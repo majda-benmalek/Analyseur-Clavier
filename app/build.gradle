@@ -34,7 +34,11 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'App'
+    mainClass = 'app.src.main.java.App'
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:all" << "-Werror"
 }
 
 tasks.named('test') {
