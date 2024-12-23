@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,14 +8,12 @@ import java.util.Map;
 public class Analyseur implements InterfaceAnalyseur {
     private ArrayList<HashMap<String,Integer>> nGrammes;
 
-    public Analyseur(String fichier){
+    public Analyseur(String fichier){//TODO Mettre un int ds le param du constructeur pr savoir on construit des ... grammes ?
         this.nGrammes= new ArrayList<>();
-        this.nGrammes.add(new HashMap<>());
-        this.nGrammes.add(new HashMap<>());
-        this.nGrammes.add(new HashMap<>());
-        this.analyse(1, fichier);
-        this.analyse(2, fichier);
-        // this.analyse(3, fichier);
+        for (int i= 0; i<3;i++){
+            this.nGrammes.add(new HashMap<>());
+        }
+        this.analyse(3, fichier);
     }
 
 
@@ -51,64 +49,54 @@ public class Analyseur implements InterfaceAnalyseur {
     }
 
     boolean aLaisser(String s){
-        return s.equals("\n") || s.equals("\r") || s.equals("\t") || s.isBlank();
+        return s.equals("\n") || s.equals("\r") || s.equals("\t") ;
+        // || s.isBlank();
     }
 
-    String transformeTabenString(char [] c){
-        String s="";
-        for (int i = 0; i < c.length; i++) {
-            if (!aLaisser(String.valueOf(c[i]))){
-                s+=c[i];
-            }
-        }
-        return s;
-    }
 
     @Override
     public void analyse(int n, String fichier) {
-        try {
-            FileReader fileReader = new FileReader(fichier);
-            if (n == 1)
-            {
-                try {
-                    int i = fileReader.read();
-                    String gramme;
-                    while( i != -1)
-                    {
-                        gramme = String.valueOf((char)i);
-                        if (!aLaisser(gramme))
-                        {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier))){
+            // BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier));
+            String ligne = bufferedReader.readLine();
+            while (ligne!= null) {
+                int taille = ligne.length();
+                for (int i = 0;i<taille;i++){
+                    for (int j = 1;j<n+1;j++){
+                        if (i+j<taille+1){
+                            String gramme = ligne.substring(i, i+j);
+                            // System.out.println("gramme = "+gramme);
                             majGrammes(gramme);
                         }
-                        i = fileReader.read();
-                    }                    
-                } catch (IOException e) 
-                {
-                    System.out.println("Il y a une problème avec le fichier");
-                }
-            }
-            else
-            {
-                try {
-                    char[] paquet = new char[n];
-                    int nbCaractereLu = fileReader.read(paquet);
-                    while (nbCaractereLu != -1) {
-                        majGrammes(transformeTabenString(paquet));
-                        nbCaractereLu = fileReader.read(paquet);
                     }
-                } catch (IOException e) {
-                    System.out.println("Il y a une problème avec le fichier");
                 }
+                ligne = bufferedReader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Le fichier donné est invalide");
+        } catch (IOException e) {
+            System.out.println("Il y a un problème avec le fichier donné.");
         }        
     }
 
     @Override
     public void transformeEnTouche(Clavier c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'transformeEnTouche'");
+        ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
+        for (int i = 0; i < nGrammes.size(); i++) {
+            res.add(new HashMap<>());            
+        }
+        for (HashMap<String,Integer> hashMap : nGrammes) {
+            for (Map.Entry<String,Integer> entry : hashMap.entrySet())
+            {
+                String nGrammes = entry.getKey();
+                ArrayList<Touche> l = new ArrayList<>();
+                for (int i = 0;i<nGrammes.length();i++){
+                    char caractere = nGrammes.charAt(i);
+                    Touche t = c.chercheTouche(caractere);
+                    l.add(t);
+                }
+                Integer occ = entry.getValue();
+                res.get(nGrammes.length()).put(l, occ);
+            }
+        }
     }
 
 
@@ -129,10 +117,3 @@ public class Analyseur implements InterfaceAnalyseur {
         }
     }
 }
-
-
-
-// BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            // char[] paquet = new char[1];
-            // fileReader.read(paquet);
