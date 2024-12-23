@@ -1,4 +1,3 @@
-import java.text.DecimalFormat;
 import java.util.List;
 
 public abstract class Mouvement {

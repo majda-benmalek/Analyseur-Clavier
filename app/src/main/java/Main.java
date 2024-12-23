@@ -35,7 +35,7 @@ public enum Main {
         }
 
         double poidsTotal = (poidsD + poidsG);
-        double pG = poidsG / poidsTotal; // > 0.5 = main gauche fais + d'effort 
+        double pG = poidsG / poidsTotal; // > 0.5 = main gauche fais + d'effort  //TODO variable parlante
         double pD = poidsD / poidsTotal; // > 0.5 = main droite fais + d'effort 
 
         double distanceEquilibre = Math.abs(pG - 0.5) + Math.abs(pD - 0.5); // = 0 alors l'effort est équilibré 
