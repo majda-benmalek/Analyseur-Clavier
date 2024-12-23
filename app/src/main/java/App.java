@@ -5,17 +5,30 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        Touche t = new Touche('m', new Coordonnee(10,2), Doigt.AURICULAIRE_D);
+        Touche t = new Touche('j', new Coordonnee(7,2), Doigt.INDEX_D);
+        Touche t2 = new Touche('n',new Coordonnee(7, 1),Doigt.INDEX_D);
+        Touche t3 = new Touche('d',new Coordonnee(3, 2),Doigt.INDEX_D);
         List<Touche> l = new ArrayList<>();
         l.add(t);
+        List<Touche> l2 = new ArrayList<>();
+        l2.add(t2);
+        List<Touche> l3 = new ArrayList<>();
+        l3.add(t3);
         Mouvement1 m = new Mouvement1(l, 20);
+        Mouvement1 m2 = new Mouvement1(l2, 20);
+        Mouvement1 m3 = new Mouvement1(l3, 20);
         m.calculScore();
+        m2.calculScore();;
+        m3.calculScore();
         System.out.println(m);
+        System.out.println(m2);
+        System.out.println(m3);
     }
 }
