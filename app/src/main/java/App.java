@@ -9,6 +9,6 @@ public class App {
 
     public static void main(String[] args) {
         Analyseur a = new Analyseur("app/src/main/java/fic.txt");
-        // a.afficheGramme();
+        a.afficheGramme();
     }
 }

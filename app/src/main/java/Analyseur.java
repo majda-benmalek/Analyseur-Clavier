@@ -63,7 +63,7 @@ public class Analyseur implements InterfaceAnalyseur {
                 int taille = ligne.length();
                 for (int i = 0;i<taille;i++){
                     for (int j = 1;j<n+1;j++){
-                        if (i+j<taille+1){
+                        if (i+j<taille+1){ // TODO POUR LA COMPLEXITE ???????
                             String gramme = ligne.substring(i, i+j);
                             // System.out.println("gramme = "+gramme);
                             majGrammes(gramme);
