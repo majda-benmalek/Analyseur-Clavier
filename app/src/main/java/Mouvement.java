@@ -1,3 +1,4 @@
+
 import java.util.List;
 
 public abstract class Mouvement {
@@ -8,6 +9,7 @@ public abstract class Mouvement {
     public Mouvement(List<Touche> t, int o) {
         this.sequenceTouche = t;
         this.occurrence = o;
+        // this.calculScore();
     }
 
     // public abstract void calculScore();

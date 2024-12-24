@@ -1,3 +1,4 @@
+
 import java.util.List;
 
 public class Mouvement1 extends Mouvement {
@@ -36,11 +37,11 @@ public class Mouvement1 extends Mouvement {
         Coordonnee coordT = t.getCoord();
         Coordonnee coordD = d.getCord();
 
-        int distance = Math.abs(coordD.getX() - coordT.getX()) + Math.abs(coordD.getY() - coordT.getY());
-        score = ((distance * d.getPoids()) * this.getOccurrences()) * Main.calculEquilibre();
+        int distance = coordT.calculDistance(coordD);
+        double score = ((distance * d.getPoids()) * this.getOccurrences()) * Main.calculEquilibre();
 
-        //Plus le score est fort plus l'effort est haut => mouvement a minimiser (pas ouf)
-        // this.setScore(score);
+        //Plus le score est grand plus l'effort est haut => mouvement a minimiser (pas ouf)
+        this.setScore(score);
     }
 
 

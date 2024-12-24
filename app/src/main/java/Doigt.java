@@ -1,4 +1,5 @@
 public enum Doigt {
+    //TODO : les poids ne doivent pas être codé en dur donc ca c'est a modif 
     POUCE_D(Main.DROITE, 0.5), ANNULAIRE_D(Main.DROITE, 1.2), MAJEUR_D(Main.DROITE, 1), AURICULAIRE_D(Main.DROITE, 2),
     INDEX_D(Main.DROITE, 1.2),
     POUCE_G(Main.GAUCHE, 0.5), ANNULAIRE_G(Main.GAUCHE, 1.2), MAJEUR_G(Main.GAUCHE, 1), AURICULAIRE_G(Main.GAUCHE, 1.5),
@@ -17,6 +18,8 @@ public enum Doigt {
         this.coord = getPosBase(this);
     }
 
+    //TODO POUR TESTER
+
     public Main getMain() {
         return this.main;
     }
@@ -28,6 +31,10 @@ public enum Doigt {
     public Coordonnee getCord() {
         return this.coord;
     }
+
+    //Les positions de base restent les mêmes et pour calculé le poids d'un doigt
+    // Voir le nombre de touches qu'il atteint + la distance entre la pos de base et la touche qu'il doit atteindre 
+    // + la distance est grande + le doigts doit faire d'effort + son poids est fort 
 
     public Coordonnee getPosBase(Doigt d) {
         Coordonnee c = null;
