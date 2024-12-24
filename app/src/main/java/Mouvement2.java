@@ -126,7 +126,7 @@ public class Mouvement2 extends Mouvement {
         // auriculaire -> annulaire -> majeur -> index
         return r;
     }
-
+        ////
     @Override
     public String toString() {
         return "Mouvement2{" +
