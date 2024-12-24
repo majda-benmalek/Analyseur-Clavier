@@ -6,52 +6,6 @@ public class Mouvement2 extends Mouvement {
     public Mouvement2(List<Touche> l, int o) {
         super(l, o);
     }
-
-    @Override
-    public void calculScore() {
-        // Mouvement à minimisé :
-        // Mouvement à un seul doigt : "hy"(pas ouf) donc les touches qui sont dans le
-        // rayon du même doigt "je" => chaque touche est touché par un doigt diff
-
-        // Ciseaux : Mouvement de la même mains mais rangée différente "ji" même main
-        // diff doigt mais pas la même rangé
-
-        // Mouvement a extension latéral : Touche qui ne sont pas sur la même colonne
-        // que la colonne de repods du doigt : "h" (6,2) index droit = (7,2)
-
-        // Mouvement à maximisé :
-        // Les alternanaces : 2 touches chaque touche est faite par une main
-        // Roulement : 2 doigts différent d'une même main
-        double score = 0;
-        if (this.isSFB()) {
-            System.out.println("isSFB");
-            score += 2;
-        }
-        if (this.isCiseaux()) {
-            System.out.println("isCiseaux");
-            score += 2;
-        }
-
-        if (this.isLSB()) {
-            System.out.println("isLSB");
-            score += 2;
-        }
-
-        if (this.isAlternance()) {
-            System.out.println("isAlternance");
-            score += 1;
-        }
-
-        int roulement = this.isRoulement();
-        if (roulement != 0) {
-            System.out.println("isRoulement");
-            score += roulement;
-        }
-
-        this.setScore(score * (getOccurrences()));
-
-    }
-
     // 3 méthode verifiant que c'est pas SFB ciseaux ou LSB
 
     public boolean isSFB() {
@@ -62,7 +16,7 @@ public class Mouvement2 extends Mouvement {
     }
 
     public boolean isCiseaux() {
-        // même mains diiférente rangées
+        // même mains diférente rangées
         Touche t1 = this.getSqTouches().get(0);
         Touche t2 = this.getSqTouches().get(1);
         return (t1.getDoigt().getMain() == t2.getDoigt().getMain()) && (t1.getCoord().getY() != t2.getCoord().getY());
@@ -79,6 +33,7 @@ public class Mouvement2 extends Mouvement {
         return (posReposDT1.getY() != t1.getCoord().getY()) && (posReposDT2.getY() != t2.getCoord().getY());
     }
 
+    // MOUVEMENTS A MAXIMISÉ
     public boolean isAlternance() {
         // les touches sont faites par 2 mains différentes
         Touche t1 = this.getSqTouches().get(0);
@@ -98,42 +53,57 @@ public class Mouvement2 extends Mouvement {
 
         // verfier le doigt (si c'est autre chose que index ou auriculaire)
         if (!isCiseaux() && !isLSB() && !isSFB() && (d1 != d2 && d1.getMain() == d2.getMain())) {
-            // verfier le doigt (si c'est autre chose que index ou auriculaire)
             if (d1.getMain() == Main.GAUCHE) { // Si la touche 1 est faite par l'index
-                if (d1.getCord().getX() > d2.getCord().getX()) {
-                    // ! interieur -> exterieur G
-                    r = 2; // TODO : revoir les chiffres a ajouté ou -
-                } else if (d1.getCord().getX() < d2.getCord().getX()) {
-                    // ! exterieur -> interieur
-                    r = 3;
-                }
-            } else if (d1.getMain() == Main.DROITE) {
                 if (d1.getCord().getX() < d2.getCord().getX()) {
-                    // ! interieur -> exterieur D
+                    r = 1;
+                } else if (d1.getCord().getX() > d2.getCord().getX()) {
                     r = 2;
                 }
-
+            } else if (d1.getMain() == Main.DROITE) {
                 if (d1.getCord().getX() > d2.getCord().getX()) {
-                    // ! exterieur -> interieur
-                    r = 3;
+                    r = 1;
+                }
+                if (d1.getCord().getX() < d2.getCord().getX()) {
+                    r = 2;
                 }
             }
-
             // Pour les auriculaire voir si on compte les touche autres que les lettres
             // (shift, tab, ^...)
-
         }
-        // auriculaire -> annulaire -> majeur -> index
         return r;
     }
-        ////
+
     @Override
-    public String toString() {
-        return "Mouvement2{" +
-                "sequenceTouche=" + getSqTouches() +
-                ", occurrence=" + getOccurrences() +
-                ", score=" + getScore() +
-                '}';
+    public void calculScore() {
+        double score = 0;
+        if (this.isSFB()) {
+            System.out.println("isSFB");
+            score -= 1;
+        }
+        if (this.isCiseaux()) {
+            System.out.println("isCiseaux");
+            score -= 1;
+        }
+
+        if (this.isLSB()) {
+            System.out.println("isLSB");
+            score -= 1;
+        }
+
+        if (this.isAlternance()) {
+            System.out.println("isAlternance");
+            score += 1;
+        }
+
+        int roulement = this.isRoulement();
+        if (roulement != 0) {
+            System.out.println("isRoulement");
+            score += roulement;
+        }
+
+        score = score * getOccurrences();
+        this.setScore(score);
+
     }
 
 }

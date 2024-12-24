@@ -22,12 +22,21 @@ public class Touche {
         return doigt;
     }
 
+    // @Override
+    // public String toString() {
+    //     return "Touche{" +
+    //             "coord=" + coord +
+    //             ", etiq=" + etiq +
+    //             ", doigt=" + doigt +
+    //             '}';
+    // }
+
     @Override
     public String toString() {
-        return "Touche{" +
-                "coord=" + coord +
-                ", etiq=" + etiq +
-                ", doigt=" + doigt +
-                '}';
+        return "Touche { " +
+                coord +
+                ", etiq = " + etiq +
+                " , "+ doigt +
+                " }\n";
     }
 }

@@ -54,10 +54,9 @@ public class Coordonnee {
 
     @Override
     public String toString() {
-        return "Coordonnee{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Coordonnées = { " +
+                " x = " + x +
+                " , y = " + y +
+                " } ";
     }
-
 }

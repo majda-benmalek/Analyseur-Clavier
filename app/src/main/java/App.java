@@ -30,7 +30,7 @@ public class App {
 
         // MOUVEMENT 2
 
-        // LSB + Alternance 
+        // LSB + Alternance
         Touche t4 = new Touche('y', new Coordonnee(6, 3), Doigt.INDEX_D);
         Touche t5 = new Touche('t', new Coordonnee(6, 3), Doigt.INDEX_G);
         List<Touche> l4 = new ArrayList<>();
@@ -45,7 +45,7 @@ public class App {
         List<Touche> l5 = new ArrayList<>();
         l5.add(t6);
         l5.add(t7);
-        Mouvement2 m5 = new Mouvement2(l5, 1);
+        Mouvement2 m5 = new Mouvement2(l5, 100);
         System.out.println(m5);
 
         // Roulement interieur -> exterieur
@@ -54,9 +54,8 @@ public class App {
         List<Touche> l6 = new ArrayList<>();
         l6.add(t8);
         l6.add(t9);
-        Mouvement2 m6 = new Mouvement2(l6, 1);
+        Mouvement2 m6 = new Mouvement2(l6, 10);
         System.out.println(m6);
-
 
     }
 }

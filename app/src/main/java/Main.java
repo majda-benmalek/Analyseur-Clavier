@@ -7,11 +7,16 @@ public enum Main {
     private static List<Doigt> d = new ArrayList<>();
     private static List<Doigt> g = new ArrayList<>();
 
+    // @Override
+    // public String toString() {
+    //     return "Main { " +
+    //             "name = " + name() +
+    //             " }";
+    // }
+
     @Override
     public String toString() {
-        return "Main{" +
-                "name=" + name() +
-                '}';
+        return "Main = " + name();
     }
 
     public List<Doigt> getListDoigt() {
