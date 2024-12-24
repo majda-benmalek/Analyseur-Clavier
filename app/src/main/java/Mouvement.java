@@ -1,4 +1,6 @@
+
 import java.util.List;
+
 
 public abstract class Mouvement {
     private List<Touche> sequenceTouche;
@@ -8,6 +10,7 @@ public abstract class Mouvement {
     public Mouvement(List<Touche> t, int o) {
         this.sequenceTouche = t;
         this.occurrence = o;
+        this.calculScore();
     }
 
     public abstract void calculScore();
@@ -27,6 +30,7 @@ public abstract class Mouvement {
     public void setScore(double s){
         this.score = s;
     }
+
 
     @Override
     public String toString() {
