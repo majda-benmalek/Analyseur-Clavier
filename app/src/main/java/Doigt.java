@@ -17,6 +17,8 @@ public enum Doigt {
         this.coord = getPosBase(this);
     }
 
+    //TODO POUR TESTER
+
     public Main getMain() {
         return this.main;
     }
