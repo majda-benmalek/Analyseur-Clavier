@@ -1,5 +1,5 @@
-import java.io.File;
+import java.util.List;
 public interface InterfaceAnalyseur {
     void analyse(int paquet,String fichier);
-    void transformeEnTouche(Clavier c);
+    List<Mouvement> transformeEnTouche(Clavier c);
 }

@@ -3,13 +3,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.checkerframework.checker.units.qual.t;
+
+//TODO est ce qu'on peut avoir abcde\nazertyuik,nbv Et du coup faudrait compter e\n et pas e\ ???
 
 public class Analyseur implements InterfaceAnalyseur {
     private ArrayList<HashMap<String,Integer>> nGrammes;
+    private String fichier;
 
     public Analyseur(String fichier){//TODO Mettre un int ds le param du constructeur pr savoir on construit des ... grammes ?
         this.nGrammes= new ArrayList<>();
+        this.fichier = fichier;
         for (int i= 0; i<3;i++){
             this.nGrammes.add(new HashMap<>());
         }
@@ -46,59 +53,101 @@ public class Analyseur implements InterfaceAnalyseur {
             Integer nouvelleOcc = Integer.valueOf(ancienneOcc.intValue()+1);
             nGrammes.get(pos).put(s, nouvelleOcc);
         }
+
+        // if (s.equals("\n")){
+        //     System.out.println("c'est un slash n");
+        // }
     }
 
     boolean aLaisser(String s){
-        return s.equals("\n") || s.equals("\r") || s.equals("\t") ;
+        return  s.equals("\r") || s.equals("\t") ;
         // || s.isBlank();
+        // s.equals("\n") ||
     }
-
 
     @Override
     public void analyse(int n, String fichier) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier))){
             // BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier));
             String ligne = bufferedReader.readLine();
+            int cmpRetourLigne = -1;
             while (ligne!= null) {
                 int taille = ligne.length();
+                cmpRetourLigne++;
                 for (int i = 0;i<taille;i++){
                     for (int j = 1;j<n+1;j++){
                         if (i+j<taille+1){ // TODO POUR LA COMPLEXITE ???????
                             String gramme = ligne.substring(i, i+j);
-                            // System.out.println("gramme = "+gramme);
+                            // if (gramme.length() == 1){
+                            //     System.out.println("gramme = "+gramme);
+                            // }
                             majGrammes(gramme);
+                            if (gramme.length() == 0){
+                                cmpRetourLigne++;
+                            }
                         }
                     }
                 }
                 ligne = bufferedReader.readLine();
             }
+            System.out.println("nombre de retour à la ligne = "+cmpRetourLigne);
         } catch (IOException e) {
             System.out.println("Il y a un problème avec le fichier donné.");
         }        
     }
 
+    // @Override
+    // public void transformeEnTouche(Clavier c) {
+    //     ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
+    //     for (int i = 0; i < nGrammes.size(); i++) {
+    //         res.add(new HashMap<>());            
+    //     }
+    //     for (HashMap<String,Integer> hashMap : nGrammes) {
+    //         for (Map.Entry<String,Integer> entry : hashMap.entrySet())
+    //         {
+    //             String nGrammes = entry.getKey();
+    //             ArrayList<Touche> l = new ArrayList<>();
+    //             for (int i = 0;i<nGrammes.length();i++){
+    //                 char caractere = nGrammes.charAt(i);
+    //                 Touche t = c.chercheTouche(caractere);
+    //                 l.add(t);
+    //             }
+    //             Integer occ = entry.getValue();
+    //             res.get(nGrammes.length()).put(l, occ);
+    //         }
+    //     }
+    // }
+
+    //TODO LE \N compter;
     @Override
-    public void transformeEnTouche(Clavier c) {
-        ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
-        for (int i = 0; i < nGrammes.size(); i++) {
-            res.add(new HashMap<>());            
-        }
+    public List<Mouvement> transformeEnTouche(Clavier c) {
+        List<Mouvement> res=new ArrayList<>();
         for (HashMap<String,Integer> hashMap : nGrammes) {
             for (Map.Entry<String,Integer> entry : hashMap.entrySet())
             {
                 String nGrammes = entry.getKey();
-                ArrayList<Touche> l = new ArrayList<>();
-                for (int i = 0;i<nGrammes.length();i++){
+                int taille = nGrammes.length();
+                ArrayList<Touche> sequenceTouches = new ArrayList<>();
+                for (int i = 0;i<taille;i++){
                     char caractere = nGrammes.charAt(i);
                     Touche t = c.chercheTouche(caractere);
-                    l.add(t);
+                    sequenceTouches.add(t);
                 }
                 Integer occ = entry.getValue();
-                res.get(nGrammes.length()).put(l, occ);
+                Mouvement m;
+                if (taille == 1){
+                    m = new Mouvement1(sequenceTouches, occ);
+                }else if (taille == 2){
+                    m = new Mouvement2(sequenceTouches, occ);
+                }
+                else{
+                    m = new Mouvement3(sequenceTouches,occ);
+                }
+                res.add(m);
             }
         }
+        return res;
     }
-
 
     void afficheGramme(){
         int i = 0;
