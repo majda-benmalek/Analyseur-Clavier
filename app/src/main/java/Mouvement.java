@@ -1,5 +1,7 @@
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.t;
+
 public abstract class Mouvement {
     private List<Touche> sequenceTouche;
     private int occurrence;
@@ -30,10 +32,14 @@ public abstract class Mouvement {
 
     @Override
     public String toString() {
-        return "Mouvement{" +
-                "sequenceTouche=" + sequenceTouche +
-                ", occurrence=" + occurrence +
-                ", score=" + score +
-                '}';
+        String s="";
+        for (Touche touche : sequenceTouche) {
+            s+="\t\t"+touche.toString();
+        }
+        return "Mouvement {\n" +
+                "\tsequenceTouche = \n" + s +
+                "\toccurrence = " + occurrence +
+                "\n\tscore = " + score +
+                "\n}\n";
     }
 }

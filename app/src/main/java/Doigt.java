@@ -8,6 +8,7 @@ public enum Doigt {
     private Main main;
     private double poids;
     private Coordonnee coord;
+    private String nomDoigt;
 
     private Doigt(Main m, double p) {
         this.main = m;
@@ -33,43 +34,62 @@ public enum Doigt {
         switch (d) {
             case ANNULAIRE_G:
                 c = new Coordonnee(2, 2);
+                this.nomDoigt = "ANNULAIRE_G";
                 break;
             case ANNULAIRE_D:
                 c = new Coordonnee(9, 2);
+                this.nomDoigt = "ANNULAIRE_D";
                 break;
             case AURICULAIRE_G:
                 c = new Coordonnee(1, 2);
+                this.nomDoigt = "AURICULAIRE_G";
                 break;
             case AURICULAIRE_D:
                 c = new Coordonnee(10, 2);
+                this.nomDoigt = "AURICULAIRE_D";
                 break;
             case INDEX_G:
                 c = new Coordonnee(4, 2);
+                this.nomDoigt = "INDEX_G";
                 break;
             case INDEX_D:
                 c = new Coordonnee(7, 2);
+                this.nomDoigt = "INDEX_D";
                 break;
             case MAJEUR_G:
                 c = new Coordonnee(3, 2);
+                this.nomDoigt = "MAJEUR_G";
                 break;
             case MAJEUR_D:
                 c = new Coordonnee(8, 2);
+                this.nomDoigt = "MAJEUR_D";
                 break;
             case POUCE_G:
                 c = new Coordonnee(4, 0);
+                this.nomDoigt = "POUCE_G";
                 break;
             case POUCE_D:
                 c = new Coordonnee(8, 0);
+                this.nomDoigt = "POUCE_D";
                 break;
         }
         return c;
     }
 
+    // public String toString() {
+    //     return "Doigt {" +
+    //             "main = " + main +
+    //             ", poids = " + poids +
+    //             ", coord = " + coord +
+    //             '}';
+    // }
+
     public String toString() {
-        return "Doigt{" +
-                "main=" + main +
-                ", poids=" + poids +
-                ", coord=" + coord +
+        return "Doigt { " +
+                 main + " "
+                 + nomDoigt +" "+
+                " , poids = " + poids +
+                " , " + coord +
                 '}';
     }
 }

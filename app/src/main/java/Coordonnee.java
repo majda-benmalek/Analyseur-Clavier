@@ -23,12 +23,19 @@ public class Coordonnee {
         this.y = newY;
     }
 
+    // @Override
+    // public String toString() {
+    //     return "Coordonnee { " +
+    //             " x = " + x +
+    //             ", y = " + y +
+    //             " } ";
+    // }
+
     @Override
     public String toString() {
-        return "Coordonnee{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Coordonnées = { " +
+                " x = " + x +
+                " , y = " + y +
+                " } ";
     }
-
 }
