@@ -1,4 +1,7 @@
+import java.util.List;
+
 public interface InterfaceClavier {
-    void creerTouche();
+    void creerClavier();
     Touche chercheTouche(char etiquette);
+    List<Touche> getTouches();
 }

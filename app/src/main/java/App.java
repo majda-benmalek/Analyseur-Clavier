@@ -3,6 +3,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class App {
@@ -12,9 +13,9 @@ public class App {
 
     public static void main(String[] args) {
         // MOUVEMENT 1
-        Touche t = new Touche('j', new Coordonnee(7, 2), Doigt.INDEX_D);
-        Touche t2 = new Touche('n', new Coordonnee(7, 1), Doigt.INDEX_D);
-        Touche t3 = new Touche('d', new Coordonnee(3, 2), Doigt.INDEX_D);
+        Touche t = new Touche("j", 7, 2, Doigt.INDEX_D);
+        Touche t2 = new Touche("n", 7, 1, Doigt.INDEX_D);
+        Touche t3 = new Touche("d", 3, 2, Doigt.INDEX_D);
         List<Touche> l = new ArrayList<>();
         l.add(t);
         List<Touche> l2 = new ArrayList<>();
@@ -24,38 +25,55 @@ public class App {
         Mouvement1 m = new Mouvement1(l, 20);
         Mouvement1 m2 = new Mouvement1(l2, 20);
         Mouvement1 m3 = new Mouvement1(l3, 20);
-        System.out.println(m);
-        System.out.println(m2);
-        System.out.println(m3);
+        // System.out.println(m);
+        // System.out.println(m2);
+        // System.out.println(m3);
 
         // MOUVEMENT 2
 
         // LSB + Alternance
-        Touche t4 = new Touche('y', new Coordonnee(6, 3), Doigt.INDEX_D);
-        Touche t5 = new Touche('t', new Coordonnee(6, 3), Doigt.INDEX_G);
+        Touche t4 = new Touche("y", 6, 3, Doigt.INDEX_D);
+        Touche t5 = new Touche("t", 6, 3, Doigt.INDEX_G);
         List<Touche> l4 = new ArrayList<>();
         l4.add(t4);
         l4.add(t5);
         Mouvement2 m4 = new Mouvement2(l4, 1);
-        System.out.println(m4);
+        // System.out.println(m4);
 
         // SFB + ciseaux
-        Touche t6 = new Touche('h', new Coordonnee(6, 2), Doigt.INDEX_D);
-        Touche t7 = new Touche('y', new Coordonnee(6, 3), Doigt.INDEX_D);
+        Touche t6 = new Touche("h", 6, 2, Doigt.INDEX_D);
+        Touche t7 = new Touche("y", 6, 3, Doigt.INDEX_D);
         List<Touche> l5 = new ArrayList<>();
         l5.add(t6);
         l5.add(t7);
         Mouvement2 m5 = new Mouvement2(l5, 100);
-        System.out.println(m5);
+        // System.out.println(m5);
 
         // Roulement interieur -> exterieur
-        Touche t8 = new Touche('j', new Coordonnee(7, 2), Doigt.INDEX_D);
-        Touche t9 = new Touche('m', new Coordonnee(10, 2), Doigt.AURICULAIRE_D);
+        Touche t8 = new Touche("j", 7, 2, Doigt.INDEX_D);
+        Touche t9 = new Touche("m", 10, 2, Doigt.AURICULAIRE_D);
         List<Touche> l6 = new ArrayList<>();
         l6.add(t8);
         l6.add(t9);
         Mouvement2 m6 = new Mouvement2(l6, 10);
-        System.out.println(m6);
+        // System.out.println(m6);
+
+        Analyseur a = new Analyseur("src/main/java/clavier_characters.txt");
+        // a.afficheGramme();
+
+
+        Clavier c = new Clavier();
+        ArrayList<HashMap<ArrayList<Touche>,Integer>>  touches = a.transformeEnTouche(c);
+        //printf touches
+        for (HashMap<ArrayList<Touche>,Integer> hashMap : touches) {
+            for (HashMap.Entry<ArrayList<Touche>,Integer> entry : hashMap.entrySet()){
+                ArrayList<Touche> ngrammes = entry.getKey();
+                Integer occ = entry.getValue();
+                
+                System.out.println(ngrammes + " occ: " + occ);
+            }
+        }
+        // System.out.println(c.chercheTouche('\t'));
 
     }
 }

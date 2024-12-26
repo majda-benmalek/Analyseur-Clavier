@@ -78,7 +78,7 @@ public class Analyseur implements InterfaceAnalyseur {
     }
 
     @Override
-    public void transformeEnTouche(Clavier c) {
+    public ArrayList<HashMap<ArrayList<Touche>,Integer>> transformeEnTouche(Clavier c) {
         ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
         for (int i = 0; i < nGrammes.size(); i++) {
             res.add(new HashMap<>());            
@@ -94,9 +94,10 @@ public class Analyseur implements InterfaceAnalyseur {
                     l.add(t);
                 }
                 Integer occ = entry.getValue();
-                res.get(nGrammes.length()).put(l, occ);
+                res.get(nGrammes.length()-1).put(l, occ);
             }
         }
+        return res;
     }
 
 
