@@ -10,7 +10,7 @@ public class Clavier implements InterfaceClavier {
 
     public Clavier() {
         this.touches = new ArrayList<>();
-        this.path = "src/main/java/azerty.json";
+        this.path = "ressources/azerty.json";
         chargerAzerty();
         // for (Touche touche : touches) {
         //     System.out.println(touche);
@@ -29,6 +29,7 @@ public class Clavier implements InterfaceClavier {
 
     @Override
     public void creerClavier() {
+        //TODO : shift droit ou gauche?? 
         try (FileReader reader = new FileReader((this.path))) {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
@@ -71,7 +72,6 @@ public class Clavier implements InterfaceClavier {
                 }
             }
         }
-        
         return null;
     }
 

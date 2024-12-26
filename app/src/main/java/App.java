@@ -58,7 +58,7 @@ public class App {
         Mouvement2 m6 = new Mouvement2(l6, 10);
         // System.out.println(m6);
 
-        Analyseur a = new Analyseur("src/main/java/clavier_characters.txt");
+        Analyseur a = new Analyseur("ressources/clavier_characters.txt");
         // a.afficheGramme();
 
 
