@@ -131,7 +131,7 @@ public class Analyseur implements InterfaceAnalyseur {
                 for (int i = 0;i<taille;i++){
                     char caractere = nGrammes.charAt(i);
                     Touche t = c.chercheTouche(caractere);
-                    sequenceTouches.add(t);
+                    sequenceTouches.add(t); // TODO TEJ SI C + GD QUE 3 GRAMMES
                 }
                 Integer occ = entry.getValue();
                 Mouvement m;

@@ -1,5 +1,5 @@
 import java.util.List;
-
+//TODO gérer le cas où le clavier est pas adaptée au texte donnée exemple QWERTY donné sur un texte français dc les accents éè sont pas dans le claviers
 public class Evaluateur implements InterfaceEvaluateur {
     private Clavier clavier;
     private Analyseur analyseur;
@@ -30,25 +30,39 @@ public class Evaluateur implements InterfaceEvaluateur {
 
 
     @Override
-    public int donneLeScore() {
+    public int donneLeScore() { // TODO utiliser les streams
         int res = 0;
         for (Mouvement mouvement : mouvementListe) {
             if (mouvement instanceof Mouvement1){
-                score1touche+=((Mouvement1) mouvement).getScore()*mouvement.getOccurrences();
+                score1touche+=((Mouvement1) mouvement).getScore();
             }   
             else if (mouvement instanceof Mouvement2){
                 Mouvement2 inter = (Mouvement2) mouvement;
-                // if (inter.)
+                int occ= inter.getOccurrences();
+                if (inter.isAlternance()){
+                    alternance+=occ;
+                }
+                if (inter.isCiseaux()){
+                    ciseaux+=occ;
+                }
+                if (inter.isLSB()){
+                    lsb+=occ;
+                }
+                if (inter.isSFB()){
+                    sfb+=occ;
+                }
+                roulement+=inter.isRoulement();
             }else{
                 Mouvement3 interMouvement3 = (Mouvement3) mouvement;
+                int occ = interMouvement3.getOccurrences();
                 if (interMouvement3.notRedirection() == false){
-                    redirection+=interMouvement3.getOccurrences();
+                    redirection+=occ;
                     if (interMouvement3.redirectionSansIndex()){
-                        redirection+=interMouvement3.getOccurrences();
+                        redirection+=occ;
                     }
                 }
                 if (interMouvement3.skipgramme()){
-                    skipgramme+=interMouvement3.getOccurrences();
+                    skipgramme+=occ;
                 }
             }
         }

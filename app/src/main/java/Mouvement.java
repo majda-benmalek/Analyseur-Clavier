@@ -1,7 +1,7 @@
 
 import java.util.List;
 
-public abstract class Mouvement {
+public abstract class Mouvement { //TODO SCELLER LES CLASSES
     private List<Touche> sequenceTouche;
     private int occurrence;
     // private double score;
