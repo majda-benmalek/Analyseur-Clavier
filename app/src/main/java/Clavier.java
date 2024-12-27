@@ -13,7 +13,7 @@ public class Clavier implements InterfaceClavier {
         this.path = "ressources/azerty.json";
         chargerAzerty();
         // for (Touche touche : touches) {
-        //     System.out.println(touche);
+        // System.out.println(touche);
         // }
     }
 
@@ -29,30 +29,30 @@ public class Clavier implements InterfaceClavier {
 
     @Override
     public void creerClavier() {
-        //TODO : shift droit ou gauche?? 
+        // TODO : shift droit ou gauche??
         try (FileReader reader = new FileReader((this.path))) {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-            JsonArray jsonTouches = jsonObject.getAsJsonArray("clavier");
+            JsonArray clavier = jsonObject.getAsJsonArray("clavier");
 
-            for (JsonElement element : jsonTouches) {
-                JsonObject jsonTouche = element.getAsJsonObject();
-                int x = jsonTouche.get("x").getAsInt();
-                int y = jsonTouche.get("y").getAsInt();
-                String touche = jsonTouche.get("touche").getAsString();
+            for (JsonElement element : clavier) {
+                JsonObject toucheJson = element.getAsJsonObject();
+                int x = toucheJson.get("x").getAsInt();
+                int y = toucheJson.get("y").getAsInt();
+                String touche = toucheJson.get("touche").getAsString();
                 Doigt doigt = null;
-                List<Touche> touchesMortes = new ArrayList<>();
-                if (!jsonTouche.get("doigt").isJsonNull()) {
-                    doigt = Doigt.valueOf(jsonTouche.get("doigt").getAsString().toUpperCase());
+                List<String> touchesMortes = new ArrayList<>();
+                if (!toucheJson.get("doigt").isJsonNull()) {
+                    doigt = Doigt.valueOf(toucheJson.get("doigt").getAsString().toUpperCase());
                 }
-                if (jsonTouche.has("morte") && jsonTouche.get("morte").isJsonArray()) {
-                    JsonArray jsonMortes = jsonTouche.getAsJsonArray("morte");
+                if (toucheJson.has("morte") && toucheJson.get("morte").isJsonArray()) {
+                    JsonArray jsonMortes = toucheJson.getAsJsonArray("morte");
                     for (JsonElement morteElement : jsonMortes) {
                         String morteTouche = morteElement.getAsString();
-                        touchesMortes.add(new Touche(morteTouche, x, y, doigt));
+                        if(morteTouche != null){
+                            touchesMortes.add(morteTouche);
+                        }
                     }
-                } else {
-                    touchesMortes = null;
                 }
                 this.touches.add(new Touche(touche, x, y, doigt, touchesMortes));
             }
@@ -62,17 +62,15 @@ public class Clavier implements InterfaceClavier {
     }
 
     @Override
-    public Touche chercheTouche(char etiquette) {
-        Touche res = null;
-        for (Touche touche : touches) {
-            if (touche.getEtiq().charAt(0) == etiquette) {
-                res=touche;
-                if(res!=null){
-                    return res;
-                }
+    //retourne une liste pour les touches en double (shift, alt, ctrl)
+    public List<Touche> chercheTouche(String etiquette) {
+        List<Touche> res = new ArrayList<>();
+        for( Touche t : touches){
+            if(etiquette.equals(t.getEtiq())){
+                res.add(t);
             }
         }
-        return null;
+        return res;
     }
 
     @Override

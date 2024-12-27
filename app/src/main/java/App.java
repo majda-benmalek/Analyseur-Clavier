@@ -70,7 +70,7 @@ public class App {
                 ArrayList<Touche> ngrammes = entry.getKey();
                 Integer occ = entry.getValue();
                 
-                System.out.println(ngrammes + " occ: " + occ);
+                System.out.println(ngrammes);
             }
         }
         // System.out.println(c.chercheTouche('\t'));

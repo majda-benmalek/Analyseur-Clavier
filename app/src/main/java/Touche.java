@@ -5,7 +5,9 @@ public class Touche {
     private Coordonnee coord;
     private String etiq;
     private Doigt doigt;
-    private List<Touche> touchesMortes;
+    // avoir les noms des touches mortes dont on a besoin pour les utilisé dans
+    // l'analyseur et savoir quel coté on tape
+    private List<String> touchesMortes;
 
     public Touche(String e, int x, int y, Doigt d) {
         this.coord = new Coordonnee(x, y);
@@ -13,7 +15,7 @@ public class Touche {
         this.doigt = d;
     }
 
-    public Touche(String e, int x, int y, Doigt d, List<Touche> morte) {
+    public Touche(String e, int x, int y, Doigt d, List<String> morte) {
         this.coord = new Coordonnee(x, y);
         this.etiq = e;
         this.doigt = d;
@@ -32,18 +34,21 @@ public class Touche {
         return doigt;
     }
 
-    public List<Touche> getMorte(){
+    public List<String> getMorte() {
         return touchesMortes;
     }
 
     @Override
     public String toString() {
         // return "Touche { " +
-        //         coord +
-        //         ", etiq = " + etiq +
-        //         " , " + doigt +
-        //         " , morte = " + (touchesMortes!=null) +
-        //         " }\n";
-        return "Touche = " + etiq + " " ;
+        // coord +
+        // ", etiq = " + etiq +
+        // " , " + doigt +
+        // " , morte = " + (touchesMortes!=null) +
+        // " }\n";
+        if (!touchesMortes.isEmpty()) {
+            return "Touche = " + etiq + " " + coord + "[Morte : " + touchesMortes.get(0) + "]";
+        }
+        return "Touche = " + etiq + " " + coord;
     }
 }

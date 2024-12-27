@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Analyseur implements InterfaceAnalyseur {
@@ -89,9 +90,17 @@ public class Analyseur implements InterfaceAnalyseur {
                 String nGrammes = entry.getKey();
                 ArrayList<Touche> l = new ArrayList<>();
                 for (int i = 0;i<nGrammes.length();i++){
-                    char caractere = nGrammes.charAt(i);
-                    Touche t = c.chercheTouche(caractere);
-                    l.add(t);
+                    char caractere = nGrammes.charAt(i); 
+                    List<Touche> t = c.chercheTouche( Character.toString(caractere));
+                    if(t.get(0)!=null){
+                        Touche nt = t.get(0);
+                        if(nt.getMorte().get(0) != null){
+                            System.out.println("a une touche morte");
+                            List<Touche> tt = c.chercheTouche(nt.getMorte().get(0));
+                            l.add(tt.get(0));
+                        }
+                    }
+                    l.add(t.get(0));
                 }
                 Integer occ = entry.getValue();
                 res.get(nGrammes.length()-1).put(l, occ);
