@@ -7,65 +7,61 @@ import java.util.List;
 import java.util.Map;
 
 public class Analyseur implements InterfaceAnalyseur {
-    private ArrayList<HashMap<String,Integer>> nGrammes;
+    private ArrayList<HashMap<String, Integer>> nGrammes;
 
-    public Analyseur(String fichier){//TODO Mettre un int ds le param du constructeur pr savoir on construit des ... grammes ?
-        this.nGrammes= new ArrayList<>();
-        for (int i= 0; i<3;i++){
+    public Analyseur(String fichier) {// TODO Mettre un int ds le param du constructeur pr savoir on construit des ...
+                                      // grammes ?
+        this.nGrammes = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
             this.nGrammes.add(new HashMap<>());
         }
         this.analyse(3, fichier);
     }
 
-
-    int dansNgrammes(String s){
+    int dansNgrammes(String s) {
         int res = -1;
         for (int i = 0; i < 3; i++) {
-            if (nGrammes.get(i).containsKey(s)){
+            if (nGrammes.get(i).containsKey(s)) {
                 res = i;
             }
         }
         return res;
     }
 
-    void majGrammes(String s){
+    void majGrammes(String s) {
         int pos = dansNgrammes(s);
-        if ( pos == -1)
-        {
+        if (pos == -1) {
             // System.out.println("s = "+s);
-            pos = s.length()-1;
+            pos = s.length() - 1;
             // System.out.println("if pos = "+pos);
-            if (pos<0){
+            if (pos < 0) {
                 pos = 0;
             }
-            nGrammes.get(pos).put(s,1);
-        }
-        else
-        {
+            nGrammes.get(pos).put(s, 1);
+        } else {
             // System.out.println("else pos = "+pos);
             Integer ancienneOcc = nGrammes.get(pos).get(s);
-            Integer nouvelleOcc = Integer.valueOf(ancienneOcc.intValue()+1);
+            Integer nouvelleOcc = Integer.valueOf(ancienneOcc.intValue() + 1);
             nGrammes.get(pos).put(s, nouvelleOcc);
         }
     }
 
-    boolean aLaisser(String s){
-        return s.equals("\n") || s.equals("\r") || s.equals("\t") ;
+    boolean aLaisser(String s) {
+        return s.equals("\n") || s.equals("\r") || s.equals("\t");
         // || s.isBlank();
     }
 
-
     @Override
     public void analyse(int n, String fichier) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier))) {
             // BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier));
             String ligne = bufferedReader.readLine();
-            while (ligne!= null) {
+            while (ligne != null) {
                 int taille = ligne.length();
-                for (int i = 0;i<taille;i++){
-                    for (int j = 1;j<n+1;j++){
-                        if (i+j<taille+1){ // TODO POUR LA COMPLEXITE ???????
-                            String gramme = ligne.substring(i, i+j);
+                for (int i = 0; i < taille; i++) {
+                    for (int j = 1; j < n + 1; j++) {
+                        if (i + j < taille + 1) { // TODO POUR LA COMPLEXITE ???????
+                            String gramme = ligne.substring(i, i + j);
                             // System.out.println("gramme = "+gramme);
                             majGrammes(gramme);
                         }
@@ -75,53 +71,57 @@ public class Analyseur implements InterfaceAnalyseur {
             }
         } catch (IOException e) {
             System.out.println("Il y a un problème avec le fichier donné.");
-        }        
+        }
     }
 
     @Override
-    public ArrayList<HashMap<ArrayList<Touche>,Integer>> transformeEnTouche(Clavier c) {
-        ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
+    public ArrayList<HashMap<ArrayList<Touche>, Integer>> transformeEnTouche(Clavier c) {
+        ArrayList<HashMap<ArrayList<Touche>, Integer>> res = new ArrayList<>();
         for (int i = 0; i < nGrammes.size(); i++) {
-            res.add(new HashMap<>());            
+            res.add(new HashMap<>());
         }
-        for (HashMap<String,Integer> hashMap : nGrammes) {
-            for (Map.Entry<String,Integer> entry : hashMap.entrySet())
-            {
+        for (HashMap<String, Integer> hashMap : nGrammes) {
+            for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
                 String nGrammes = entry.getKey();
                 ArrayList<Touche> l = new ArrayList<>();
-                for (int i = 0;i<nGrammes.length();i++){
-                    char caractere = nGrammes.charAt(i); 
-                    List<Touche> t = c.chercheTouche( Character.toString(caractere));
-                    if(t.get(0)!=null){
-                        Touche nt = t.get(0);
-                        if(nt.getMorte().get(0) != null){
-                            System.out.println("a une touche morte");
-                            List<Touche> tt = c.chercheTouche(nt.getMorte().get(0));
-                            l.add(tt.get(0));
+                for (int i = 0; i < nGrammes.length(); i++) {
+                    char caractere = nGrammes.charAt(i);
+                    List<Touche> t = c.chercheTouche(Character.toString(caractere));
+                    if (!t.isEmpty()) {
+                        // TODO si ya 2 touches pour ^ ca ajoute les 2 
+                        for (Touche touch : t) {
+                            if (!touch.getMorte().isEmpty()) {
+                                System.out.println(touch.getEtiq()+" a une touche morte");
+                                List<Touche> tt = c.chercheTouche(touch.getMorte().get(0));
+                                l.add(tt.get(0));
+                            }
+                            System.out.println(touch.getEtiq()+ " a été ajouté ");
+                            l.add(touch);
                         }
+                    } else {
+                        return null;
                     }
-                    l.add(t.get(0));
                 }
                 Integer occ = entry.getValue();
-                res.get(nGrammes.length()-1).put(l, occ);
+                res.get(nGrammes.length() - 1).put(l, occ);
             }
         }
         return res;
+
     }
 
-
-    void afficheGramme(){
+    void afficheGramme() {
         int i = 0;
-        for (HashMap<String,Integer> hashMap : nGrammes) {
-            System.out.println("i = "+i);
-            for (Map.Entry<String,Integer> entry : hashMap.entrySet()){
+        for (HashMap<String, Integer> hashMap : nGrammes) {
+            System.out.println("i = " + i);
+            for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
                 String ngrammes = entry.getKey();
                 Integer occ = entry.getValue();
                 // if (ngrammes == null || ngrammes.isEmpty()) {
-                //     System.out.println("Entrée invalide détectée : clé vide ou nulle !");
+                // System.out.println("Entrée invalide détectée : clé vide ou nulle !");
                 // }else{
-                    System.out.println("gramme: " + ngrammes + " occ: " + occ);
-                // }            
+                System.out.println("gramme: " + ngrammes + " occ: " + occ);
+                // }
             }
             i++;
         }

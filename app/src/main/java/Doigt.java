@@ -1,9 +1,8 @@
 public enum Doigt {
-    // TODO : les poids ne doivent pas être codé en dur donc ca c'est a modif
-    POUCE_D(Main.DROITE, 0.5), ANNULAIRE_D(Main.DROITE, 1.2), MAJEUR_D(Main.DROITE, 1), AURICULAIRE_D(Main.DROITE, 2),
-    INDEX_D(Main.DROITE, 1.2), DEFAUT_D(Main.DROITE, 0),
-    POUCE_G(Main.GAUCHE, 0.5), ANNULAIRE_G(Main.GAUCHE, 1.2), MAJEUR_G(Main.GAUCHE, 1), AURICULAIRE_G(Main.GAUCHE, 1.5),
-    INDEX_G(Main.GAUCHE, 1.2), DEFAUT_G(Main.GAUCHE, 0);
+    POUCE_D(Main.DROITE), ANNULAIRE_D(Main.DROITE), MAJEUR_D(Main.DROITE), AURICULAIRE_D(Main.DROITE),
+    INDEX_D(Main.DROITE),
+    POUCE_G(Main.GAUCHE), ANNULAIRE_G(Main.GAUCHE), MAJEUR_G(Main.GAUCHE), AURICULAIRE_G(Main.GAUCHE),
+    INDEX_G(Main.GAUCHE);
     // AURICULAIRE_D = 2 psq il est petit est doit atteindre des touche chiantes =
     // %^$` entrée shift effacé - ) .....
 
@@ -11,15 +10,13 @@ public enum Doigt {
     private double poids;
     private Coordonnee coord;
     private String nomDoigt;
+    private int occ;
 
-    private Doigt(Main m, double p) {
+    private Doigt(Main m) {
         this.main = m;
         main.getListDoigt().add(this);
-        this.poids = p;
         this.coord = getPosBase(this);
     }
-
-    // TODO POUR TESTER
 
     public Main getMain() {
         return this.main;
@@ -85,6 +82,21 @@ public enum Doigt {
         return c;
     }
 
+    public void compteOccDoigts() {
+        this.occ = this.occ + 1;
+    }
+
+    public static void calculPoids() {
+        int total = 0;
+        for (Doigt doigt : Doigt.values()) {
+            total = total + doigt.occ;
+        }
+        System.out.println(total);
+        for (Doigt doigt : Doigt.values()) {
+            doigt.poids = (double) doigt.occ / total;
+            doigt.poids = doigt.poids * 10;  // pourcentage 
+        }
+    }
 
     public String toString() {
         return "Doigt { " +
@@ -92,6 +104,7 @@ public enum Doigt {
                 + nomDoigt + " " +
                 " , poids = " + poids +
                 " , " + coord +
+                " , " + occ +
                 '}';
     }
 }

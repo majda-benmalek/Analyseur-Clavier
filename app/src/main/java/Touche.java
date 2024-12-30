@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Touche {
@@ -19,7 +20,10 @@ public class Touche {
         this.coord = new Coordonnee(x, y);
         this.etiq = e;
         this.doigt = d;
-        this.touchesMortes = morte;
+        if (morte.isEmpty())
+            this.touchesMortes = new ArrayList<>();
+        else
+            this.touchesMortes = morte;
     }
 
     public Coordonnee getCoord() {
@@ -46,9 +50,9 @@ public class Touche {
         // " , " + doigt +
         // " , morte = " + (touchesMortes!=null) +
         // " }\n";
-        if (!touchesMortes.isEmpty()) {
-            return "Touche = " + etiq + " " + coord + "[Morte : " + touchesMortes.get(0) + "]";
-        }
+        // if (!touchesMortes.isEmpty()) {
+        //     return "Touche = " + etiq + " " + coord + "[Morte : " + touchesMortes.get(0) + "]";
+        // }
         return "Touche = " + etiq + " " + coord;
     }
 }

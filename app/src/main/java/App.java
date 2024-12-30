@@ -61,19 +61,32 @@ public class App {
         Analyseur a = new Analyseur("ressources/clavier_characters.txt");
         // a.afficheGramme();
 
-
         Clavier c = new Clavier();
-        ArrayList<HashMap<ArrayList<Touche>,Integer>>  touches = a.transformeEnTouche(c);
-        //printf touches
-        for (HashMap<ArrayList<Touche>,Integer> hashMap : touches) {
-            for (HashMap.Entry<ArrayList<Touche>,Integer> entry : hashMap.entrySet()){
-                ArrayList<Touche> ngrammes = entry.getKey();
-                Integer occ = entry.getValue();
-                
-                System.out.println(ngrammes);
+        ArrayList<HashMap<ArrayList<Touche>, Integer>> touches = a.transformeEnTouche(c);
+        // printf touches
+        if (touches != null) {
+            System.out.println("pas null");
+            for (HashMap<ArrayList<Touche>, Integer> hashMap : touches) {
+                for (HashMap.Entry<ArrayList<Touche>, Integer> entry : hashMap.entrySet()) {
+                    ArrayList<Touche> ngrammes = entry.getKey();
+                    Integer occ = entry.getValue();
+                    System.out.println("je suis la");
+                    System.out.println(ngrammes);
+                }
             }
+        } else {
+            System.out.println("bien null");
         }
-        // System.out.println(c.chercheTouche('\t'));
+
+        // List<Touche> rr = new ArrayList<>();
+        // // 14 = < 
+        // rr.add(c.getTouches().get(14));
+        // Mouvement1 e = new Mouvement1(rr, 3);
+        // System.out.println(e);
+
+        // System.out.println(Doigt.ANNULAIRE_D);
+        // System.out.println(Doigt.INDEX_D);
+        // System.out.println(Doigt.INDEX_G);
 
     }
 }
