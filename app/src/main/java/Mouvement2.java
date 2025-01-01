@@ -73,37 +73,37 @@ public class Mouvement2 extends Mouvement {
         return r;
     }
 
-    @Override
-    public void calculScore() {
-        double score = 0;
-        if (this.isSFB()) {
-            System.out.println("isSFB");
-            score -= 1;
-        }
-        if (this.isCiseaux()) {
-            System.out.println("isCiseaux");
-            score -= 1;
-        }
+    // @Override
+    // public void calculScore() {
+    //     double score = 0;
+    //     if (this.isSFB()) {
+    //         System.out.println("isSFB");
+    //         score -= 1;
+    //     }
+    //     if (this.isCiseaux()) {
+    //         System.out.println("isCiseaux");
+    //         score -= 1;
+    //     }
 
-        if (this.isLSB()) {
-            System.out.println("isLSB");
-            score -= 1;
-        }
+    //     if (this.isLSB()) {
+    //         System.out.println("isLSB");
+    //         score -= 1;
+    //     }
 
-        if (this.isAlternance()) {
-            System.out.println("isAlternance");
-            score += 1;
-        }
+    //     if (this.isAlternance()) {
+    //         System.out.println("isAlternance");
+    //         score += 1;
+    //     }
 
-        int roulement = this.isRoulement();
-        if (roulement != 0) {
-            System.out.println("isRoulement");
-            score += roulement;
-        }
+    //     int roulement = this.isRoulement();
+    //     if (roulement != 0) {
+    //         System.out.println("isRoulement");
+    //         score += roulement;
+    //     }
 
-        score = score * getOccurrences();
-        this.setScore(score);
+    //     score = score * getOccurrences();
+    //     this.setScore(score);
 
-    }
+    // }
 
 }

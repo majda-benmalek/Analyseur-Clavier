@@ -8,7 +8,7 @@ public enum Doigt {
 
     private Main main;
     private double poids;
-    private Coordonnee coord;
+    private Coordonnee coord;// TODO renommer coordoonée par pos de repos nan + logique
     private String nomDoigt;
     private int occ;
 

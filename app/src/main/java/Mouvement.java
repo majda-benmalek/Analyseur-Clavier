@@ -1,19 +1,18 @@
 
 import java.util.List;
 
-
-public abstract class Mouvement {
+public abstract class Mouvement { //TODO SCELLER LES CLASSES
     private List<Touche> sequenceTouche;
     private int occurrence;
-    private double score;
+    // private double score;
 
     public Mouvement(List<Touche> t, int o) {
         this.sequenceTouche = t;
         this.occurrence = o;
-        this.calculScore();
+        // this.calculScore();
     }
 
-    public abstract void calculScore();
+    // public abstract void calculScore();
 
     public int getOccurrences() {
         return this.occurrence;
@@ -23,14 +22,13 @@ public abstract class Mouvement {
         return this.sequenceTouche;
     }
 
-    public double getScore() {
-        return this.score;
-    }
+    // public double getScore() {
+    //     return this.score;
+    // }
 
-    public void setScore(double s){
-        this.score = s;
-    }
-
+    // public void setScore(double s){
+    //     this.score = s;
+    // }
 
     @Override
     public String toString() {
@@ -41,7 +39,7 @@ public abstract class Mouvement {
         return "Mouvement {\n" +
                 "\tsequenceTouche = \n" + s +
                 "\toccurrence = " + occurrence +
-                "\n\tscore = " + score +
+                // "\n\tscore = " + score +
                 "\n}\n";
     }
 }

@@ -2,12 +2,12 @@
 import java.util.List;
 
 public class Mouvement1 extends Mouvement {
-
+    private double score;
     public Mouvement1(List<Touche> l, int o) {
         super(l, o);
     }
 
-    @Override
+    // @Override
     public void calculScore() {
         Touche t = this.getSqTouches().get(0); // on sait qur ya un seul élement Mouvement une touche
         // Pour les mains :
@@ -44,4 +44,12 @@ public class Mouvement1 extends Mouvement {
         this.setScore(score);
     }
 
+
+    public double getScore() {
+        return this.score;
+    }
+
+    public void setScore(double s){
+        this.score = s;
+    }
 }

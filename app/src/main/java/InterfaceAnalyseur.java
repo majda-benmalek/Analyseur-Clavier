@@ -1,9 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.List;
 public interface InterfaceAnalyseur {
     void analyse(int paquet,String fichier);
-
-    // TODO : a changé pour List et Map pour laissé de la flexibilité sur ce choix la 
-    ArrayList<HashMap<ArrayList<Touche>,Integer>> transformeEnTouche(Clavier c);
+    List<Mouvement> transformeEnTouche(Clavier c);
 }
