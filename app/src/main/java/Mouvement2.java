@@ -61,7 +61,7 @@ public class Mouvement2 extends Mouvement {
                 }
             } else if (d1.getMain() == Main.DROITE) {
                 if (d1.getCord().getX() > d2.getCord().getX()) {
-                    r = 1;
+                    r = 1; 
                 }
                 if (d1.getCord().getX() < d2.getCord().getX()) {
                     r = 2;

@@ -89,6 +89,7 @@ public class Analyseur implements InterfaceAnalyseur {
                     List<Touche> t = c.chercheTouche(Character.toString(caractere));
                     if (!t.isEmpty()) {
                         // TODO si ya 2 touches pour ^ ca ajoute les 2 
+                        // TODO : verifié dans les sous-listes que c'est pas des mouvements > 4 
                         for (Touche touch : t) {
                             if (!touch.getMorte().isEmpty()) {
                                 System.out.println(touch.getEtiq()+" a une touche morte");

@@ -117,8 +117,9 @@ public class Clavier implements InterfaceClavier {
         }
     }
 
+    // TODO renvoie List<List<Touche>> avec toute les combinaisons
+    // ? la elle renvoie [ ^,alt, ^ ,i ] devrai renvoyer [[^,i],[alt,^,i]]
     @Override
-    // retourne une liste pour les touches en double (shift, alt, ctrl)
     public List<Touche> chercheTouche(String etiquette) {
         List<Touche> res = new ArrayList<>();
         for (Touche t : touches) {

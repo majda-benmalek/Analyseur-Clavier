@@ -84,9 +84,9 @@ public class App {
         // Mouvement1 e = new Mouvement1(rr, 3);
         // System.out.println(e);
 
-        // System.out.println(Doigt.ANNULAIRE_D);
-        // System.out.println(Doigt.INDEX_D);
-        // System.out.println(Doigt.INDEX_G);
+        System.out.println(Doigt.ANNULAIRE_D);
+        System.out.println(Doigt.INDEX_D);
+        System.out.println(Doigt.INDEX_G);
 
     }
 }
