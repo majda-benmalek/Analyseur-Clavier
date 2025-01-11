@@ -1,4 +1,5 @@
 package clavier;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -195,7 +196,7 @@ public class Clavier implements InterfaceClavier {
      * @return La liste des combinaisons trouvées.
      */
     @Override
-    public List<List<Touche>> chercheTouche(String etiquette) {
+    public List<List<Touche>> chercheTouche(String etiquette) throws TouchNotFound {
 
         List<List<Touche>> res = new ArrayList<>();
 
@@ -239,6 +240,10 @@ public class Clavier implements InterfaceClavier {
         System.out.println("Contenu de res:");
         for (List<Touche> list : res) {
             System.out.println(list);
+        }
+
+        if (res.isEmpty()) {
+            throw new TouchNotFound();
         }
 
         return res;

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import clavier.Clavier;
+import clavier.TouchNotFound;
 import clavier.Touche;
 import mouvement.Mouvement;
 import mouvement.Mouvement1;
@@ -133,10 +134,15 @@ public class Analyseur implements InterfaceAnalyseur {
                 int taille = nGrammes.length();
                 ArrayList<Touche> sequenceTouches = new ArrayList<>();
                 for (int i = 0; i < taille; i++) {
-                    System.out.println("["+nGrammes+"]");
+                    System.out.println("[" + nGrammes + "]");
                     char caractere = nGrammes.charAt(i);
                     // System.out.println("[" + caractere + "]" + "dans transformeEnTocuhes");
-                    List<List<Touche>> touches = c.chercheTouche(Character.toString(caractere));
+                    List<List<Touche>> touches = null;
+                    try {
+                        touches = c.chercheTouche(Character.toString(caractere));
+                    } catch (TouchNotFound e) {
+                        e.printStackTrace();
+                    }
                     sequenceTouches.add(touches.get(0).get(0)); // TODO TEJ SI C + GD QUE 3 GRAMMES
                 }
                 Integer occ = entry.getValue();
