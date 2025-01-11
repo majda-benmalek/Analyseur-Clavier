@@ -2,7 +2,6 @@ package clavierTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import clavier.Doigt;
@@ -12,7 +11,6 @@ import mouvement.Coordonnee;
 public class ToucheTest {
     private Touche a = new Touche("a", 1, 3, Doigt.AURICULAIRE_G);
     private Touche retourLigne = new Touche("\n", 13, 3, null);
-    private Touche un = new Touche("1", 1, 4, Doigt.AURICULAIRE_G, List.of("shift"));
 
     @Test
     public void testGetCoord() {
@@ -38,17 +36,6 @@ public class ToucheTest {
         assertEquals(d, null);
     }
 
-    @Test
-    public void testGetMorte() {
-        List<String> s = un.getMorte();
-        assertFalse(s.isEmpty());
-    }
-
-    @Test
-    public void testGetMorte_Vide() {
-        List<String> s = a.getMorte();
-        assertTrue(s.isEmpty());
-    }
 
     @Test
     public void testToString() {

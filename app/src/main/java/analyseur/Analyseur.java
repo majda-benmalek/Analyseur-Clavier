@@ -140,6 +140,9 @@ public class Analyseur implements InterfaceAnalyseur {
                     List<List<Touche>> touches = null;
                     try {
                         touches = c.chercheTouche(Character.toString(caractere));
+                        for (List<Touche> t : touches) {
+                            System.out.println(t); // Ajout de l'impression des touches
+                        }
                     } catch (TouchNotFound e) {
                         e.printStackTrace();
                     }

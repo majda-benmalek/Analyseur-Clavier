@@ -163,6 +163,7 @@ public class App {
         // System.out.println("je transforme en touches");
         List<Mouvement> touches = a.transformeEnTouche(c);
         a.afficheGramme();
+
         // System.out.println("affiche les grammes ");
         // a.afficheGramme();
         // printf touches

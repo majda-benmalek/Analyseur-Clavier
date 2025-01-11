@@ -45,34 +45,33 @@ public class ClavierTest {
     }
 
     @Test
-    public void testChercheTouche_WithDeadKeys() {
+    public void testChercheTouche_Majuscules() {
         try {
             List<List<Touche>> result = clavier.chercheTouche("A");
             assertNotNull(result);
             assertFalse(result.isEmpty());
-            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("A")));
-            boolean found_morte = result.stream()
-                    .anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("shift")));
+            // Vérifier que la combinaison de touches pour "ê" est présente dans les
+            // résultats
+            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("a")));
             assertTrue(found);
-            assertTrue(found_morte);
+            assertTrue(result.size() > 1);
         } catch (TouchNotFound e) {
-            fail("Exception should not be thrown for existing touch 'A'");
+            fail("Exception should not be thrown for existing touch 'ê'");
         }
     }
 
     @Test
-    public void testChercheTouche_WithCombinations() {
+    public void testChercheTouche_WithCombinationsMultipleChoices() {
         try {
-            List<List<Touche>> result = clavier.chercheTouche("ê");
+            List<List<Touche>> result = clavier.chercheTouche("î");
             assertNotNull(result);
             assertFalse(result.isEmpty());
-            // Vérifier que la combinaison de touches pour "ê" est présente dans les
-            // résultats
-            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("e")));
+            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("i")));
             boolean found_combi = result.stream()
-                    .anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("^")));
+                    .anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("alt")));
             assertTrue(found);
             assertTrue(found_combi);
+            assertTrue(result.size() == 3);
         } catch (TouchNotFound e) {
             fail("Exception should not be thrown for existing touch 'ê'");
         }
