@@ -29,9 +29,9 @@ public class Clavier implements InterfaceClavier {
     public Clavier() {
         this.touches = new ArrayList<>();
         this.combinaisons = new HashMap<>();
-        this.path = "ressources/azerty.json";
+        this.path = "app/ressources/azerty.json"; // TODO pb d'accès
         creerClavier();
-        this.pathCombi = "ressources/combinaison.json";
+        this.pathCombi = "app/ressources/combinaison.json";
         combinaison();
     }
 
@@ -235,11 +235,11 @@ public class Clavier implements InterfaceClavier {
         }
 
         // Print res
-        System.out.println(etiquette);
-        System.out.println("Contenu de res:");
-        for (List<Touche> list : res) {
-            System.out.println(list);
-        }
+        // System.out.println(etiquette);
+        // System.out.println("Contenu de res:");
+        // for (List<Touche> list : res) {
+            // System.out.println(list);
+        // }
 
         return res;
     }
