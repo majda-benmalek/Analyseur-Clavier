@@ -10,6 +10,7 @@ import analyseur.Analyseur;
 import clavier.Clavier;
 import clavier.Doigt;
 import clavier.Touche;
+import evaluateur.Evaluateur;
 import mouvement.Mouvement;
 import mouvement.Mouvement1;
 import mouvement.Mouvement2;
@@ -20,6 +21,18 @@ public class App {
     }
 
     public static void main(String[] args) {
+            // * -------- < Test de tout l'ensemble > --------
+
+            Clavier c = new Clavier();
+            Analyseur a = new Analyseur("ressources/clavier_characters.txt");
+            a.affichePitie(a.transformeEnTouche(c));
+            // a.transformeEnTouche(c);
+            // a.afficheGramme();
+            // System.out.println("-------------------- ds évaluateur ----------------------------");
+            // Evaluateur e = new Evaluateur(a, c);
+            // e.afficheListeTouche();
+            // e.donneLeScore();
+            // System.out.println(e.donneLeScore());
         // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
         // Pas une redirection vers intérieur
@@ -111,18 +124,18 @@ public class App {
         // System.out.println(m2);
         // System.out.println(m3);
         // MOUVEMENT 1
-        Touche t = new Touche("j", 7, 2, Doigt.INDEX_D);
-        Touche t2 = new Touche("n", 7, 1, Doigt.INDEX_D);
-        Touche t3 = new Touche("d", 3, 2, Doigt.INDEX_D);
-        List<Touche> l = new ArrayList<>();
-        l.add(t);
-        List<Touche> l2 = new ArrayList<>();
-        l2.add(t2);
-        List<Touche> l3 = new ArrayList<>();
-        l3.add(t3);
-        Mouvement1 m = new Mouvement1(l, 20);
-        Mouvement1 m2 = new Mouvement1(l2, 20);
-        Mouvement1 m3 = new Mouvement1(l3, 20);
+        // Touche t = new Touche("j", 7, 2, Doigt.INDEX_D);
+        // Touche t2 = new Touche("n", 7, 1, Doigt.INDEX_D);
+        // Touche t3 = new Touche("d", 3, 2, Doigt.INDEX_D);
+        // List<Touche> l = new ArrayList<>();
+        // l.add(t);
+        // List<Touche> l2 = new ArrayList<>();
+        // l2.add(t2);
+        // List<Touche> l3 = new ArrayList<>();
+        // l3.add(t3);
+        // Mouvement1 m = new Mouvement1(l, 20);
+        // Mouvement1 m2 = new Mouvement1(l2, 20);
+        // Mouvement1 m3 = new Mouvement1(l3, 20);
         // System.out.println(m);
         // System.out.println(m2);
         // System.out.println(m3);
@@ -130,40 +143,39 @@ public class App {
         // MOUVEMENT 2
 
         // LSB + Alternance
-        Touche t4 = new Touche("y", 6, 3, Doigt.INDEX_D);
-        Touche t5 = new Touche("t", 6, 3, Doigt.INDEX_G);
-        List<Touche> l4 = new ArrayList<>();
-        l4.add(t4);
-        l4.add(t5);
-        Mouvement2 m4 = new Mouvement2(l4, 1);
+        // Touche t4 = new Touche("y", 6, 3, Doigt.INDEX_D);
+        // Touche t5 = new Touche("t", 6, 3, Doigt.INDEX_G);
+        // List<Touche> l4 = new ArrayList<>();
+        // l4.add(t4);
+        // l4.add(t5);
+        // Mouvement2 m4 = new Mouvement2(l4, 1);
         // System.out.println(m4);
 
         // SFB + ciseaux
-        Touche t6 = new Touche("h", 6, 2, Doigt.INDEX_D);
-        Touche t7 = new Touche("y", 6, 3, Doigt.INDEX_D);
-        List<Touche> l5 = new ArrayList<>();
-        l5.add(t6);
-        l5.add(t7);
-        Mouvement2 m5 = new Mouvement2(l5, 100);
+        // Touche t6 = new Touche("h", 6, 2, Doigt.INDEX_D);
+        // Touche t7 = new Touche("y", 6, 3, Doigt.INDEX_D);
+        // List<Touche> l5 = new ArrayList<>();
+        // l5.add(t6);
+        // l5.add(t7);
+        // Mouvement2 m5 = new Mouvement2(l5, 100);
         // System.out.println(m5);
 
         // Roulement interieur -> exterieur
-        Touche t8 = new Touche("j", 7, 2, Doigt.INDEX_D);
-        Touche t9 = new Touche("m", 10, 2, Doigt.AURICULAIRE_D);
-        List<Touche> l6 = new ArrayList<>();
-        l6.add(t8);
-        l6.add(t9);
-        Mouvement2 m6 = new Mouvement2(l6, 10);
+        // Touche t8 = new Touche("j", 7, 2, Doigt.INDEX_D);
+        // Touche t9 = new Touche("m", 10, 2, Doigt.AURICULAIRE_D);
+        // List<Touche> l6 = new ArrayList<>();
+        // l6.add(t8);
+        // l6.add(t9);
+        // Mouvement2 m6 = new Mouvement2(l6, 10);
         // System.out.println(m6);
 
-        Analyseur a = new Analyseur("ressources/clavier_characters.txt");
-        // a.afficheGramme();
+        // Analyseur a = new Analyseur("ressources/clavier_characters.txt");
+        // // a.afficheGramme();
 
-        Clavier c = new Clavier();
+        // Clavier c = new Clavier();
         // System.out.println("je transforme en touches");
-        List<Mouvement> touches = a.transformeEnTouche(c);
-        a.afficheGramme();
-
+        // List<List<Mouvement>> touches = a.transformeEnTouche(c);
+        // a.afficheGramme();
         // System.out.println("affiche les grammes ");
         // a.afficheGramme();
         // printf touches
@@ -175,7 +187,7 @@ public class App {
         // System.out.println(e);
 
         // System.out.println(Doigt.ANNULAIRE_D);
-        System.out.println(Doigt.INDEX_D);
+        // System.out.println(Doigt.INDEX_D);
         // System.out.println(Doigt.INDEX_G);
 
     }

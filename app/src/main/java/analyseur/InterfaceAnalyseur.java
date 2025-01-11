@@ -7,5 +7,5 @@ import mouvement.Mouvement;
 
 public interface InterfaceAnalyseur {
     void analyse(int paquet,String fichier);
-    List<Mouvement> transformeEnTouche(Clavier c);
+    List<List<Mouvement>> transformeEnTouche(Clavier c);
 }
