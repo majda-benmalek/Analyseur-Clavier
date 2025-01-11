@@ -7,3 +7,6 @@ Compilé avec :
 
 Exécuté avec : 
 ```./gradlew run``` 
+
+Exécuté les tests avec :
+```./gradlew test```
