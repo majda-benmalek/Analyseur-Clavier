@@ -91,7 +91,7 @@ public class Evaluateur implements InterfaceEvaluateur {
             else if (mouvement instanceof Mouvement2){
                 Mouvement2 inter = (Mouvement2) mouvement;
                 // System.out.println(inter);
-                System.out.println("dans M2");
+                // System.out.println("dans M2");
                 int occ = inter.getOccurrences();
                 if (inter.isAlternance()){
                     alternance+=occ;
@@ -107,7 +107,7 @@ public class Evaluateur implements InterfaceEvaluateur {
                 }
                 roulement+=inter.isRoulement();
             }else{
-                System.out.println("dans M3");
+                // System.out.println("dans M3");
                 Mouvement3 interMouvement3 = (Mouvement3) mouvement;
                 int occ = interMouvement3.getOccurrences();
                 if (interMouvement3.notRedirection() == false){
@@ -124,7 +124,9 @@ public class Evaluateur implements InterfaceEvaluateur {
         int numerateur = redirection + skipgramme +lsb + sfb + ciseaux + roulement + alternance + score1touche; // TODO Chef ? yakak
         // System.out.println("numérateur = "+numerateur);
         // System.out.println("Nombre de 3 grammes "+ nombre3Grammes);
-        res = numerateur / nombre3Grammes;
+        if (nombre3Grammes != 0){
+            res = numerateur / nombre3Grammes;
+        }
         return res;
     }
 

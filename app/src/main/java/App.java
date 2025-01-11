@@ -25,7 +25,7 @@ public class App {
 
             Clavier c = new Clavier();
             Analyseur a = new Analyseur("app/ressources/clavier_characters.txt");
-            a.transformeEnTouche(c);
+            // a.transformeEnTouche(c);
             // a.afficheGramme();
             // System.out.println("-------------------- ds évaluateur ----------------------------");
             // Evaluateur e = new Evaluateur(a, c);
