@@ -1,7 +1,12 @@
+package mouvement;
 
 import java.util.List;
 
-public class Mouvement1 extends Mouvement {
+import clavier.Doigt;
+import clavier.Main;
+import clavier.Touche;
+
+public final class Mouvement1 extends Mouvement {
     private double score;
     public Mouvement1(List<Touche> l, int o) {
         super(l, o);
@@ -35,7 +40,7 @@ public class Mouvement1 extends Mouvement {
 
         Doigt d = t.getDoigt();
         Coordonnee coordT = t.getCoord();
-        Coordonnee coordD = d.getCord();
+        Coordonnee coordD = d.getPosRepos();
 
         int distance = coordT.calculDistance(coordD);
         double score = ((distance * d.getPoids()) * this.getOccurrences()) * Main.calculEquilibre();

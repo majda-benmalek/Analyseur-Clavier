@@ -1,5 +1,8 @@
+package clavier;
 import java.util.ArrayList;
 import java.util.List;
+
+import mouvement.Coordonnee;
 
 public class Touche {
 
@@ -51,8 +54,10 @@ public class Touche {
         // " , morte = " + (touchesMortes!=null) +
         // " }\n";
         // if (!touchesMortes.isEmpty()) {
-        //     return "Touche = " + etiq + " " + coord + "[Morte : " + touchesMortes.get(0) + "]";
+        // return "Touche = " + etiq + " " + coord + "[Morte : " + touchesMortes.get(0)
+        // + "]";
         // }
         return "Touche = " + etiq + " " + coord;
+        // return etiq;
     }
 }

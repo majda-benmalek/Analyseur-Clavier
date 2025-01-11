@@ -1,4 +1,12 @@
+package evaluateur;
 import java.util.List;
+
+import analyseur.Analyseur;
+import clavier.Clavier;
+import mouvement.Mouvement;
+import mouvement.Mouvement1;
+import mouvement.Mouvement2;
+import mouvement.Mouvement3;
 //TODO gérer le cas où le clavier est pas adaptée au texte donnée exemple QWERTY donné sur un texte français dc les accents éè sont pas dans le claviers
 public class Evaluateur implements InterfaceEvaluateur {
     private Clavier clavier;

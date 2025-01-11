@@ -6,13 +6,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import analyseur.Analyseur;
+import clavier.Clavier;
+import clavier.Doigt;
+import clavier.Touche;
+import mouvement.Mouvement;
+import mouvement.Mouvement1;
+import mouvement.Mouvement2;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        Analyseur a = new Analyseur("app/src/main/java/fic.txt");
+        // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
         // Pas une redirection vers intérieur
         // Touche t = new Touche('a', new Coordonnee(1,3), Doigt.AURICULAIRE_G);
@@ -28,7 +36,7 @@ public class App {
         // System.out.println("m score = "+m.getScore());
         // System.out.println(m);
         // System.out.println("-------------------");
-        
+
         // pas une redi vers l'extérieur
         // List<Touche> l2 = new ArrayList<>();
         // l2.add(t3);
@@ -66,7 +74,7 @@ public class App {
         // System.out.println("-------------------");
         // // System.out.println(m4);
 
-        // // skipgramme 
+        // // skipgramme
 
         // // Touche t4 = new Touche('e', new Coordonnee(1,3), Doigt.AURICULAIRE_G);
         // Touche t5 = new Touche('m',new Coordonnee(10, 2),Doigt.AURICULAIRE_D);
@@ -152,31 +160,22 @@ public class App {
         // a.afficheGramme();
 
         Clavier c = new Clavier();
-        ArrayList<HashMap<ArrayList<Touche>, Integer>> touches = a.transformeEnTouche(c);
+        // System.out.println("je transforme en touches");
+        List<Mouvement> touches = a.transformeEnTouche(c);
+        a.afficheGramme();
+        // System.out.println("affiche les grammes ");
+        // a.afficheGramme();
         // printf touches
-        if (touches != null) {
-            System.out.println("pas null");
-            for (HashMap<ArrayList<Touche>, Integer> hashMap : touches) {
-                for (HashMap.Entry<ArrayList<Touche>, Integer> entry : hashMap.entrySet()) {
-                    ArrayList<Touche> ngrammes = entry.getKey();
-                    Integer occ = entry.getValue();
-                    System.out.println("je suis la");
-                    System.out.println(ngrammes);
-                }
-            }
-        } else {
-            System.out.println("bien null");
-        }
 
         // List<Touche> rr = new ArrayList<>();
-        // // 14 = < 
+        // // 14 = <
         // rr.add(c.getTouches().get(14));
         // Mouvement1 e = new Mouvement1(rr, 3);
         // System.out.println(e);
 
-        System.out.println(Doigt.ANNULAIRE_D);
+        // System.out.println(Doigt.ANNULAIRE_D);
         System.out.println(Doigt.INDEX_D);
-        System.out.println(Doigt.INDEX_G);
+        // System.out.println(Doigt.INDEX_G);
 
     }
 }

@@ -1,7 +1,12 @@
+package mouvement;
 
 import java.util.List;
 
-public class Mouvement2 extends Mouvement {
+import clavier.Doigt;
+import clavier.Main;
+import clavier.Touche;
+
+public final class Mouvement2 extends Mouvement {
 
     public Mouvement2(List<Touche> l, int o) {
         super(l, o);
@@ -27,8 +32,8 @@ public class Mouvement2 extends Mouvement {
         Touche t2 = this.getSqTouches().get(1);
         // les 2 touches sont sur une colonne diff que la position de repos de leur
         // doigt
-        Coordonnee posReposDT1 = t1.getDoigt().getCord();
-        Coordonnee posReposDT2 = t2.getDoigt().getCord();
+        Coordonnee posReposDT1 = t1.getDoigt().getPosRepos();
+        Coordonnee posReposDT2 = t2.getDoigt().getPosRepos();
 
         return (posReposDT1.getY() != t1.getCoord().getY()) && (posReposDT2.getY() != t2.getCoord().getY());
     }
@@ -54,16 +59,16 @@ public class Mouvement2 extends Mouvement {
         // verfier le doigt (si c'est autre chose que index ou auriculaire)
         if (!isCiseaux() && !isLSB() && !isSFB() && (d1 != d2 && d1.getMain() == d2.getMain())) {
             if (d1.getMain() == Main.GAUCHE) { // Si la touche 1 est faite par l'index
-                if (d1.getCord().getX() < d2.getCord().getX()) {
+                if (d1.getPosRepos().getX() < d2.getPosRepos().getX()) {
                     r = 1;
-                } else if (d1.getCord().getX() > d2.getCord().getX()) {
+                } else if (d1.getPosRepos().getX() > d2.getPosRepos().getX()) {
                     r = 2;
                 }
             } else if (d1.getMain() == Main.DROITE) {
-                if (d1.getCord().getX() > d2.getCord().getX()) {
+                if (d1.getPosRepos().getX() > d2.getPosRepos().getX()) {
                     r = 1; 
                 }
-                if (d1.getCord().getX() < d2.getCord().getX()) {
+                if (d1.getPosRepos().getX() < d2.getPosRepos().getX()) {
                     r = 2;
                 }
             }

@@ -29,30 +29,6 @@
         "main": "GAUCHE"
       },
       {
-        "x": 4, 
-        "y": 0, 
-        "touche": " ", 
-        "doigt": "POUCE_G"
-      },
-      {
-        "x": 5, 
-        "y": 0, 
-        "touche": " ", 
-        "doigt": "POUCE_G"
-      },
-      {
-        "x": 6, 
-        "y": 0, 
-        "touche": " ", 
-        "doigt": "POUCE_D"
-      },
-      {
-        "x": 7, 
-        "y": 0, 
-        "touche": " ", 
-        "doigt": "POUCE_D"
-      },
-      {
         "x": 8, 
         "y": 0, 
         "touche": " ", 
