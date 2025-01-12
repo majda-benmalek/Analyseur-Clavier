@@ -227,20 +227,4 @@ public class Clavier implements InterfaceClavier, Observable {
     public List<Observer> getObservers() {
         return observers;
     }
-    // @Override
-    // public void addObserver(Observer observer) {
-    // observers.add(observer);
-    // }
-
-    // @Override
-    // public void removeObserver(Observer observer) {
-    // observers.remove(observer);
-    // }
-
-    // @Override
-    // public void notifyObservers(String message, Observer o) {
-    // o.update(message);
-    // observers.remove(o);
-    // }
-
 }

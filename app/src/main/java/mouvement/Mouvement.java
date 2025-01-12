@@ -22,14 +22,6 @@ public sealed abstract class Mouvement permits Mouvement1, Mouvement2, Mouvement
         return this.sequenceTouche;
     }
 
-    // public double getScore() {
-    // return this.score;
-    // }
-
-    // public void setScore(double s){
-    // this.score = s;
-    // }
-
     @Override
     public String toString() {
         String s = "";

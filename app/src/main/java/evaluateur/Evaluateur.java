@@ -16,6 +16,11 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
     private Clavier clavier;
     private Analyseur analyseur;
     private List<List<Mouvement>> mouvementListe;
+    
+    private static double poidsFaible = 0.25;
+    private static double poidsMoyen = 0.5;
+    private static double poidsFort = 1.0;
+
     private int redirection;
     private int skipgramme;
     private int lsb;
@@ -70,16 +75,44 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
     */
     public Mouvement meilleurMouvement(List<Mouvement> l) {
         Mouvement res = l.get(0);
-        int tailleMouvementChoisi = tailleMouvement(res);
+        double scoreRes = scoreMouvement(res);
         for (Mouvement mouvement : l) {
-            int tailleMouvementCandidat = tailleMouvement(mouvement);
-            if (tailleMouvementCandidat < tailleMouvementChoisi) {
+            double scoreCandidat = scoreMouvement(mouvement);
+            if (scoreCandidat < scoreRes) {
                 res = mouvement;
-                tailleMouvementChoisi = tailleMouvementCandidat;
+                scoreRes = scoreCandidat;
             }
         }
         return res;
     }
+
+    public double scoreMouvement(Mouvement m){
+        double score=0 ; 
+       int taille = tailleMouvement(m);
+       if (taille == 1){
+        score= m.getOccurrences()*poidsMoyen;
+       }else if (taille == 2){
+            Mouvement2 mm = (Mouvement2)m;
+            if (mm.isAlternance() || mm.isRoulement() == 0){
+                score= m.getOccurrences()*poidsFaible;
+            }
+       }else{
+            Mouvement3 m3 = (Mouvement3) m;
+            if (m3.notRedirection() == false){
+                if (m3.redirectionSansIndex()){
+                    score= m.getOccurrences()*poidsFort;
+                }
+                else{
+                    score= m.getOccurrences()*poidsMoyen;
+                }
+            }
+            else{
+                score = m.getOccurrences()*poidsMoyen;
+            }
+       }
+       return score;
+    }
+
     /**
      renvoie le score du clavier 
      @return le score
@@ -124,6 +157,7 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
         double numerateur = redirection + skipgramme + lsb + sfb + ciseaux - roulement - alternance + score1touche; 
         if (nombre3Grammes != 0) {
             res = numerateur / nombre3Grammes;
+            res *=10;
         }
         return res;
     }
