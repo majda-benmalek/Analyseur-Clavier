@@ -50,7 +50,7 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
         this.nombre3Grammes = this.analyseur.getNombre3Gramme();
     }
 
-    /** retourne la taille du mouvement //TODO à mettre ailleurs nan
+    /** retourne la taille du mouvement
      * @param m le mouvement dont on veut la taille
      * @return la taille du mouvement
     */
@@ -73,7 +73,7 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
         int tailleMouvementChoisi = tailleMouvement(res);
         for (Mouvement mouvement : l) {
             int tailleMouvementCandidat = tailleMouvement(mouvement);
-            if (tailleMouvementCandidat < tailleMouvementChoisi) { // TODO changer le critère nan ?
+            if (tailleMouvementCandidat < tailleMouvementChoisi) {
                 res = mouvement;
                 tailleMouvementChoisi = tailleMouvementCandidat;
             }
@@ -121,15 +121,10 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
                 }
             }
         }
-        double numerateur = redirection + skipgramme + lsb + sfb + ciseaux - roulement - alternance + score1touche; // TODO
-                                                                                                                    // Chef
-                                                                                                                    // ?
-                                                                                                                    // yakak
+        double numerateur = redirection + skipgramme + lsb + sfb + ciseaux - roulement - alternance + score1touche; 
         if (nombre3Grammes != 0) {
             res = numerateur / nombre3Grammes;
         }
-        double i = 20.0 / (1.0 + res);
-        res = i;
         return res;
     }
     @Override
