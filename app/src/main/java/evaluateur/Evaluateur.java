@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import analyseur.Analyseur;
+import analyseur.InterfaceAnalyseur;
 import clavier.Clavier;
+import clavier.InterfaceClavier;
 import mouvement.Mouvement;
 import mouvement.Mouvement1;
 import mouvement.Mouvement2;
@@ -13,8 +15,8 @@ import ui.Observable;
 import ui.Observer;
 
 public class Evaluateur implements InterfaceEvaluateur, Observable {
-    private Clavier clavier;
-    private Analyseur analyseur;
+    private InterfaceClavier clavier;
+    private InterfaceAnalyseur analyseur;
     private List<List<Mouvement>> mouvementListe;
     
     private static double poidsFaible = 0.25;
@@ -52,7 +54,8 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
         this.sfb = 0;
         this.skipgramme = 0;
         this.score1touche = 0;
-        this.nombre3Grammes = this.analyseur.getNombre3Gramme();
+        Analyseur a = (Analyseur) this.analyseur;
+        this.nombre3Grammes = a.getNombre3Gramme();
     }
 
     /** retourne la taille du mouvement
@@ -69,7 +72,7 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
         }
 
     }
-    /** retourne le meillleur mouvement parmis les choix proposées
+    /** retourne le meilleur mouvement parmis les choix proposées
      * @param l la liste de choix
      * @return le meilleur mouvement pour le même gramme
     */
@@ -85,7 +88,10 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
         }
         return res;
     }
-
+   /** retourne le score d'un mouvement
+     * @param m le mouvement dont on veut le score
+     * @return le score du mouvement
+    */
     public double scoreMouvement(Mouvement m){
         double score=0 ; 
        int taille = tailleMouvement(m);
