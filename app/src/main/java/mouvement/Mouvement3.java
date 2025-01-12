@@ -10,7 +10,9 @@ public final class Mouvement3 extends Mouvement {
     public Mouvement3(List<Touche> l, int o) {
         super(l, o);
     }
-
+    /**
+     * @return renvoie si le mouvement n'est pas une redirection 
+     */
     public boolean notRedirection() {
         Touche t1 = this.getSqTouches().get(0);
         Touche t2 = this.getSqTouches().get(1);
@@ -23,6 +25,9 @@ public final class Mouvement3 extends Mouvement {
         return versInterieur || versExterieur;
     }
 
+       /**
+     * @return renvoie si le mouvement n'est pas une redirection sans index
+     */
     public boolean redirectionSansIndex() {
         Touche t1 = this.getSqTouches().get(0);
         Touche t2 = this.getSqTouches().get(1);
@@ -33,6 +38,9 @@ public final class Mouvement3 extends Mouvement {
         return b1 || b2 || b3;
     }
 
+       /**
+     * @return renvoie si le mouvement est un skipgramme
+     */
     public boolean skipgramme() {
         Touche t1 = this.getSqTouches().get(0);
         Touche t2 = this.getSqTouches().get(1);
