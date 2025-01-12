@@ -21,21 +21,23 @@ public class App {
     }
 
     public static void main(String[] args) {
-            // * -------- < Test de tout l'ensemble > --------
+        // * -------- < Test de tout l'ensemble > --------
 
-            Clavier c = new Clavier();
-            Analyseur a = new Analyseur("app/ressources/clavier_characters.txt");
-            try {
-                a.transformeEnTouche(c);
-            } catch (Exception ToucheNotFound) {
-                System.out.println("pas trouvé");
-            }
-            // a.afficheGramme();
-            // System.out.println("-------------------- ds évaluateur ----------------------------");
-            // Evaluateur e = new Evaluateur(a, c);
-            // e.afficheListeTouche();
-            // e.donneLeScore();
-            // System.out.println(e.donneLeScore());
+        Clavier c = new Clavier();
+        Analyseur a = new Analyseur("ressources/corpus.txt");
+        try {
+            a.transformeEnTouche(c);
+        } catch (Exception ToucheNotFound) {
+            System.out.println("pas trouvé");
+        }
+        Evaluateur e = new Evaluateur(a, c);
+        // a.afficheGramme();
+        // System.out.println("-------------------- ds évaluateur
+        // ----------------------------");
+        // Evaluateur e = new Evaluateur(a, c);
+        // e.afficheListeTouche();
+        // e.donneLeScore();
+        System.out.println(e.donneLeScore());
         // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
         // Pas une redirection vers intérieur

@@ -218,11 +218,11 @@ public class Analyseur implements InterfaceAnalyseur {
                         m = new Mouvement3(list, occ);
                     }
                     if (m != null) {
-                        System.out.println("----------");
-                        System.out.println(tailleMouvement1(m));
-                        for (Touche touche : m.getSqTouches()) {
-                            System.out.println(touche.getEtiq());
-                        }
+                        // System.out.println("----------");
+                        // System.out.println(tailleMouvement1(m));
+                        // for (Touche touche : m.getSqTouches()) {
+                        //     System.out.println(touche.getEtiq());
+                        // }
                         lm.add(m);
                     }
                 }
