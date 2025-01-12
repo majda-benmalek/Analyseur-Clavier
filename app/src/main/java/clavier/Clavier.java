@@ -30,9 +30,9 @@ public class Clavier implements InterfaceClavier {
     public Clavier() {
         this.touches = new ArrayList<>();
         this.combinaisons = new HashMap<>();
-        this.path = "ressources/azerty.json"; // TODO pb d'accès
+        this.path = "app/ressources/azerty.json"; // TODO pb d'accès
         creerClavier();
-        this.pathCombi = "ressources/combinaison.json";
+        this.pathCombi = "app/ressources/combinaison.json";
         combinaison();
     }
 

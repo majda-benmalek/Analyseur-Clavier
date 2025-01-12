@@ -83,8 +83,8 @@ public class Evaluateur implements InterfaceEvaluateur {
     }
 
     @Override
-    public int donneLeScore() { // TODO utiliser les streams
-        int res = 0;
+    public double donneLeScore() { // TODO utiliser les streams
+        double res = 0;
         for (List<Mouvement> combList : mouvementListe) {
             Mouvement mouvement = meilleurMouvement(combList);
             // System.out.println(mouvement);
@@ -127,13 +127,14 @@ public class Evaluateur implements InterfaceEvaluateur {
             }
         }
         int numerateur = redirection + skipgramme +lsb + sfb + ciseaux - roulement - alternance + score1touche; // TODO Chef ? yakak
-        // System.out.println("numérateur = "+numerateur);
-        // System.out.println("Nombre de 3 grammes "+ nombre3Grammes);
+        System.out.println("numérateur = "+numerateur);
+        System.out.println("Nombre de 3 grammes "+ nombre3Grammes);
         if (nombre3Grammes != 0){
-            res = numerateur / nombre3Grammes;
+            res = (double) numerateur / (double) nombre3Grammes;
+            System.out.println("res = "+res);
         }
-        // int i = 20 / (1 + res);
-        // res = i;
+        double i = 20.0 / (1.0 + res);
+        res = i;
         return res;
     }
 
