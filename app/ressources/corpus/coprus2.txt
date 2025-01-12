@@ -1,5 +1,0 @@
-- class Touche { private int x; private int y; }  
-- if (x > 10 && y < 5) { System.out.println("Test"); }  
-- 42 est la réponse à la grande question de la vie.  
-- var result = map.get("clé"); // Vérifie si la clé existe  
-- A=Pi*r^2 ; E=mc^2 ; sin(x) + cos(x) = 1  

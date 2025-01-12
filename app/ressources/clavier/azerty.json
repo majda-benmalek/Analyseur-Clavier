@@ -257,13 +257,6 @@
       "doigt" : "INDEX_G"
     },
     {
-      "x" : 4,
-      "y" : 3,
-      "touche" : "R",
-      "doigt" : "INDEX_G",
-      "morte" : ["shift"]
-    },
-    {
       "x" : 5,
       "y" : 3,
       "touche" : "t",

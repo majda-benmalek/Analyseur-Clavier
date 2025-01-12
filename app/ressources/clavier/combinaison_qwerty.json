@@ -1,0 +1,188 @@
+{
+    "combinaison": [
+        {
+            "char": "A",
+            "combi": ["shift", "a"]
+        },
+        {
+            "char": "B",
+            "combi": ["shift", "b"]
+        },
+        {
+            "char": "C",
+            "combi": ["shift", "c"]
+        },
+        {
+            "char": "D",
+            "combi": ["shift", "d"]
+        },
+        {
+            "char": "E",
+            "combi": ["shift", "e"]
+        },
+        {
+            "char": "F",
+            "combi": ["shift", "f"]
+        },
+        {
+            "char": "G",
+            "combi": ["shift", "g"]
+        },
+        {
+            "char": "H",
+            "combi": ["shift", "h"]
+        },
+        {
+            "char": "I",
+            "combi": ["shift", "i"]
+        },
+        {
+            "char": "J",
+            "combi": ["shift", "j"]
+        },
+        {
+            "char": "K",
+            "combi": ["shift", "k"]
+        },
+        {
+            "char": "L",
+            "combi": ["shift", "l"]
+        },
+        {
+            "char": "M",
+            "combi": ["shift", "m"]
+        },
+        {
+            "char": "N",
+            "combi": ["shift", "n"]
+        },
+        {
+            "char": "O",
+            "combi": ["shift", "o"]
+        },
+        {
+            "char": "P",
+            "combi": ["shift", "p"]
+        },
+        {
+            "char": "Q",
+            "combi": ["shift", "q"]
+        },
+        {
+            "char": "R",
+            "combi": ["shift", "r"]
+        },
+        {
+            "char": "S",
+            "combi": ["shift", "s"]
+        },
+        {
+            "char": "T",
+            "combi": ["shift", "t"]
+        },
+        {
+            "char": "U",
+            "combi": ["shift", "u"]
+        },
+        {
+            "char": "V",
+            "combi": ["shift", "v"]
+        },
+        {
+            "char": "W",
+            "combi": ["shift", "w"]
+        },
+        {
+            "char": "X",
+            "combi": ["shift", "x"]
+        },
+        {
+            "char": "Y",
+            "combi": ["shift", "y"]
+        },
+        {
+            "char": "Z",
+            "combi": ["shift", "z"]
+        },
+        {
+            "char": "<",
+            "combi": ["shift", ","]
+        },
+        {
+            "char" : ">", 
+            "combi" : ["shift","."]
+        },
+        {
+            "char": "?",
+            "combi": ["shift", "/"]
+        },
+        {
+            "char" : "~",
+            "combi" : ["shift","`"]
+        },
+        {
+            "char" : "!",
+            "combi" : ["shift","1"]
+        },
+        {
+            "char" : "@",
+            "combi" : ["shift","2"]
+        },
+        {
+            "char" : "#",
+            "combi" : ["shift","3"]
+        },
+        {
+            "char" : "$",
+            "combi" : ["shift",4]
+        },
+        {
+            "char" : "%",
+            "combi" :["shift", "5"]
+        },
+        {
+            "char" : "^",
+            "combi" : ["shift","6"]
+        },
+        {
+            "char" : "&",
+            "combi" : ["shift","7"]
+        },
+        {
+            "char" : "*",
+            "combi" :["shift","8"]
+        },
+        {
+            "char" : "(",
+            "combi" : ["shift","9"]
+        },
+        {
+            "char" : ")",
+            "combi" : ["shift","0"]
+        },
+        {
+            "char" : "_",
+            "combi" : ["shift","-"]
+        },
+        {
+            "char" : "+",
+            "combi" : ["shift","="]
+        },
+        {
+            "char" : "{",
+            "combi" : ["shift","["]
+        },
+        {
+            "char" : "}",
+            "combi" : ["shift","]"]
+        },
+        {
+            "char" : "|",
+            "combi" : ["shift","\\"]
+        },
+        {
+            "char" : ":",
+            "combi" : ["shift",";"]
+        }
+    ]
+}

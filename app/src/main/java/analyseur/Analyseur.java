@@ -156,12 +156,7 @@ public class Analyseur implements InterfaceAnalyseur, Observable {
                 for (int i = 0; i < taille; i++) { // îa
                     char caractere = nGrammes.charAt(i);
                     List<List<Touche>> sequenceTouches = null;
-                    try {
-                        sequenceTouches = c.chercheTouche(Character.toString(caractere));
-                    } catch (TouchNotFound e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    sequenceTouches = c.chercheTouche(Character.toString(caractere));
                     int tailleSequence = sequenceTouches.size();
                     if (tailleSequence == 1) {
                         if (i == 0) { // j'ai rien a copier

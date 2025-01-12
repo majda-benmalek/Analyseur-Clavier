@@ -16,6 +16,7 @@ public final class Mouvement1 extends Mouvement {
 
     public Mouvement1(List<Touche> l, int o) {
         super(l, o);
+        this.calculScore();
     }
 
     public void calculScore() {
@@ -47,19 +48,19 @@ public final class Mouvement1 extends Mouvement {
         Coordonnee coordT = t.getCoord();
         Coordonnee coordD = d.getPosRepos();
 
-        int distance = coordT.calculDistance(coordD);   
+        int distance = coordT.calculDistance(coordD);
         // System.out.println(distance);
-        // System.out.println((t.getCoord().calculDistance(d.getPosRepos()) * d.getPoids()));
-        // System.out.println((t.getCoord().calculDistance(d.getPosRepos())));
+        // System.out.println(d.getPoids());
+        // System.out.println(Main.calculEquilibre());
         double score = ((distance * d.getPoids()) * this.getOccurrences()) * Main.calculEquilibre();
 
         // Plus le score est grand plus l'effort est haut => mouvement a minimiser (pas
         // ouf)
-        this.setScore(score);
+        // System.out.println(score);
+        this.score = score;
     }
 
     public double getScore() {
-        this.calculScore();
         return this.score;
     }
 

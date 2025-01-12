@@ -31,15 +31,13 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
     private int nombre3Grammes;
     private List<Observer> observers = new ArrayList<>();
 
-    public Evaluateur(Analyseur analyseur, Clavier clavier) { // ? est ce qu'on donne le type du clavier genre Azery
-                                                              // qwerty etc..?
+    public Evaluateur(Analyseur analyseur, Clavier clavier) throws TouchNotFound { // ? est ce qu'on donne le type du
+                                                                                   // clavier genre Azery
+        // qwerty etc..?
         this.analyseur = analyseur;
         this.clavier = clavier;
-        try {
-            this.mouvementListe = this.analyseur.transformeEnTouche(this.clavier);
-        } catch (Exception TouchNotFound) {
-            System.out.println("La touche n'existe pas dans le clavier !");
-        }
+
+        this.mouvementListe = this.analyseur.transformeEnTouche(this.clavier);
         this.alternance = 0;
         this.ciseaux = 0;
         this.lsb = 0;

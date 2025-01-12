@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 import analyseur.Analyseur;
 import clavier.Clavier;
+import clavier.TouchNotFound;
 import evaluateur.Evaluateur;
 
 public class UI {
     private Scanner scan;
     private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_YELLOW = "\u001B[33m";
     private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_RED = "\u001B[31m";
     private boolean choix;
     private boolean choixClavier;
     private boolean combi;
@@ -25,7 +25,7 @@ public class UI {
 
     public String corpusUser() {
         String path = "";
-        System.out.println("Veuillez donner un corpus a testé :");
+        System.out.println("Veuillez donner un corpus a teste :");
         String input = scan.nextLine();
         if (input != null) {
             path = input;
@@ -37,16 +37,16 @@ public class UI {
     }
 
     public void explication() {
-        System.out.println(ANSI_GREEN + "Bienvenue dans notre logiciel d'évaluation de clavier!" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Bienvenue dans notre logiciel d'evaluation de clavier!" + ANSI_RESET);
         System.out.println(
-                "Ce logiciel permet de prendre un corpus et d'évaluer un clavier donné par rapport à celui-ci ");
+                "Ce logiciel permet de prendre un corpus et d'evaluer un clavier donne par rapport a celui-ci ");
     }
 
     public void corpus() {
         System.out.println("Souhaitez vous fournir votre corpus ? O / N");
         String input = scan.nextLine();
         while (!input.equalsIgnoreCase("O") && !input.equalsIgnoreCase("N")) {
-            System.out.println("Entrée invalide. Veuillez entrer 'O' pour Oui ou 'N' pour Non.");
+            System.out.println("Entree invalide. Veuillez entrer 'O' pour Oui ou 'N' pour Non.");
             input = scan.nextLine();
         }
         switch (input.toUpperCase()) {
@@ -63,22 +63,22 @@ public class UI {
     public String choixCorpus() {
         String path = null;
         if (!choix) {
-            System.out.println("Choisissez parmis les corpus par défaut : ");
+            System.out.println("Choisissez parmis les corpus par defaut : ");
             System.out.println("1 : corpus en français");
-            System.out.println("2 : corpus en angalais");
+            System.out.println("2 : corpus en anglais");
             System.out.println("3 : corpus en espagnol");
-            System.out.println("4 : trés grand corpus");
-            System.out.println("5 : très petit corpus");
+            System.out.println("4 : tres grand corpus");
+            System.out.println("5 : tres petit corpus");
             System.out.println("6 : corpus en java");
             int input = -1;
             while (input < 1 || input > 6) {
                 try {
                     input = Integer.parseInt(scan.nextLine());
                     if (input < 1 || input > 6) {
-                        System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 6.");
+                        System.out.println("Entree invalide. Veuillez entrer un nombre entre 1 et 6.");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 6.");
+                    System.out.println("Entree invalide. Veuillez entrer un nombre entre 1 et 6.");
                 }
             }
 
@@ -110,7 +110,7 @@ public class UI {
         System.out.println("Souhaitez vous fournir votre propre clavier ? O / N");
         String input = scan.nextLine();
         while (!input.equalsIgnoreCase("O") && !input.equalsIgnoreCase("N")) {
-            System.out.println("Entrée invalide. Veuillez entrer 'O' pour Oui ou 'N' pour Non.");
+            System.out.println("Entree invalide. Veuillez entrer 'O' pour Oui ou 'N' pour Non.");
             input = scan.nextLine();
         }
         switch (input.toUpperCase()) {
@@ -127,7 +127,7 @@ public class UI {
                 "Souhaitez vous fournir votre un fichier des touches de combinaisons possible avec votre clavier ? O / N");
         String input2 = scan.nextLine();
         while (!input2.equalsIgnoreCase("O") && !input2.equalsIgnoreCase("N")) {
-            System.out.println("Entrée invalide. Veuillez entrer 'O' pour Oui ou 'N' pour Non.");
+            System.out.println("Entree invalide. Veuillez entrer 'O' pour Oui ou 'N' pour Non.");
             input2 = scan.nextLine();
         }
         switch (input2.toUpperCase()) {
@@ -151,10 +151,10 @@ public class UI {
             try {
                 input = Integer.parseInt(scan.nextLine());
                 if (input < 1 || input > 2) {
-                    System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 6.");
+                    System.out.println("Entree invalide. Veuillez entrer un nombre entre 1 et 2.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 6.");
+                System.out.println("Entree invalide. Veuillez entrer un nombre entre 1 et 2.");
             }
         }
 
@@ -165,7 +165,7 @@ public class UI {
                 break;
             case 2:
                 paths[0] = "ressources/clavier/qwerty.json";
-                paths[2] = "ressources/clavier/combinaison_qwerty.json";
+                paths[1] = "ressources/clavier/combinaison_qwerty.json";
                 break;
         }
 
@@ -207,7 +207,7 @@ public class UI {
         } else {
             corpusPath = choixCorpus();
         }
-        System.out.println("Corpus sélectionné : " + corpusPath);
+        System.out.println("Corpus selectionne : " + corpusPath);
 
         clavier();
         String[] clavierPaths;
@@ -217,9 +217,9 @@ public class UI {
         } else {
             clavierPaths = choixClavier();
         }
-        System.out.println("Clavier sélectionné : " + clavierPaths[0]);
+        System.out.println("Clavier selectionne : " + clavierPaths[0]);
         if (clavierPaths.length > 1) {
-            System.out.println("Combinaison clavier sélectionnée : " + clavierPaths[1]);
+            System.out.println("Combinaison clavier selectionnee : " + clavierPaths[1]);
         }
         Analyseur a = new Analyseur(corpusPath);
         Clavier c;
@@ -229,8 +229,14 @@ public class UI {
             c = new Clavier(clavierPaths[0]);
         }
 
-        Evaluateur e = new Evaluateur(a, c);
-        System.out.println("Score final : "+ e.donneLeScore());
+        Evaluateur e;
+        try {
+            e = new Evaluateur(a, c);
+        } catch (TouchNotFound ex) {
+            System.out.println(ANSI_RED + "Un carctere du corpus n'existe pas le clavier." + ANSI_RESET);
+            return;
+        }
+        System.out.println(ANSI_BLUE + "Score final : " + e.donneLeScore() + ANSI_RESET);
 
     }
 

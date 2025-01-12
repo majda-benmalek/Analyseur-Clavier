@@ -34,9 +34,9 @@ public class Clavier implements InterfaceClavier, Observable {
     public Clavier() {
         this.touches = new ArrayList<>();
         this.combinaisons = new HashMap<>();
-        this.path = "ressources/azerty.json"; // TODO pb d'accès
+        this.path = "ressources/clavier/azerty.json"; // TODO pb d'accès
         creerClavier();
-        this.pathCombi = "ressources/combinaison.json";
+        this.pathCombi = "ressources/clavier/combinaison_azerty.json";
         combinaison();
     }
 

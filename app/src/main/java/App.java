@@ -3,15 +3,10 @@
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import analyseur.Analyseur;
-import clavier.Clavier;
 import clavier.Doigt;
 import clavier.Touche;
-import evaluateur.Evaluateur;
-import mouvement.Mouvement;
 import mouvement.Mouvement1;
 import mouvement.Mouvement2;
 import ui.UI;
@@ -25,11 +20,11 @@ public class App {
         // * -------- < Test de tout l'ensemble > --------
 
         // Clavier c = new Clavier();
-        // Analyseur a = new Analyseur("ressources/corpus.txt");
+        // Analyseur a = new Analyseur("ressources/corpus/corpus_francais.txt");
         // try {
-        //     a.transformeEnTouche(c);
+        // a.transformeEnTouche(c);
         // } catch (Exception ToucheNotFound) {
-        //     System.out.println("pas trouvé");
+        // System.out.println("pas trouvé");
         // }
         // // a.afficheGramme();
         // // System.out.println("-------------------- ds évaluateur
@@ -39,8 +34,8 @@ public class App {
         // // e.donneLeScore();
         // System.out.println(e.donneLeScore());
 
-        UI i = new UI();
-        i.app();
+        UI ui = new UI();
+        ui.app();
 
         // Analyseur a2 = new Analyseur("ressources/coprus2.txt");
         // Evaluateur e2 = new Evaluateur(a2, c);
@@ -50,11 +45,21 @@ public class App {
         // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
         // Pas une redirection vers intérieur
-        // Touche t = new Touche('a', new Coordonnee(1,3), Doigt.AURICULAIRE_G);
-        // Touche t2 = new Touche('z',new Coordonnee(2, 3),Doigt.ANNULAIRE_G);
-        // Touche t3 = new Touche('e',new Coordonnee(3, 3),Doigt.MAJEUR_G);
-        // List<Touche> l = new ArrayList<>();
-        // l.add(t);
+        // Touche touche = new Touche(" ", 8, 0, Doigt.POUCE_G);
+        // Doigt doigt = touche.getDoigt();
+        // doigt = touche.getDoigt();
+        // doigt.setOcc();
+        // doigt.compteOccDoigts();
+        // doigt.compteOccDoigts();
+        // doigt.compteOccDoigts();
+        // Doigt.calculPoids();
+        // System.out.println(doigt.getPoids());
+        // List<Touche> touches = List.of(touche);
+        // // // Touche t2 = new Touche('z',new Coordonnee(2, 3),Doigt.ANNULAIRE_G);
+        // // // Touche t3 = new Touche('e',new Coordonnee(3, 3),Doigt.MAJEUR_G);
+        // Mouvement1 m = new Mouvement1(touches, 1);
+        // m.calculScore();
+        // m.getScore();
         // l.add(t2);
         // l.add(t3);
         // System.out.println("Pas une redirection vers intérieur");
@@ -181,7 +186,7 @@ public class App {
         // l6.add(t8);
         // l6.add(t9);
         // Mouvement2 m6 = new Mouvement2(l6, 10);
-        // System.out.println(m6);
+        // System.out.println(m6.isRoulement());
 
         // Analyseur a = new Analyseur("ressources/clavier_characters.txt");
         // // a.afficheGramme();

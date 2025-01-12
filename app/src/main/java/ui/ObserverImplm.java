@@ -6,7 +6,7 @@ public class ObserverImplm implements Observer {
 
     public ObserverImplm(Observable o) {
         this.observable = o;
-        observable.addObserver(this,observable.getObservers());
+        observable.addObserver(this, observable.getObservers());
     }
 
     @Override
@@ -15,11 +15,12 @@ public class ObserverImplm implements Observer {
 
     @Override
     public void update(String message) {
-        switch(message){
-            case "Clavier" :  System.out.println("Le clavier a été chargé avec succés");
-            case "Combinaison" : System.out.println("Les combinaisons ont été chargé avec succés");
-            case "analyse" : System.out.println("L'analyse du corpus est fini.");
-            case "evaluation" : System.out.println("L'évaluation est fini");
+        switch (message) {
+            // case "Clavier" : System.out.println("Le clavier a été chargé avec succés");
+            // case "Combinaison" : System.out.println("Les combinaisons ont été chargé avec
+            // succés");
+            // case "analyse" : System.out.println("L'analyse du corpus est fini.");
+            // case "evaluation" : System.out.println("L'évaluation est fini");
         }
     }
 
