@@ -3,6 +3,7 @@ import java.util.List;
 
 import analyseur.Analyseur;
 import clavier.Clavier;
+import clavier.TouchNotFound;
 import clavier.Touche;
 import mouvement.Mouvement;
 import mouvement.Mouvement1;
@@ -27,7 +28,11 @@ public class Evaluateur implements InterfaceEvaluateur {
     public Evaluateur(Analyseur analyseur , Clavier clavier){ // ? est ce qu'on donne le type du clavier genre Azery qwerty etc..?
         this.analyseur = analyseur;
         this.clavier = clavier;
-        this.mouvementListe = this.analyseur.transformeEnTouche(this.clavier);
+        try {
+            this.mouvementListe = this.analyseur.transformeEnTouche(this.clavier);   
+        } catch (Exception TouchNotFound) {
+            System.out.println("La touche n'existe pas dans le clavier !");
+        }
         this.alternance=0;
         this.ciseaux=0;
         this.lsb= 0;

@@ -154,7 +154,7 @@ public class Analyseur implements InterfaceAnalyseur {
     }
 
     @Override
-    public List<List<Mouvement>> transformeEnTouche(Clavier c) {
+     public List<List<Mouvement>> transformeEnTouche(Clavier c) throws TouchNotFound {
         List<List<Mouvement>> res = new ArrayList<>();
 
         for (HashMap<String, Integer> hashMap : nGrammes) {
