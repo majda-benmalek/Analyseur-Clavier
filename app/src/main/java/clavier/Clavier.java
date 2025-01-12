@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.*;
+import ui.Observable;
+import ui.Observer;
+import ui.ObserverImplm;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,12 +19,13 @@ import java.io.IOException;
  * Elle permet de charger un clavier à partir de fichiers JSON et de donné les
  * touches et les combinaisons possibles par rapport a une etiquette donné
  */
-public class Clavier implements InterfaceClavier {
+public class Clavier implements InterfaceClavier, Observable {
     private List<Touche> touches;
     private String path;
     // String = î List<String> = ["^","i"]
     private Map<String, List<String>> combinaisons;
     private String pathCombi;
+    private List<Observer> observers = new ArrayList<>();
 
     /**
      * Constructeur par défaut qui initialise le clavier avec les fichiers JSON par
@@ -87,6 +91,8 @@ public class Clavier implements InterfaceClavier {
                 this.touches.add(new Touche(touche, x, y, doigt));
             }
             Doigt.calculPoids();
+            ObserverImplm c = new ObserverImplm(this);
+            notifyObservers("Clavier", c, observers);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,6 +117,8 @@ public class Clavier implements InterfaceClavier {
                 }
                 this.combinaisons.put(etiq, comList);
             }
+            ObserverImplm c = new ObserverImplm(this);
+            notifyObservers("Combinaisons", c, observers);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -213,5 +221,24 @@ public class Clavier implements InterfaceClavier {
     public Map<String, List<String>> getCombinaisons() {
         return combinaisons;
     }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+    // @Override
+    // public void addObserver(Observer observer) {
+    // observers.add(observer);
+    // }
+
+    // @Override
+    // public void removeObserver(Observer observer) {
+    // observers.remove(observer);
+    // }
+
+    // @Override
+    // public void notifyObservers(String message, Observer o) {
+    // o.update(message);
+    // observers.remove(o);
+    // }
 
 }

@@ -48,9 +48,9 @@ public final class Mouvement1 extends Mouvement {
         Coordonnee coordD = d.getPosRepos();
 
         int distance = coordT.calculDistance(coordD);   
-        System.out.println(distance);
-        System.out.println((t.getCoord().calculDistance(d.getPosRepos()) * d.getPoids()));
-        System.out.println((t.getCoord().calculDistance(d.getPosRepos())));
+        // System.out.println(distance);
+        // System.out.println((t.getCoord().calculDistance(d.getPosRepos()) * d.getPoids()));
+        // System.out.println((t.getCoord().calculDistance(d.getPosRepos())));
         double score = ((distance * d.getPoids()) * this.getOccurrences()) * Main.calculEquilibre();
 
         // Plus le score est grand plus l'effort est haut => mouvement a minimiser (pas
@@ -59,6 +59,7 @@ public final class Mouvement1 extends Mouvement {
     }
 
     public double getScore() {
+        this.calculScore();
         return this.score;
     }
 

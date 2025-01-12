@@ -14,6 +14,7 @@ import evaluateur.Evaluateur;
 import mouvement.Mouvement;
 import mouvement.Mouvement1;
 import mouvement.Mouvement2;
+import ui.UI;
 
 public class App {
     public String getGreeting() {
@@ -23,20 +24,29 @@ public class App {
     public static void main(String[] args) {
         // * -------- < Test de tout l'ensemble > --------
 
-        Clavier c = new Clavier();
-        Analyseur a = new Analyseur("ressources/corpus.txt");
-        try {
-            a.transformeEnTouche(c);
-        } catch (Exception ToucheNotFound) {
-            System.out.println("pas trouvé");
-        }
-        // a.afficheGramme();
-        // System.out.println("-------------------- ds évaluateur
-        // ----------------------------");
-        Evaluateur e = new Evaluateur(a, c);
+        // Clavier c = new Clavier();
+        // Analyseur a = new Analyseur("ressources/corpus.txt");
+        // try {
+        //     a.transformeEnTouche(c);
+        // } catch (Exception ToucheNotFound) {
+        //     System.out.println("pas trouvé");
+        // }
+        // // a.afficheGramme();
+        // // System.out.println("-------------------- ds évaluateur
+        // // ----------------------------");
+        // Evaluateur e = new Evaluateur(a, c);
+        // // e.afficheListeTouche();
+        // // e.donneLeScore();
+        // System.out.println(e.donneLeScore());
+
+        UI i = new UI();
+        i.app();
+
+        // Analyseur a2 = new Analyseur("ressources/coprus2.txt");
+        // Evaluateur e2 = new Evaluateur(a2, c);
         // e.afficheListeTouche();
         // e.donneLeScore();
-        System.out.println(e.donneLeScore());
+        // System.out.println(e2.donneLeScore());
         // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
         // Pas une redirection vers intérieur

@@ -10,3 +10,6 @@ Exécuté avec :
 
 Exécuté les tests avec :
 ```./gradlew test```
+
+
+```./gradlew run --console=plain --quiet```
