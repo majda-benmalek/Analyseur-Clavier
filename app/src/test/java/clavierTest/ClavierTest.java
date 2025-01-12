@@ -1,9 +1,11 @@
 package clavierTest;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clavier.Clavier;
+import clavier.TouchNotFound;
 import clavier.Touche;
 
 import java.util.List;
@@ -14,7 +16,7 @@ public class ClavierTest {
 
     @BeforeEach
     public void setUp() {
-        clavier = new Clavier("ressources/azerty.json", "ressources/combinaison.json");
+        clavier = new Clavier();
     }
 
     @Test
@@ -31,45 +33,54 @@ public class ClavierTest {
 
     @Test
     public void testChercheTouche_Simple() {
-        List<List<Touche>> result = clavier.chercheTouche("a");
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("a")));
-        assertTrue(found);
+        try {
+            List<List<Touche>> result = clavier.chercheTouche("a");
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("a")));
+            assertTrue(found);
+        } catch (TouchNotFound e) {
+            fail("Exception should not be thrown for existing touch 'a'");
+        }
     }
 
     @Test
-    public void testChercheTouche_WithDeadKeys() {
-        List<List<Touche>> result = clavier.chercheTouche("A");
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("A")));
-        assertTrue(found);
+    public void testChercheTouche_Majuscules() {
+        try {
+            List<List<Touche>> result = clavier.chercheTouche("A");
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+            // Vérifier que la combinaison de touches pour "ê" est présente dans les
+            // résultats
+            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("a")));
+            assertTrue(found);
+            assertTrue(result.size() > 1);
+        } catch (TouchNotFound e) {
+            fail("Exception should not be thrown for existing touch 'ê'");
+        }
     }
 
     @Test
-    public void testChercheTouche_WithCombinations() {
-        List<List<Touche>> result = clavier.chercheTouche("ê");
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        // Vérifier que la combinaison de touches pour "ê" est présente dans les
-        // résultats
-        boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("e")));
-        assertTrue(found);
+    public void testChercheTouche_WithCombinationsMultipleChoices() {
+        try {
+            List<List<Touche>> result = clavier.chercheTouche("î");
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+            boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("i")));
+            boolean found_combi = result.stream()
+                    .anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("alt")));
+            assertTrue(found);
+            assertTrue(found_combi);
+            assertTrue(result.size() == 3);
+        } catch (TouchNotFound e) {
+            fail("Exception should not be thrown for existing touch 'ê'");
+        }
     }
 
     @Test
-    public void testChercheTouche_NonExistant(){
-        List<List<Touche>> result = clavier.chercheTouche("æ");
-        assertNotNull(result);
-        assertTrue(result.isEmpty());
-        boolean found = result.stream().anyMatch(list -> list.stream().anyMatch(t -> t.getEtiq().equals("æ")));
-        assertFalse(found);
-    }
-
-    @Test
-    public void testAfficherCombinaisons() {
-        // Juste pour s'assurer que la méthode ne lance pas d'exception
-        assertDoesNotThrow(() -> clavier.afficherCombinaisons());
+    public void testChercheTouche_NonExistant() {
+        assertThrows(TouchNotFound.class, () -> {
+            clavier.chercheTouche("æ");
+        });
     }
 }

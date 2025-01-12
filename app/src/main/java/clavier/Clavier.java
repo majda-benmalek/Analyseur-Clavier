@@ -1,4 +1,5 @@
 package clavier;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,21 +80,11 @@ public class Clavier implements InterfaceClavier {
                 int y = toucheJson.get("y").getAsInt();
                 String touche = toucheJson.get("touche").getAsString();
                 Doigt doigt = null;
-                List<String> touchesMortes = new ArrayList<>();
                 if (!toucheJson.get("doigt").isJsonNull()) {
                     doigt = Doigt.valueOf(toucheJson.get("doigt").getAsString().toUpperCase());
                     doigt.compteOccDoigts();
                 }
-                if (toucheJson.has("morte") && toucheJson.get("morte").isJsonArray()) {
-                    JsonArray jsonMortes = toucheJson.getAsJsonArray("morte");
-                    for (JsonElement morteElement : jsonMortes) {
-                        String morteTouche = morteElement.getAsString();
-                        if (morteTouche != null) {
-                            touchesMortes.add(morteTouche);
-                        }
-                    }
-                }
-                this.touches.add(new Touche(touche, x, y, doigt, touchesMortes));
+                this.touches.add(new Touche(touche, x, y, doigt));
             }
             Doigt.calculPoids();
         } catch (IOException e) {
@@ -127,63 +118,29 @@ public class Clavier implements InterfaceClavier {
     }
 
     /**
-     * /**
-     * Ajoute des touches mortes à une liste de touches courante.
+     * Génère toutes les combinaisons possibles de touches à partir d'une liste de
+     * combinaisons de chaînes.
      *
-     * @param current  La liste actuelle de touches.
-     * @param touches  La liste de toutes les touches disponibles.
-     * @param deadKeys La liste des étiquettes des touches mortes à ajouter.
-     * @param result   La liste des combinaisons résultantes.
+     * @param combo   La liste des combinaisons de chaînes à traiter.
+     * @param current La liste actuelle des touches en cours de combinaison.
+     * @param result  La liste des résultats contenant toutes les combinaisons
+     *                générées.
+     * @param index   L'index actuel dans la liste des combinaisons de chaînes.
+     * @throws TouchNotFound Si une touche n'est pas trouvée lors de la recherche.
      */
-    private void addDeadKeys(List<Touche> current, List<Touche> touches, List<String> deadKeys,
-            List<List<Touche>> result) {
-        for (String mort : deadKeys) {
-            for (Touche mortT : touches) {
-                if (mortT.getEtiq().equals(mort)) {
-                    // Ajoute différente combinaisons avec les différentes touches mortes trouvés
-                    List<Touche> newCombination = new ArrayList<>(current);
-                    newCombination.add(mortT);
-                    result.add(newCombination);
-                }
-            }
-        }
-    }
-
-    /**
-     * Génère toutes les combinaisons possibles de touches en utilisant une liste de
-     * combinaisons.
-     *
-     * @param combo   La liste des étiquettes des touches à combiner.
-     * @param current La liste actuelle de touches.
-     * @param result  La liste des combinaisons résultantes.
-     * @param index   L'index actuel dans la liste combo.
-     */
-    private void generateCombinations(List<String> combo, List<Touche> current, List<List<Touche>> result, int index) {
+    private void generateCombinations(List<String> combo, List<Touche> current, List<List<Touche>> result, int index)
+            throws TouchNotFound {
         if (index == combo.size()) {
             result.add(new ArrayList<>(current));
             return;
         }
 
-        String etiq = combo.get(index);
-
-        for (Touche t : touches) {
-            if (t.getEtiq().equals(etiq)) {
-                // Gestion des touches mortes
-                if (!t.getMorte().isEmpty()) {
-                    List<List<Touche>> tempResults = new ArrayList<>();
-                    addDeadKeys(current, touches, t.getMorte(), tempResults);
-                    for (List<Touche> tempCurrent : tempResults) {
-                        tempCurrent.add(t);
-                        generateCombinations(combo, tempCurrent, result, index + 1);
-                    }
-                } else {
-                    current.add(t);
-                    // Passer a la touches suivante a ajouté dans la combinaison
-                    generateCombinations(combo, current, result, index + 1);
-                    // retour en arriére pour explorer les autres possibilités de touches à ajouté
-                    current.remove(current.size() - 1);
-                }
-            }
+        List<List<Touche>> toucheCombos = null;
+        toucheCombos = chercheTouche(combo.get(index));
+        for (List<Touche> toucheCombo : toucheCombos) {
+            current.addAll(toucheCombo);
+            generateCombinations(combo, current, result, index + 1);
+            current.removeAll(toucheCombo);
         }
     }
 
@@ -193,53 +150,40 @@ public class Clavier implements InterfaceClavier {
      *
      * @param etiquette L'étiquette de la touche à rechercher.
      * @return La liste des combinaisons trouvées.
+     * @throws TouchNotFound Si une touche n'est pas trouvée lors de la
+     *                       recherche.
      */
     @Override
-    public List<List<Touche>> chercheTouche(String etiquette) {
+    public List<List<Touche>> chercheTouche(String etiquette) throws TouchNotFound {
 
         List<List<Touche>> res = new ArrayList<>();
 
         // Étape 1 : Rechercher les touches correspondantes directement dans le clavier
         for (Touche t : touches) {
             if (etiquette.equals(t.getEtiq())) {
-                if (!t.getMorte().isEmpty()) {
-                    // Ajout des touches mortes
-                    List<List<Touche>> tempResults = new ArrayList<>();
-                    addDeadKeys(new ArrayList<>(), touches, t.getMorte(), tempResults);
-                    for (List<Touche> tempCurrent : tempResults) {
-                        tempCurrent.add(t);
-                        res.add(tempCurrent);
-                    }
-                } else {
-                    List<Touche> singleToucheList = new ArrayList<>();
-                    singleToucheList.add(t);
-                    res.add(singleToucheList);
-                }
+                List<Touche> singleToucheList = new ArrayList<>();
+                singleToucheList.add(t);
+                res.add(singleToucheList);
             }
         }
 
         // Étape 2 : Chercher dans les combinaisons si aucun résultat trouvé
-        if (res.isEmpty() && this.combinaisons != null) {
+        if (this.combinaisons != null) {
             for (Map.Entry<String, List<String>> entry : combinaisons.entrySet()) {
                 if (entry.getKey().equals(etiquette)) {
                     List<String> combo = entry.getValue(); // Exemple : [^, i]
                     List<List<Touche>> tempCombinaisons = new ArrayList<>();
-
                     // générer toutes les combinaisons possibles
                     generateCombinations(combo, new ArrayList<>(), tempCombinaisons, 0);
-
-                    // ajouter les combinaisons générées au résultat final
                     res.addAll(tempCombinaisons);
                 }
             }
         }
 
-        // Print res
-        // System.out.println(etiquette);
-        // System.out.println("Contenu de res:");
-        // for (List<Touche> list : res) {
-            // System.out.println(list);
-        // }
+        if (res.isEmpty()) {
+            System.out.println(etiquette);
+            throw new TouchNotFound();
+        }
 
         return res;
     }

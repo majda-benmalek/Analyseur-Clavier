@@ -34,9 +34,10 @@ public enum Main {
     public List<Doigt> getListDoigt() {
         if (this == Main.DROITE) {
             return d;
-        } else {
+        } else if (this == Main.GAUCHE) {
             return g;
         }
+        return null;
     }
 
     /**

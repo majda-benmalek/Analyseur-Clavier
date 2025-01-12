@@ -11,6 +11,7 @@ import java.util.Map;
 import org.checkerframework.checker.units.qual.m;
 
 import clavier.Clavier;
+import clavier.TouchNotFound;
 import clavier.Touche;
 import mouvement.Mouvement;
 import mouvement.Mouvement1;
@@ -155,7 +156,7 @@ public class Analyseur implements InterfaceAnalyseur {
     }
 
     @Override
-     public List<List<Mouvement>> transformeEnTouche(Clavier c) {
+     public List<List<Mouvement>> transformeEnTouche(Clavier c) throws TouchNotFound {
         List<List<Mouvement>> res = new ArrayList<>();
         
         for (HashMap<String, Integer> hashMap : nGrammes) {

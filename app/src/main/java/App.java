@@ -25,7 +25,11 @@ public class App {
 
             Clavier c = new Clavier();
             Analyseur a = new Analyseur("app/ressources/clavier_characters.txt");
-            // a.transformeEnTouche(c);
+            try {
+                a.transformeEnTouche(c);
+            } catch (Exception ToucheNotFound) {
+                System.out.println("pas trouvé");
+            }
             // a.afficheGramme();
             // System.out.println("-------------------- ds évaluateur ----------------------------");
             // Evaluateur e = new Evaluateur(a, c);
@@ -173,8 +177,9 @@ public class App {
 
         // Clavier c = new Clavier();
         // System.out.println("je transforme en touches");
-        // List<List<Mouvement>> touches = a.transformeEnTouche(c);
+        // List<Mouvement> touches = a.transformeEnTouche(c);
         // a.afficheGramme();
+
         // System.out.println("affiche les grammes ");
         // a.afficheGramme();
         // printf touches
