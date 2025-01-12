@@ -3,11 +3,9 @@ package clavierTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import clavier.Clavier;
 import clavier.TouchNotFound;
 import clavier.Touche;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -36,6 +34,7 @@ public class ClavierTest {
         assertFalse(clavier.getCombinaisons().isEmpty());
     }
 
+
     @Test
     public void testChercheTouche_Simple() {
         try {
@@ -48,6 +47,7 @@ public class ClavierTest {
             fail("Exception should not be thrown for existing touch 'a'");
         }
     }
+
 
     @Test
     public void testChercheTouche_Majuscules() {

@@ -85,22 +85,22 @@ public class UI {
 
             switch (input) {
                 case 1:
-                    path = "app/ressources/corpus/corpus_francais.txt";
+                    path = "ressources/corpus/corpus_francais.txt";
                     break;
                 case 2:
-                    path = "app/ressources/corpus/corpus_anglais.txt";
+                    path = "ressources/corpus/corpus_anglais.txt";
                     break;
                 case 3:
-                    path = "app/ressources/corpus/corpus_espagnol.txt";
+                    path = "ressources/corpus/corpus_espagnol.txt";
                     break;
                 case 4:
-                    path = "app/ressources/corpus/tres_grand_corpus.txt";
+                    path = "ressources/corpus/tres_grand_corpus.txt";
                     break;
                 case 5:
-                    path = "app/ressources/corpus/tres_petit_corpus.txt";
+                    path = "ressources/corpus/tres_petit_corpus.txt";
                     break;
                 case 6:
-                    path = "app/ressources/corpus/corpus_java.txt";
+                    path = "ressources/corpus/corpus_java.txt";
                     break;
             }
         }
@@ -161,8 +161,8 @@ public class UI {
 
         switch (input) {
             case 1:
-                paths[0] = "app/ressources/clavier/azerty.json";
-                paths[1] = "app/ressources/clavier/combinaison_azerty.json";
+                paths[0] = "ressources/clavier/azerty.json";
+                paths[1] = "ressources/clavier/combinaison_azerty.json";
                 break;
             case 2:
                 paths[0] = "ressources/clavier/qwerty.json";

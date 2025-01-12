@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AnalyseurTest {
 
     private Analyseur analyseur;
-    private String CHEMIN = "app/ressources/corpus/ficTest.txt";
+    private String CHEMIN = "ressources/corpus/ficTest.txt";
     
     @BeforeEach
     public void setUp(){
-        analyseur = new Analyseur("app/ressources/corpus/ficTest.txt");
+        analyseur = new Analyseur("ressources/corpus/ficTest.txt");
         analyseur = new Analyseur(CHEMIN);
     }    
     
