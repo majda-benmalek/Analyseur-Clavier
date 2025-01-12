@@ -21,7 +21,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-            // * -------- < Test de tout l'ensemble > --------
+        // * -------- < Test de tout l'ensemble > --------
 
             Clavier c = new Clavier();
             Analyseur a = new Analyseur("app/ressources/clavier_characters.txt");

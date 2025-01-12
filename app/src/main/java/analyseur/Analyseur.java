@@ -109,36 +109,35 @@ public class Analyseur implements InterfaceAnalyseur {
     // // TODO la aussi c'est List<List<Mouvement>>
 
     /*
-     - Majda m'envoie toutes les combinaisons // [[^,i],[alt, ^,i ] ] = î -> parcourir ça et tej si c + grand que 3 grammes
+     * - Majda m'envoie toutes les combinaisons // [[^,i],[alt, ^,i ] ] = î ->
+     * parcourir ça et tej si c + grand que 3 grammes
      */
 
-    public List<List<Touche>> copieOcc(List<List<Touche>> l,int occ){
-        List<List<Touche>> res= new ArrayList<>();
+    public List<List<Touche>> copieOcc(List<List<Touche>> l, int occ) {
+        List<List<Touche>> res = new ArrayList<>();
         for (List<Touche> list : l) {
             for (int i = 0; i < occ; i++) {
                 res.add(list);
             }
         }
         return res;
-    } 
+    }
 
         //! méthode osef
     public int tailleMouvement1(Mouvement m){
         if (m instanceof Mouvement1){
             return 1;
-        }
-        else if (m instanceof Mouvement2){
+        } else if (m instanceof Mouvement2) {
             return 2;
-        }
-        else{
+        } else {
             return 3;
-        } 
+        }
     }
 
     @Override
      public List<List<Mouvement>> transformeEnTouche(Clavier c) throws TouchNotFound {
         List<List<Mouvement>> res = new ArrayList<>();
-        
+
         for (HashMap<String, Integer> hashMap : nGrammes) {
             for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
                 String nGrammes = entry.getKey();
@@ -148,40 +147,45 @@ public class Analyseur implements InterfaceAnalyseur {
                 List<Mouvement> lm = new ArrayList<>();
                 for (int i = 0; i < taille; i++) { // îa
                     char caractere = nGrammes.charAt(i);
-                    List<List<Touche>> sequenceTouches = c.chercheTouche(Character.toString(caractere));
+                    List<List<Touche>> sequenceTouches = null;
+                    try {
+                        sequenceTouches = c.chercheTouche(Character.toString(caractere));
+                    } catch (TouchNotFound e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     int tailleSequence = sequenceTouches.size();
-                    if (tailleSequence == 1){
-                        if (i == 0){ // j'ai rien a copier
+                    if (tailleSequence == 1) {
+                        if (i == 0) { // j'ai rien a copier
                             for (int j = 0; j < tailleSequence; j++) {
                                 l.add(sequenceTouches.get(j));
                             }
-                        }
-                        else{
-                        for (List<Touche> list : l) {
-                            for (Touche touche : sequenceTouches.get(0)) {
-                                list.add(touche);
-                                }   
-                            }
-                        }
-                    }else{
-                        // System.out.println("taille sequence != "+1);
-                        if (i == 0){ // j'ai rien a copier
-                            for (int j = 0; j < tailleSequence; j++) {
-                                l.add(sequenceTouches.get(j));
-                        }
-                        }else{
-                            List<List<Touche>> inter = copieOcc(l, tailleSequence);
-                            int tailleInter = inter.size();
-                            for (int j = 1; j < tailleInter+1; j++) {
-                                int k = j % tailleSequence;
-                                for (Touche touche : sequenceTouches.get(k)){
-                                    inter.get(j-1).add(touche);
+                        } else {
+                            for (List<Touche> list : l) {
+                                for (Touche touche : sequenceTouches.get(0)) {
+                                    list.add(touche);
                                 }
                             }
-                            l=inter;
+                        }
+                    } else {
+                        // System.out.println("taille sequence != "+1);
+                        if (i == 0) { // j'ai rien a copier
+                            for (int j = 0; j < tailleSequence; j++) {
+                                l.add(sequenceTouches.get(j));
+                            }
+                        } else {
+                            List<List<Touche>> inter = copieOcc(l, tailleSequence);
+                            int tailleInter = inter.size();
+                            for (int j = 1; j < tailleInter + 1; j++) {
+                                int k = j % tailleSequence;
+                                for (Touche touche : sequenceTouches.get(k)) {
+                                    inter.get(j - 1).add(touche);
+                                }
+                            }
+                            l = inter;
                         }
                     }
-                    //*
+                    // *
                 }
                 for (List<Touche> list : l) {
                         int t = list.size();

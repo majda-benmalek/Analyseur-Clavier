@@ -4,29 +4,25 @@
       "x": 0, 
       "y": 0, 
       "touche": "ctrl", 
-      "doigt": null,
-      "main": "GAUCHE"
+      "doigt": "POUCE_G"
     },
     {
       "x": 1, 
       "y": 0, 
       "touche": "suppr", 
-      "doigt": null,
-      "main": "GAUCHE"
+      "doigt": "POUCE_G"
     },
     {
       "x": 2, 
       "y": 0, 
       "touche": "alt", 
-      "doigt": null,
-      "main": "GAUCHE"
+      "doigt": "POUCE_G"
     },
     {
       "x": 3, 
       "y": 0, 
       "touche": " ", 
-      "doigt": "POUCE_G",
-      "main": "GAUCHE"
+      "doigt": "POUCE_G"
     },
     {
       "x": 8, 
@@ -38,29 +34,25 @@
       "x": 9, 
       "y": 0, 
       "touche": "alt", 
-      "doigt": null,
-      "main": "DROITE"
+      "doigt": "POUCE_D"
     },
     {
       "x": 10, 
       "y": 0, 
       "touche": "suppr", 
-      "doigt": null,
-      "main": "DROITE"
+      "doigt": "POUCE_D"
     },
     {
       "x": 11, 
       "y": 0, 
       "touche": "menu", 
-      "doigt": null,
-      "main": "DROITE"
+      "doigt": "POUCE_D"
     },
     {
       "x": 12, 
       "y": 0, 
       "touche": "ctrl", 
-      "doigt": null,
-      "main": "DROITE"
+      "doigt": "POUCE_D"
     },
 
 
@@ -69,8 +61,7 @@
       "x": 0, 
       "y": 1, 
       "touche": "shift", 
-      "doigt": null,
-      "main": "GAUCHE"
+      "doigt": "AURICULAIRE_G"
     },
     {
       "x": 1,
@@ -142,8 +133,7 @@
       "x" : 12,
       "y" : 1,
       "touche" : "shift",
-      "doigt" : null,
-      "main": "DROITE"
+      "doigt" : "AURICULAIRE_D"
     },
 
 
@@ -152,7 +142,7 @@
       "x": 0,
       "y": 2,
       "touche": "shiftLock",
-      "doigt": null
+      "doigt": "AURICULAIRE_G"
     },
     {
       "x": 1,
