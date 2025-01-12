@@ -74,7 +74,7 @@ public class Evaluateur implements InterfaceEvaluateur {
         int tailleMouvementChoisi = tailleMouvement(res);
         for (Mouvement mouvement : l) {
             int tailleMouvementCandidat = tailleMouvement(mouvement);
-            if (tailleMouvementCandidat < tailleMouvementChoisi){
+            if (tailleMouvementCandidat < tailleMouvementChoisi){ //TODO changer le critère nan ?
                 res = mouvement;
                 tailleMouvementChoisi = tailleMouvementCandidat;
             }
@@ -126,12 +126,14 @@ public class Evaluateur implements InterfaceEvaluateur {
                 }
             }
         }
-        int numerateur = redirection + skipgramme +lsb + sfb + ciseaux + roulement + alternance + score1touche; // TODO Chef ? yakak
+        int numerateur = redirection + skipgramme +lsb + sfb + ciseaux - roulement - alternance + score1touche; // TODO Chef ? yakak
         // System.out.println("numérateur = "+numerateur);
         // System.out.println("Nombre de 3 grammes "+ nombre3Grammes);
         if (nombre3Grammes != 0){
             res = numerateur / nombre3Grammes;
         }
+        // int i = 20 / (1 + res);
+        // res = i;
         return res;
     }
 

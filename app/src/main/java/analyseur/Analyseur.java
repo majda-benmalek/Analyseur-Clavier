@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.checkerframework.checker.units.qual.m;
-
 import clavier.Clavier;
 import clavier.TouchNotFound;
 import clavier.Touche;
@@ -77,54 +74,35 @@ public class Analyseur implements InterfaceAnalyseur {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier))) {
             // BufferedReader bufferedReader = new BufferedReader(new FileReader(fichier));
             String ligne = bufferedReader.readLine();
-            int cmpRetourLigne = -1;
+            // ligne+="\n";
+            // int cmpRetourLigne = -1;
             while (ligne != null) {
+                ligne+="\n";
                 int taille = ligne.length();
-                cmpRetourLigne++;
+                // cmpRetourLigne++;
                 for (int i = 0; i < taille; i++) {
                     for (int j = 1; j < n + 1; j++) {
                         if (i + j < taille + 1) { // TODO POUR LA COMPLEXITE ???????
                             String gramme = ligne.substring(i, i + j);
+                            
                             // if (gramme.length() == 1){
-                            // System.out.println("gramme = "+gramme);
+                            //     System.out.println("gramme = "+gramme);
                             // }
                             majGrammes(gramme);
-                            if (gramme.length() == 0) {
-                                cmpRetourLigne++;
-                            }
+                            // if (gramme.length() == 0) {
+                            //     cmpRetourLigne++;
+                            // }
                         }
                     }
                 }
                 ligne = bufferedReader.readLine();
             }
+
             // System.out.println("nombre de retour à la ligne = " + cmpRetourLigne);
         } catch (IOException e) {
             System.out.println("Il y a un problème avec le fichier donné.");
         }
     }
-
-    // @Override
-    // public void transformeEnTouche(Clavier c) {
-    // ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
-    // for (int i = 0; i < nGrammes.size(); i++) {
-    // res.add(new HashMap<>());
-    // }
-    // for (HashMap<String,Integer> hashMap : nGrammes) {
-    // for (Map.Entry<String,Integer> entry : hashMap.entrySet())
-    // {
-    // String nGrammes = entry.getKey();
-    // ArrayList<Touche> l = new ArrayList<>();
-    // for (int i = 0;i<nGrammes.length();i++){
-    // char caractere = nGrammes.charAt(i);
-    // Touche t = c.chercheTouche(caractere);
-    // l.add(t);
-    // }
-    // Integer occ = entry.getValue();
-    // res.get(nGrammes.length()).put(l, occ);
-    // }
-    // }
-    // }
-
 
     // TODO LE \N compter;
     // // TODO la aussi c'est List<List<Mouvement>>
@@ -217,16 +195,18 @@ public class Analyseur implements InterfaceAnalyseur {
                             m = new Mouvement3(list, occ);
                         }
                         if (m != null){
-                            System.out.println("----------");
-                            System.out.println(tailleMouvement1(m));
-                            for (Touche touche : m.getSqTouches()) {
-                                System.out.println(touche.getEtiq());
-                            }
+                            // System.out.println("----------");
+                            // System.out.println(tailleMouvement1(m));
+                            // for (Touche touche : m.getSqTouches()) {
+                            //     System.out.println(touche.getEtiq());
+                            // }
                             lm.add(m);
                         }
                 }
                 // System.out.println("lm size "+lm.size());
-                res.add(lm);
+                if (lm.isEmpty() == false){
+                    res.add(lm);
+                }
             }
         }
         // affichePitie(res);
@@ -247,65 +227,36 @@ public class Analyseur implements InterfaceAnalyseur {
         }
     }
 
-    // public List<List<Mouvement>> transformeEnTouche(Clavier c) {
-    //     List<List<Mouvement>> res = new ArrayList<>();
-    //     for (HashMap<String, Integer> hashMap : nGrammes) {
-    //         for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
-    //             String nGrammes = entry.getKey();
-    //             int taille = nGrammes.length();
-    //             Integer occ = entry.getValue();
-    //             // List<Mouvement> combinaisonPossible = new ArrayList<>() ; // si je met pas null ça râle
-    //             // List<List<Touche>> touches = new ArrayList<>();
-    //             List<List<List<Touche>>> l = new ArrayList<>();
-    //             // System.out.println("taille ngrammes  = "+taille);
-    //             System.out.println(nGrammes);
-    //             for (int i = 0; i < taille; i++) { // îa
-    //                 // System.out.println("["+nGrammes+"]");
-    //                 char caractere = nGrammes.charAt(i);
-    //                 List<List<Touche>> sequenceTouches = c.chercheTouche(Character.toString(caractere));
-    //                 // l.add(sequenceTouches);
-    //                 // System.out.println("[" + caractere + "]" + "dans transformeEnTocuhes");
-    //                 // touches.add(c.chercheTouche(Character.toString(caractere)));
-    //                 // cherche Touche -> pour un char par exemple pr i ou î List<List<Touche>>
-    //             }
-    //             // int tailleM = l.size();
-                
-
-    //             // System.out.println("l size = "+l.size());
-    //             // for (List<List<Touche>> list : l) {
-    //             //     int t = list.size();
-    //             //     System.out.println("list taille = "+t);  
-    //             //     // System.out.println("taille list list touche = "+ list.get(0)); 
-    //             // }
-    //             // for (List<Touche> combinaison : touches ) {
-    //             //     Mouvement m=null;
-    //             //     int tailleCombi = combinaison.size();
-    //             //     if (tailleCombi == 1) {
-    //             //         System.out.println("taille combi = "+1);
-    //             //         m = new Mouvement1(combinaison, occ);
-    //             //     } else if (tailleCombi == 2) {
-    //             //             System.out.println("taille combi = "+2);
-    //             //         m = new Mouvement2(combinaison, occ);
-    //             //     } else if (tailleCombi == 3 ) {
-    //             //         System.out.println("taille combi = "+3);
-    //             //         m = new Mouvement3(combinaison, occ);
-    //             //     }
-    //             //     if (m!=null){
-    //             //         combinaisonPossible.add(m);
-    //             //         // System.out.println(m);
-    //             //     }
-    //             // }
-    //             // res.add(combinaisonPossible);
-    //         }
-    //     }
-    //     return res;
-    // }
-
     public int getNombre3Gramme(){
         // System.out.println("dans analyseur nombre de 3 grammes = "+ nGrammes.get(2).size());
         return nGrammes.get(2).size();
     }
-    
+
+    public void afficheGramme() {
+        int i = 0;
+        for (HashMap<String, Integer> hashMap : nGrammes) {
+            System.out.println("i = " + i);
+            for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+                String ngrammes = entry.getKey();
+                Integer occ = entry.getValue();
+                // if (ngrammes == null || ngrammes.isEmpty()) {
+                // System.out.println("Entrée invalide détectée : clé vide ou nulle !");
+                // }else{
+                if (ngrammes.equals("\n")){
+                    System.out.println("gramme :\\n occ : "+occ);
+                }else{
+                    System.out.println("gramme: " + ngrammes + " occ: " + occ);
+                }
+                // }
+            }
+            i++;
+        }
+    }
+}
+
+
+
+
 
     // // TODO LE \N compter;
     // @Override
@@ -339,20 +290,83 @@ public class Analyseur implements InterfaceAnalyseur {
     //     return res;
     // }
 
-    public void afficheGramme() {
-        int i = 0;
-        for (HashMap<String, Integer> hashMap : nGrammes) {
-            System.out.println("i = " + i);
-            for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
-                String ngrammes = entry.getKey();
-                Integer occ = entry.getValue();
-                // if (ngrammes == null || ngrammes.isEmpty()) {
-                // System.out.println("Entrée invalide détectée : clé vide ou nulle !");
-                // }else{
-                System.out.println("gramme: " + ngrammes + " occ: " + occ);
-                // }
-            }
-            i++;
-        }
-    }
-}
+
+
+
+   // public List<List<Mouvement>> transformeEnTouche(Clavier c) {
+        //     List<List<Mouvement>> res = new ArrayList<>();
+        //     for (HashMap<String, Integer> hashMap : nGrammes) {
+        //         for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+        //             String nGrammes = entry.getKey();
+        //             int taille = nGrammes.length();
+        //             Integer occ = entry.getValue();
+        //             // List<Mouvement> combinaisonPossible = new ArrayList<>() ; // si je met pas null ça râle
+        //             // List<List<Touche>> touches = new ArrayList<>();
+        //             List<List<List<Touche>>> l = new ArrayList<>();
+        //             // System.out.println("taille ngrammes  = "+taille);
+        //             System.out.println(nGrammes);
+        //             for (int i = 0; i < taille; i++) { // îa
+        //                 // System.out.println("["+nGrammes+"]");
+        //                 char caractere = nGrammes.charAt(i);
+        //                 List<List<Touche>> sequenceTouches = c.chercheTouche(Character.toString(caractere));
+        //                 // l.add(sequenceTouches);
+        //                 // System.out.println("[" + caractere + "]" + "dans transformeEnTocuhes");
+        //                 // touches.add(c.chercheTouche(Character.toString(caractere)));
+        //                 // cherche Touche -> pour un char par exemple pr i ou î List<List<Touche>>
+        //             }
+        //             // int tailleM = l.size();
+                    
+    
+        //             // System.out.println("l size = "+l.size());
+        //             // for (List<List<Touche>> list : l) {
+        //             //     int t = list.size();
+        //             //     System.out.println("list taille = "+t);  
+        //             //     // System.out.println("taille list list touche = "+ list.get(0)); 
+        //             // }
+        //             // for (List<Touche> combinaison : touches ) {
+        //             //     Mouvement m=null;
+        //             //     int tailleCombi = combinaison.size();
+        //             //     if (tailleCombi == 1) {
+        //             //         System.out.println("taille combi = "+1);
+        //             //         m = new Mouvement1(combinaison, occ);
+        //             //     } else if (tailleCombi == 2) {
+        //             //             System.out.println("taille combi = "+2);
+        //             //         m = new Mouvement2(combinaison, occ);
+        //             //     } else if (tailleCombi == 3 ) {
+        //             //         System.out.println("taille combi = "+3);
+        //             //         m = new Mouvement3(combinaison, occ);
+        //             //     }
+        //             //     if (m!=null){
+        //             //         combinaisonPossible.add(m);
+        //             //         // System.out.println(m);
+        //             //     }
+        //             // }
+        //             // res.add(combinaisonPossible);
+        //         }
+        //     }
+        //     return res;
+        // }
+
+
+        
+    // @Override
+    // public void transformeEnTouche(Clavier c) {
+    // ArrayList<HashMap<ArrayList<Touche>,Integer>> res=new ArrayList<>();
+    // for (int i = 0; i < nGrammes.size(); i++) {
+    // res.add(new HashMap<>());
+    // }
+    // for (HashMap<String,Integer> hashMap : nGrammes) {
+    // for (Map.Entry<String,Integer> entry : hashMap.entrySet())
+    // {
+    // String nGrammes = entry.getKey();
+    // ArrayList<Touche> l = new ArrayList<>();
+    // for (int i = 0;i<nGrammes.length();i++){
+    // char caractere = nGrammes.charAt(i);
+    // Touche t = c.chercheTouche(caractere);
+    // l.add(t);
+    // }
+    // Integer occ = entry.getValue();
+    // res.get(nGrammes.length()).put(l, occ);
+    // }
+    // }
+    // }

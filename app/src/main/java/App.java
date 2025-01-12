@@ -25,17 +25,19 @@ public class App {
 
             Clavier c = new Clavier();
             Analyseur a = new Analyseur("app/ressources/clavier_characters.txt");
-            try {
-                a.transformeEnTouche(c);
-            } catch (Exception ToucheNotFound) {
-                System.out.println("pas trouvé");
-            }
+            // a.afficheGramme();
+            // try {
+            //     a.transformeEnTouche(c);
+            // } catch (Exception ToucheNotFound) {
+            //     System.out.println("pas trouvé");
+            // }
             // a.afficheGramme();
             // System.out.println("-------------------- ds évaluateur ----------------------------");
-            // Evaluateur e = new Evaluateur(a, c);
+            Evaluateur e = new Evaluateur(a, c);
             // e.afficheListeTouche();
             // e.donneLeScore();
             // System.out.println(e.donneLeScore());
+            // System.out.println(e.donneLeScore()+"/20");
         // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
         // Pas une redirection vers intérieur
