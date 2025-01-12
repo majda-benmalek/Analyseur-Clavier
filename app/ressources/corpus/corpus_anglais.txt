@@ -1,0 +1,11 @@
+house, school, work, child, tree, flower, book, car, street, dog, cat, table, chair, sun, moon, star, sea, mountain, friend, family
+Hello, how are you?  
+I am very happy today.  
+The sky is blue and the sun is shining.  
+Children are playing in the park.  
+I will buy some bread at the bakery.  
+It often rains in autumn.  
+We eat lunch together at noon.  
+She loves reading science fiction books.  
+This is a beautiful day for a walk.  
+My brother enjoys video games.

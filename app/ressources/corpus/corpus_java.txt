@@ -1,0 +1,141 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class TestClavier {
+
+    // Classe interne pour tester des objets simples
+    static class Personne {
+        private String nom;
+        private int age;
+
+        public Personne(String nom, int age) {
+            this.nom = nom;
+            this.age = age;
+        }
+
+        public void saluer() {
+            System.out.println("Bonjour, je m'appelle " + nom + " et j'ai " + age + " ans.");
+        }
+    }
+
+    // Méthode pour gérer des contrôles conditionnels
+    public static void controleConditions() {
+        int x = 10;
+
+        if (x > 5) {
+            System.out.println("x est grand !");
+        } else {
+            System.out.println("x est petit !");
+        }
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Itération : " + i);
+        }
+
+        int y = 0;
+        while (y < 3) {
+            System.out.println("y vaut : " + y);
+            y++;
+        }
+
+        String jour = "vendredi";
+        switch (jour) {
+            case "lundi":
+                System.out.println("Début de la semaine !");
+                break;
+            case "vendredi":
+                System.out.println("Presque le week-end !");
+                break;
+            default:
+                System.out.println("Jour classique.");
+        }
+    }
+
+    // Méthode pour travailler avec des collections
+    public static void travaillerAvecCollections() {
+        List<String> fruits = Arrays.asList("Pomme", "Banane", "Cerise");
+        for (String fruit : fruits) {
+            System.out.println("Fruit : " + fruit);
+        }
+
+        Map<String, Integer> ages = new HashMap<>();
+        ages.put("Alice", 25);
+        ages.put("Bob", 30);
+        ages.forEach((nom, age) -> System.out.println(nom + " a " + age + " ans."));
+    }
+
+    // Méthode pour tester les lambdas et streams
+    public static void testerStreams() {
+        List<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> nombresPairs = nombres.stream()
+                                            .filter(n -> n % 2 == 0)
+                                            .map(n -> n * 2)
+                                            .collect(Collectors.toList());
+        System.out.println("Nombres pairs doublés : " + nombresPairs);
+    }
+
+    // Méthode pour gérer les exceptions
+    public static void gestionExceptions() {
+        try {
+            int result = diviser(10, 0);
+            System.out.println("Résultat : " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+    }
+
+    public static int diviser(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Division par zéro !");
+        }
+        return a / b;
+    }
+
+    // Méthode pour générer des caractères spéciaux
+    public static void caracteresSpeciaux() {
+        String text = "Les caractères spéciaux incluent : \n\t- \"Guillemets\"\n\t- \\Antislash\\\n\t- %\n\t- $";
+        System.out.println(text);
+    }
+
+    // Méthode de stress-test avec Fibonacci
+    public static void stressTest() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println("Fib(" + i + ") = " + calculFibonacci(i));
+        }
+    }
+
+    public static long calculFibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return calculFibonacci(n - 1) + calculFibonacci(n - 2);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Test Clavier : Début ===");
+
+        // Test des objets simples
+        Personne personne = new Personne("Alice", 25);
+        personne.saluer();
+
+        // Test des structures de contrôle
+        controleConditions();
+
+        // Test des collections
+        travaillerAvecCollections();
+
+        // Test des streams
+        testerStreams();
+
+        // Test des exceptions
+        gestionExceptions();
+
+        // Test des caractères spéciaux
+        caracteresSpeciaux();
+
+        // Stress-test
+        stressTest();
+
+        System.out.println("=== Test Clavier : Fin ===");
+    }
+}

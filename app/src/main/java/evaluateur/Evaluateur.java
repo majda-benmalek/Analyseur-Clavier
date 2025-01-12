@@ -1,0 +1,134 @@
+package evaluateur;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import analyseur.Analyseur;
+import clavier.Clavier;
+import clavier.TouchNotFound;
+import mouvement.Mouvement;
+import mouvement.Mouvement1;
+import mouvement.Mouvement2;
+import mouvement.Mouvement3;
+import ui.Observable;
+import ui.Observer;
+
+public class Evaluateur implements InterfaceEvaluateur, Observable {
+    private Clavier clavier;
+    private Analyseur analyseur;
+    private List<List<Mouvement>> mouvementListe;
+    private int redirection;
+    private int skipgramme;
+    private int lsb;
+    private int sfb;
+    private int ciseaux;
+    private int roulement;
+    private int alternance;
+    private int score1touche;
+    private int nombre3Grammes;
+    private List<Observer> observers = new ArrayList<>();
+
+    /** construit l'évaluateur
+     * @param analyseur le résultat de l'analyse
+     * @param clavier le clavier qu'on veut étudier
+     */
+    public Evaluateur(Analyseur analyseur, Clavier clavier) throws TouchNotFound { // ? est ce qu'on donne le type du
+                                                                                   // clavier genre Azery
+        // qwerty etc..?
+        this.analyseur = analyseur;
+        this.clavier = clavier;
+
+        this.mouvementListe = this.analyseur.transformeEnTouche(this.clavier);
+        this.alternance = 0;
+        this.ciseaux = 0;
+        this.lsb = 0;
+        this.redirection = 0;
+        this.roulement = 0;
+        this.sfb = 0;
+        this.skipgramme = 0;
+        this.score1touche = 0;
+        this.nombre3Grammes = this.analyseur.getNombre3Gramme();
+    }
+
+    /** retourne la taille du mouvement
+     * @param m le mouvement dont on veut la taille
+     * @return la taille du mouvement
+    */
+    public int tailleMouvement(Mouvement m) {
+        if (m instanceof Mouvement1) {
+            return 1;
+        } else if (m instanceof Mouvement2) {
+            return 2;
+        } else {
+            return 3;
+        }
+
+    }
+    /** retourne le meillleur mouvement parmis les choix proposées
+     * @param l la liste de choix
+     * @return le meilleur mouvement pour le même gramme
+    */
+    public Mouvement meilleurMouvement(List<Mouvement> l) {
+        Mouvement res = l.get(0);
+        int tailleMouvementChoisi = tailleMouvement(res);
+        for (Mouvement mouvement : l) {
+            int tailleMouvementCandidat = tailleMouvement(mouvement);
+            if (tailleMouvementCandidat < tailleMouvementChoisi) {
+                res = mouvement;
+                tailleMouvementChoisi = tailleMouvementCandidat;
+            }
+        }
+        return res;
+    }
+    /**
+     renvoie le score du clavier 
+     @return le score
+    */
+    @Override
+    public double donneLeScore() {
+        double res = 0;
+        for (List<Mouvement> combList : mouvementListe) {
+            Mouvement mouvement = meilleurMouvement(combList);
+            if (mouvement instanceof Mouvement1) {
+                score1touche += ((Mouvement1) mouvement).getScore();
+            } else if (mouvement instanceof Mouvement2) {
+                Mouvement2 inter = (Mouvement2) mouvement;
+                int occ = inter.getOccurrences();
+                if (inter.isAlternance()) {
+                    alternance += occ;
+                }
+                if (inter.isCiseaux()) {
+                    ciseaux += occ;
+                }
+                if (inter.isLSB()) {
+                    lsb += occ;
+                }
+                if (inter.isSFB()) {
+                    sfb += occ;
+                }
+                roulement += inter.isRoulement();
+            } else {
+                Mouvement3 interMouvement3 = (Mouvement3) mouvement;
+                int occ = interMouvement3.getOccurrences();
+                if (interMouvement3.notRedirection() == false) {
+                    redirection += occ;
+                    if (interMouvement3.redirectionSansIndex()) {
+                        redirection += occ;
+                    }
+                }
+                if (interMouvement3.skipgramme()) {
+                    skipgramme += occ;
+                }
+            }
+        }
+        double numerateur = redirection + skipgramme + lsb + sfb + ciseaux - roulement - alternance + score1touche; 
+        if (nombre3Grammes != 0) {
+            res = numerateur / nombre3Grammes;
+        }
+        return res;
+    }
+    @Override
+    public List<Observer> getObservers() {
+        return this.observers;
+    }
+}

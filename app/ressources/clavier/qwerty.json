@@ -1,0 +1,375 @@
+{
+    "clavier": [
+      {
+        "x": 0, 
+        "y": 0, 
+        "touche": "ctrl", 
+        "doigt": "POUCE_G"
+      },
+      {
+        "x": 1, 
+        "y": 0, 
+        "touche": "wind", 
+        "doigt": "POUCE_G"
+      },
+      {
+        "x": 2, 
+        "y": 0, 
+        "touche": "alt", 
+        "doigt": "POUCE_G"
+      },
+      {
+        "x": 3, 
+        "y": 0, 
+        "touche": " ", 
+        "doigt": "POUCE_G"
+      },
+      {
+        "x": 8, 
+        "y": 0, 
+        "touche": " ", 
+        "doigt": "POUCE_D"
+      },
+      {
+        "x": 9, 
+        "y": 0, 
+        "touche": "alt", 
+        "doigt": "POUCE_D"
+      },
+      {
+        "x": 10, 
+        "y": 0, 
+        "touche": "win", 
+        "doigt": "POUCE_D"
+      },
+      {
+        "x": 11, 
+        "y": 0, 
+        "touche": "menu", 
+        "doigt": "POUCE_D"
+      },
+      {
+        "x": 12, 
+        "y": 0, 
+        "touche": "ctrl", 
+        "doigt": "POUCE_D"
+      },
+      
+      {
+        "x": 0, 
+        "y": 1, 
+        "touche": "shift", 
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "touche": "z",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "touche": "x",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 3,
+        "y": 1,
+        "touche": "c",
+        "doigt": "ANNULAIRE_G"
+      },
+      {
+        "x": 4,
+        "y": 1,
+        "touche": "v",
+        "doigt": "MAJEUR_G"
+      },
+      {
+        "x": 5,
+        "y": 1,
+        "touche": "b",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 6,
+        "y": 1,
+        "touche": "n",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 7,
+        "y": 1,
+        "touche": "m",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 8,
+        "y": 1,
+        "touche": ",",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 9,
+        "y": 1,
+        "touche": ".",
+        "doigt": "MAJEUR_D"
+      },
+      {
+        "x": 10,
+        "y": 1,
+        "touche": "/",
+        "doigt": "ANNULAIRE_D"
+      },
+      {
+        "x": 11,
+        "y": 1,
+        "touche": "shift",
+        "doigt": "AURICULAIRE_D"
+      },
+  
+      {
+        "x": 0,
+        "y": 2,
+        "touche": "caps",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 1,
+        "y": 2,
+        "touche": "a",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "touche": "s",
+        "doigt": "ANNULAIRE_G"
+      },
+      {
+        "x": 3,
+        "y": 2,
+        "touche": "d",
+        "doigt": "MAJEUR_G"
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "touche": "f",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 5,
+        "y": 2,
+        "touche": "g",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 6,
+        "y": 2,
+        "touche": "h",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 7,
+        "y": 2,
+        "touche": "j",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 8,
+        "y": 2,
+        "touche": "k",
+        "doigt": "MAJEUR_D"
+      },
+      {
+        "x": 9,
+        "y": 2,
+        "touche": "l",
+        "doigt": "ANNULAIRE_D"
+      },
+      {
+        "x": 10,
+        "y": 2,
+        "touche": ";",
+        "doigt": "AURICULAIRE_D"
+      },  
+      {
+        "x": 11,
+        "y": 2,
+        "touche": "'",
+        "doigt": "AURICULAIRE_D"
+      },
+      {
+        "x": 13,
+        "y": 2,
+        "touche": "\n",
+        "doigt": "AURICULAIRE_D"
+      },
+  
+      {
+        "x": 0,
+        "y": 3,
+        "touche": "\t",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "touche": "q",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "touche": "w",
+        "doigt": "ANNULAIRE_G"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "touche": "e",
+        "doigt": "MAJEUR_G"
+      },
+      {
+        "x": 4,
+        "y": 3,
+        "touche": "r",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "touche": "t",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "touche": "y",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 7,
+        "y": 3,
+        "touche": "u",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "touche": "i",
+        "doigt": "MAJEUR_D"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "touche": "o",
+        "doigt": "ANNULAIRE_D"
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "touche": "p",
+        "doigt": "AURICULAIRE_D"
+      },
+      {
+        "x" : 11, 
+        "y" : 3, 
+        "touche": "[",
+        "doigt": "AURICULAIRE_D"
+      },
+      {
+        "x" : 12,
+        "y" : 3, 
+        "touche" : "]",
+        "doigt": "AURICULAIRE_D"
+      },
+      {
+        "x" : 13, 
+        "y" : 3,
+        "touche" : "\\",
+        "doigt": "AURICULAIRE_D"
+      },
+  
+      {
+        "x": 0,
+        "y": 4,
+        "touche": "`",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 1,
+        "y": 4,
+        "touche": "1",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "touche": "2",
+        "doigt": "AURICULAIRE_G"
+      },
+      {
+        "x": 3,
+        "y": 4,
+        "touche": "3",
+        "doigt": "ANNULAIRE_G"
+      },
+      {
+        "x": 4,
+        "y": 4,
+        "touche": "4",
+        "doigt": "MAJEUR_G"
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "touche": "5",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "touche": "6",
+        "doigt": "INDEX_G"
+      },
+      {
+        "x": 7,
+        "y": 4,
+        "touche": "7",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "touche": "8",
+        "doigt": "INDEX_D"
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "touche": "9",
+        "doigt": "MAJEUR_D"
+      },
+      {
+        "x": 10,
+        "y": 4,
+        "touche": "0",
+        "doigt": "ANNULAIRE_D"
+      },
+      {
+        "x": 11,
+        "y": 4,
+        "touche": "-",
+        "doigt": "AURICULAIRE_D"
+      },
+      {
+        "x": 12,
+        "y": 4,
+        "touche": "=",
+        "doigt": "AURICULAIRE_D"
+      }
+    ]
+  }
+  
