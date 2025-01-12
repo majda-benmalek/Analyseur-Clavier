@@ -1,4 +1,5 @@
 package clavierTest;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,9 @@ public class DoigtTest {
 
     @BeforeEach
     public void setUp() {
-
         // Réinitialiser les occurrences et poids des doigts avant chaque test
         for (Doigt doigt : Doigt.values()) {
-            doigt.setOcc(); // Réinitialiser les occurrences
+            doigt.setOcc();
         }
         Doigt.calculPoids();
     }

@@ -30,11 +30,10 @@ public class App {
         } catch (Exception ToucheNotFound) {
             System.out.println("pas trouvé");
         }
-        Evaluateur e = new Evaluateur(a, c);
         // a.afficheGramme();
         // System.out.println("-------------------- ds évaluateur
         // ----------------------------");
-        // Evaluateur e = new Evaluateur(a, c);
+        Evaluateur e = new Evaluateur(a, c);
         // e.afficheListeTouche();
         // e.donneLeScore();
         System.out.println(e.donneLeScore());
