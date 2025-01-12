@@ -1,18 +1,16 @@
 package mouvementTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.BeforeEach;
 import clavier.Doigt;
 import clavier.Main;
 import clavier.Touche;
 import mouvement.Mouvement1;
 
 public class Mouvement1Test {
+
     private Touche touche;
     private Doigt doigt;
     private List<Touche> touches;
@@ -32,6 +30,7 @@ public class Mouvement1Test {
         touches = List.of(touche);
     }
 
+    
     @Test
     public void testCalculScore_SansOcc() {
         Mouvement1 mouvement = new Mouvement1(touches, 1);
@@ -72,6 +71,7 @@ public class Mouvement1Test {
         mouvement.setScore(5.0);
 
         assertEquals(5.0, mouvement.getScore());
+
     }
 
     @Test

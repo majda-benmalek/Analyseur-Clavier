@@ -1,4 +1,3 @@
-import analyseur.Analyseur;
 import ui.UI;
 
 public class App {

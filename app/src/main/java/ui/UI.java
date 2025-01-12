@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import analyseur.Analyseur;
+import analyseur.InterfaceAnalyseur;
 import clavier.Clavier;
+import clavier.InterfaceClavier;
 import clavier.TouchNotFound;
 import evaluateur.Evaluateur;
 
@@ -34,6 +36,7 @@ public class UI {
 
     /**
      * Demande à l'utilisateur de fournir un chemin vers un corpus.
+     * 
      * @return le chemin du corpus fourni par l'utilisateur.
      */
     public String corpusUser() {
@@ -80,6 +83,7 @@ public class UI {
 
     /**
      * Permet à l'utilisateur de choisir un corpus parmi les corpus par défaut.
+     * 
      * @return le chemin du corpus choisi.
      */
     public String choixCorpus() {
@@ -167,7 +171,9 @@ public class UI {
 
     /**
      * Permet à l'utilisateur de choisir un clavier parmi les claviers disponibles.
-     * @return un tableau contenant les chemins des fichiers clavier et combinaisons.
+     * 
+     * @return un tableau contenant les chemins des fichiers clavier et
+     *         combinaisons.
      */
     public String[] choixClavier() {
         String[] paths = new String[2];
@@ -202,7 +208,9 @@ public class UI {
     }
 
     /**
-     * Demande à l'utilisateur de fournir les chemins des fichiers clavier et combinaisons.
+     * Demande à l'utilisateur de fournir les chemins des fichiers clavier et
+     * combinaisons.
+     * 
      * @return une liste contenant les chemins des fichiers clavier et combinaisons.
      */
     public List<String> clavierUser() {
@@ -259,8 +267,8 @@ public class UI {
             System.out.println("Combinaison clavier selectionnee : " + clavierPaths[1]);
         }
 
-        Analyseur a = new Analyseur(corpusPath);
-        Clavier c;
+        InterfaceAnalyseur a = new Analyseur(corpusPath);
+        InterfaceClavier c;
         if (clavierPaths.length > 1) {
             try {
                 c = new Clavier(clavierPaths[0], clavierPaths[1]);

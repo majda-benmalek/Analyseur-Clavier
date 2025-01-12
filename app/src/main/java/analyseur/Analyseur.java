@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import clavier.Clavier;
+import clavier.InterfaceClavier;
 import clavier.TouchNotFound;
 import clavier.Touche;
 import mouvement.Mouvement;
@@ -130,7 +130,7 @@ public class Analyseur implements InterfaceAnalyseur, Observable {
         @return la liste séquence de touches
     */
     @Override
-    public List<List<Mouvement>> transformeEnTouche(Clavier c) throws TouchNotFound {
+    public List<List<Mouvement>> transformeEnTouche(InterfaceClavier c) throws TouchNotFound {
         List<List<Mouvement>> res = new ArrayList<>();
 
         for (Map<String, Integer> hashMap : nGrammes) {
