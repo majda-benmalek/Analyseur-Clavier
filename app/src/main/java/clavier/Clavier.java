@@ -94,7 +94,8 @@ public class Clavier implements InterfaceClavier, Observable {
             ObserverImplm c = new ObserverImplm(this);
             notifyObservers("Clavier", c, observers);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ça marche pas le creer clavier");
+            // e.printStackTrace();
         }
     }
 
@@ -121,7 +122,8 @@ public class Clavier implements InterfaceClavier, Observable {
             notifyObservers("Combinaisons", c, observers);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ça marche pas");
+            // e.printStackTrace();
         }
     }
 
