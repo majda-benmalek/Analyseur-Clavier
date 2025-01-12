@@ -62,7 +62,8 @@ public class Analyseur implements InterfaceAnalyseur {
         // System.out.println("c'est un slash n");
         // }
     }
-
+    
+    //! méthode osef
     boolean aLaisser(String s) {
         return s.equals("\r") || s.equals("\t");
         // || s.isBlank();
@@ -121,6 +122,7 @@ public class Analyseur implements InterfaceAnalyseur {
         return res;
     } 
 
+        //! méthode osef
     public int tailleMouvement1(Mouvement m){
         if (m instanceof Mouvement1){
             return 1;
@@ -214,6 +216,7 @@ public class Analyseur implements InterfaceAnalyseur {
         return res;
     }
 
+    //! méthode osef
     public void affichePitie(List<List<Mouvement>> res){
         for (List<Mouvement> list : res) {
             for (Mouvement m : list) {
@@ -232,6 +235,7 @@ public class Analyseur implements InterfaceAnalyseur {
         return nGrammes.get(2).size();
     }
 
+    //! méthode osef
     public void afficheGramme() {
         int i = 0;
         for (HashMap<String, Integer> hashMap : nGrammes) {

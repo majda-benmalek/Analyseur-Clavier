@@ -137,7 +137,7 @@ public class Evaluateur implements InterfaceEvaluateur {
         return res;
     }
 
-
+    //! méthode osef
     public void afficheListeTouche(){
         int cmp = 0;
         for (List<Mouvement> list : mouvementListe) {

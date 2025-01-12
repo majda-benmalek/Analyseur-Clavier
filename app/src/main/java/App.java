@@ -36,7 +36,7 @@ public class App {
             Evaluateur e = new Evaluateur(a, c);
             // e.afficheListeTouche();
             // e.donneLeScore();
-            // System.out.println(e.donneLeScore());
+            System.out.println(e.donneLeScore());
             // System.out.println(e.donneLeScore()+"/20");
         // Analyseur a = new Analyseur("app/src/main/java/fic.txt");
         // a.afficheGramme();
