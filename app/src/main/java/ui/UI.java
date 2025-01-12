@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -221,12 +222,22 @@ public class UI {
         if (clavierPaths.length > 1) {
             System.out.println("Combinaison clavier selectionnee : " + clavierPaths[1]);
         }
+
         Analyseur a = new Analyseur(corpusPath);
         Clavier c;
         if (clavierPaths.length > 1) {
-            c = new Clavier(clavierPaths[0], clavierPaths[1]);
+
+            try {
+                c = new Clavier(clavierPaths[0], clavierPaths[1]);
+            } catch (IOException e) {
+                return;
+            }
         } else {
-            c = new Clavier(clavierPaths[0]);
+            try {
+                c = new Clavier(clavierPaths[0]);
+            } catch (IOException e) {
+                return;
+            }
         }
 
         Evaluateur e;

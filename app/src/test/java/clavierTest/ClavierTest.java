@@ -8,6 +8,7 @@ import clavier.Clavier;
 import clavier.TouchNotFound;
 import clavier.Touche;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ClavierTest {
@@ -16,7 +17,11 @@ public class ClavierTest {
 
     @BeforeEach
     public void setUp() {
-        clavier = new Clavier();
+        try {
+            clavier = new Clavier();
+        } catch (IOException e) {
+            fail("Problème avec les fichiers");
+        }
     }
 
     @Test

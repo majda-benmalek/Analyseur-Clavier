@@ -110,7 +110,7 @@ public class Analyseur implements InterfaceAnalyseur, Observable {
             notifyObservers("analyse", o, observers);
             // System.out.println("nombre de retour à la ligne = " + cmpRetourLigne);
         } catch (IOException e) {
-            System.out.println("Il y a un problème avec le fichier donné.");
+            System.out.println("Mauvais chemin de fichiers pour le corpus");
         }
     }
 
