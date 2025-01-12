@@ -22,13 +22,6 @@ public sealed abstract class Mouvement permits Mouvement1, Mouvement2, Mouvement
         return this.sequenceTouche;
     }
 
-    // public double getScore() {
-    // return this.score;
-    // }
-
-    // public void setScore(double s){
-    // this.score = s;
-    // }
 
     @Override
     public String toString() {
@@ -39,7 +32,6 @@ public sealed abstract class Mouvement permits Mouvement1, Mouvement2, Mouvement
         return "Mouvement {\n" +
                 "\tsequenceTouche = \n" + s +
                 "\toccurrence = " + occurrence +
-                // "\n\tscore = " + score +
                 "\n}\n";
     }
 }

@@ -10,6 +10,10 @@ import clavier.Clavier;
 import clavier.TouchNotFound;
 import evaluateur.Evaluateur;
 
+/**
+ * Classe UI.
+ * Cette classe gère l'interface utilisateur pour l'évaluation des claviers.
+ */
 public class UI {
     private Scanner scan;
     private static final String ANSI_RESET = "\u001B[0m";
@@ -20,10 +24,18 @@ public class UI {
     private boolean choixClavier;
     private boolean combi;
 
+    /**
+     * Constructeur de la classe UI.
+     * Initialise le scanner pour lire les entrées utilisateur.
+     */
     public UI() {
         this.scan = new Scanner(System.in);
     }
 
+    /**
+     * Demande à l'utilisateur de fournir un chemin vers un corpus.
+     * @return le chemin du corpus fourni par l'utilisateur.
+     */
     public String corpusUser() {
         String path = "";
         System.out.println("Veuillez donner un corpus a teste :");
@@ -37,12 +49,18 @@ public class UI {
         }
     }
 
+    /**
+     * Affiche une explication sur le logiciel.
+     */
     public void explication() {
         System.out.println(ANSI_GREEN + "Bienvenue dans notre logiciel d'evaluation de clavier!" + ANSI_RESET);
         System.out.println(
                 "Ce logiciel permet de prendre un corpus et d'evaluer un clavier donne par rapport a celui-ci ");
     }
 
+    /**
+     * Demande à l'utilisateur s'il souhaite fournir son propre corpus.
+     */
     public void corpus() {
         System.out.println("Souhaitez vous fournir votre corpus ? O / N");
         String input = scan.nextLine();
@@ -58,9 +76,12 @@ public class UI {
                 choix = false;
                 break;
         }
-
     }
 
+    /**
+     * Permet à l'utilisateur de choisir un corpus parmi les corpus par défaut.
+     * @return le chemin du corpus choisi.
+     */
     public String choixCorpus() {
         String path = null;
         if (!choix) {
@@ -107,6 +128,9 @@ public class UI {
         return path;
     }
 
+    /**
+     * Demande à l'utilisateur s'il souhaite fournir son propre clavier.
+     */
     public void clavier() {
         System.out.println("Souhaitez vous fournir votre propre clavier ? O / N");
         String input = scan.nextLine();
@@ -141,6 +165,10 @@ public class UI {
         }
     }
 
+    /**
+     * Permet à l'utilisateur de choisir un clavier parmi les claviers disponibles.
+     * @return un tableau contenant les chemins des fichiers clavier et combinaisons.
+     */
     public String[] choixClavier() {
         String[] paths = new String[2];
         System.out.println("Choisissez parmi les claviers disponibles : ");
@@ -173,6 +201,10 @@ public class UI {
         return paths;
     }
 
+    /**
+     * Demande à l'utilisateur de fournir les chemins des fichiers clavier et combinaisons.
+     * @return une liste contenant les chemins des fichiers clavier et combinaisons.
+     */
     public List<String> clavierUser() {
         List<String> paths = new ArrayList<>();
         System.out.println("Veuillez fournir un fichier clavier (.json) : ");
@@ -198,6 +230,10 @@ public class UI {
         return paths;
     }
 
+    /**
+     * Méthode principale de l'application.
+     * Gère l'ensemble du processus d'évaluation du clavier.
+     */
     public void app() {
         explication();
 
@@ -226,7 +262,6 @@ public class UI {
         Analyseur a = new Analyseur(corpusPath);
         Clavier c;
         if (clavierPaths.length > 1) {
-
             try {
                 c = new Clavier(clavierPaths[0], clavierPaths[1]);
             } catch (IOException e) {
@@ -248,7 +283,5 @@ public class UI {
             return;
         }
         System.out.println(ANSI_BLUE + "Score final : " + e.donneLeScore() + ANSI_RESET);
-
     }
-
 }
