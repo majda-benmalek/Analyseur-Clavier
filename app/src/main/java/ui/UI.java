@@ -11,6 +11,7 @@ import clavier.Clavier;
 import clavier.InterfaceClavier;
 import clavier.TouchNotFound;
 import evaluateur.Evaluateur;
+import evaluateur.InterfaceEvaluateur;
 
 /**
  * Classe UI.
@@ -283,7 +284,7 @@ public class UI {
             }
         }
 
-        Evaluateur e;
+        InterfaceEvaluateur e;
         try {
             e = new Evaluateur(a, c);
         } catch (TouchNotFound ex) {
