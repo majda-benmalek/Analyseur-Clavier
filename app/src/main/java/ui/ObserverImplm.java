@@ -35,7 +35,7 @@ public class ObserverImplm implements Observer {
             case "Clavier":
                 System.out.println("Le clavier a été chargé avec succès");
                 break;
-            case "Combinaison":
+            case "Combinaisons":
                 System.out.println("Les combinaisons ont été chargées avec succès");
                 break;
             case "analyse":

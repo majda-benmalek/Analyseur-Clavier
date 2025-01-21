@@ -1,0 +1,187 @@
+{
+    "clavier": [
+      {
+        "lettre": "A",
+        "x": 1,
+        "y": 2,
+        "main": "Gauche",
+        "doigt": "Auriculaire"
+      },
+      {
+        "lettre": "Z",
+        "x": 2,
+        "y": 1,
+        "main": "Gauche",
+        "doigt": "Auriculaire"
+      },
+      {
+        "lettre": "E",
+        "x": 3,
+        "y": 1,
+        "main": "Gauche",
+        "doigt": "Majeur"
+      },
+      {
+        "lettre": "R",
+        "x": 4,
+        "y": 1,
+        "main": "Gauche",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "T",
+        "x": 5,
+        "y": 1,
+        "main": "Gauche",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "Y",
+        "x": 6,
+        "y": 1,
+        "main": "Droite",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "U",
+        "x": 7,
+        "y": 1,
+        "main": "Droite",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "I",
+        "x": 8,
+        "y": 1,
+        "main": "Droite",
+        "doigt": "Majeur"
+      },
+      {
+        "lettre": "O",
+        "x": 9,
+        "y": 1,
+        "main": "Droite",
+        "doigt": "Annulaire"
+      },
+      {
+        "lettre": "P",
+        "x": 10,
+        "y": 1,
+        "main": "Droite",
+        "doigt": "Auriculaire"
+      },
+      {
+        "lettre": "Q",
+        "x": 1,
+        "y": 2,
+        "main": "Gauche",
+        "doigt": "Auriculaire"
+      },
+      {
+        "lettre": "S",
+        "x": 2,
+        "y": 2,
+        "main": "Gauche",
+        "doigt": "Annulaire"
+      },
+      {
+        "lettre": "D",
+        "x": 3,
+        "y": 2,
+        "main": "Gauche",
+        "doigt": "Majeur"
+      },
+      {
+        "lettre": "F",
+        "x": 4,
+        "y": 2,
+        "main": "Gauche",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "G",
+        "x": 5,
+        "y": 2,
+        "main": "Gauche",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "H",
+        "x": 6,
+        "y": 2,
+        "main": "Droite",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "J",
+        "x": 7,
+        "y": 2,
+        "main": "Droite",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "K",
+        "x": 8,
+        "y": 2,
+        "main": "Droite",
+        "doigt": "Majeur"
+      },
+      {
+        "lettre": "L",
+        "x": 9,
+        "y": 2,
+        "main": "Droite",
+        "doigt": "Annulaire"
+      },
+      {
+        "lettre": "M",
+        "x": 10,
+        "y": 2,
+        "main": "Droite",
+        "doigt": "Auriculaire"
+      },
+      {
+        "lettre": "W",
+        "x": 1,
+        "y": 3,
+        "main": "Gauche",
+        "doigt": "Auriculaire"
+      },
+      {
+        "lettre": "X",
+        "x": 2,
+        "y": 3,
+        "main": "Gauche",
+        "doigt": "Annulaire"
+      },
+      {
+        "lettre": "C",
+        "x": 3,
+        "y": 3,
+        "main": "Gauche",
+        "doigt": "Majeur"
+      },
+      {
+        "lettre": "V",
+        "x": 4,
+        "y": 3,
+        "main": "Gauche",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "B",
+        "x": 5,
+        "y": 3,
+        "main": "Gauche",
+        "doigt": "Index"
+      },
+      {
+        "lettre": "N",
+        "x": 6,
+        "y": 3,
+        "main": "Droite",
+        "doigt": "Index"
+      }
+    ]
+  }
+  

@@ -288,7 +288,7 @@ public class UI {
         try {
             e = new Evaluateur(a, c);
         } catch (TouchNotFound ex) {
-            System.out.println(ANSI_RED + "Un carctere du corpus n'existe pas le clavier." + ANSI_RESET);
+            System.out.println(ANSI_RED + "Un caractere du corpus n'existe pas dans le clavier." + ANSI_RESET);
             return;
         }
         System.out.println(ANSI_BLUE + "Score final : " + e.donneLeScore() + ANSI_RESET);

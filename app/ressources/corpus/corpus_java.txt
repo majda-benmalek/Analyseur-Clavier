@@ -1,141 +1,174 @@
-import java.util.*;
-import java.util.stream.Collectors;
+package evaluateur;
 
-public class TestClavier {
+import java.util.ArrayList;
+import java.util.List;
 
-    // Classe interne pour tester des objets simples
-    static class Personne {
-        private String nom;
-        private int age;
+import analyseur.Analyseur;
+import analyseur.InterfaceAnalyseur;
+import clavier.InterfaceClavier;
+import clavier.TouchNotFound;
+import mouvement.Mouvement;
+import mouvement.Mouvement1;
+import mouvement.Mouvement2;
+import mouvement.Mouvement3;
+import ui.Observable;
+import ui.Observer;
+import ui.ObserverImplm;
 
-        public Personne(String nom, int age) {
-            this.nom = nom;
-            this.age = age;
-        }
+public class Evaluateur implements InterfaceEvaluateur, Observable {
+    private InterfaceClavier clavier;
+    private InterfaceAnalyseur analyseur;
+    private List<List<Mouvement>> mouvementListe;
+    
+    private static double poidsFaible = 0.25;
+    private static double poidsMoyen = 0.5;
+    private static double poidsFort = 1.0;
 
-        public void saluer() {
-            System.out.println("Bonjour, je m'appelle " + nom + " et j'ai " + age + " ans.");
-        }
+    private int redirection;
+    private int skipgramme;
+    private int lsb;
+    private int sfb;
+    private int ciseaux;
+    private int roulement;
+    private int alternance;
+    private int score1touche;
+    private int nombre3Grammes;
+    private List<Observer> observers = new ArrayList<>();
+
+    /** construit l'evaluateur
+     * @param analyseur le resultat de l'analyse
+     * @param clavier le clavier qu'on veut etudier
+     */
+    public Evaluateur(InterfaceAnalyseur analyseur, InterfaceClavier clavier) throws TouchNotFound { 
+        this.analyseur = analyseur;
+        this.clavier = clavier;
+
+        this.mouvementListe = this.analyseur.transformeEnTouche(this.clavier);
+        this.alternance = 0;
+        this.ciseaux = 0;
+        this.lsb = 0;
+        this.redirection = 0;
+        this.roulement = 0;
+        this.sfb = 0;
+        this.skipgramme = 0;
+        this.score1touche = 0;
+        Analyseur a = (Analyseur) this.analyseur;
+        this.nombre3Grammes = a.getNombre3Gramme();
     }
 
-    // Méthode pour gérer des contrôles conditionnels
-    public static void controleConditions() {
-        int x = 10;
-
-        if (x > 5) {
-            System.out.println("x est grand !");
+    /** retourne la taille du mouvement
+     * @param m le mouvement dont on veut la taille
+     * @return la taille du mouvement
+    */
+    public int tailleMouvement(Mouvement m) {
+        if (m instanceof Mouvement1) {
+            return 1;
+        } else if (m instanceof Mouvement2) {
+            return 2;
         } else {
-            System.out.println("x est petit !");
+            return 3;
         }
 
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Itération : " + i);
+    }
+    /** retourne le meilleur mouvement parmis les choix proposees
+     * @param l la liste de choix
+     * @return le meilleur mouvement pour le meme gramme
+    */
+    public Mouvement meilleurMouvement(List<Mouvement> l) {
+        Mouvement res = l.get(0);
+        double scoreRes = scoreMouvement(res);
+        for (Mouvement mouvement : l) {
+            double scoreCandidat = scoreMouvement(mouvement);
+            if (scoreCandidat < scoreRes) {
+                res = mouvement;
+                scoreRes = scoreCandidat;
+            }
         }
-
-        int y = 0;
-        while (y < 3) {
-            System.out.println("y vaut : " + y);
-            y++;
-        }
-
-        String jour = "vendredi";
-        switch (jour) {
-            case "lundi":
-                System.out.println("Début de la semaine !");
-                break;
-            case "vendredi":
-                System.out.println("Presque le week-end !");
-                break;
-            default:
-                System.out.println("Jour classique.");
-        }
+        return res;
+    }
+   /** retourne le score d'un mouvement
+     * @param m le mouvement dont on veut le score
+     * @return le score du mouvement
+    */
+    public double scoreMouvement(Mouvement m){
+        double score=0 ; 
+       int taille = tailleMouvement(m);
+       if (taille == 1){
+        score= m.getOccurrences()*poidsMoyen;
+       }else if (taille == 2){
+            Mouvement2 mm = (Mouvement2)m;
+            if (mm.isAlternance() || mm.isRoulement() == 0){
+                score= m.getOccurrences()*poidsFaible;
+            }
+       }else{
+            Mouvement3 m3 = (Mouvement3) m;
+            if (m3.notRedirection() == false){
+                if (m3.redirectionSansIndex()){
+                    score= m.getOccurrences()*poidsFort;
+                }
+                else{
+                    score= m.getOccurrences()*poidsMoyen;
+                }
+            }
+            else{
+                score = m.getOccurrences()*poidsMoyen;
+            }
+       }
+       return score;
     }
 
-    // Méthode pour travailler avec des collections
-    public static void travaillerAvecCollections() {
-        List<String> fruits = Arrays.asList("Pomme", "Banane", "Cerise");
-        for (String fruit : fruits) {
-            System.out.println("Fruit : " + fruit);
+    /**
+     renvoie le score du clavier 
+     @return le score
+    */
+    @Override
+    public double donneLeScore() {
+        double res = 0;
+        for (List<Mouvement> combList : mouvementListe) {
+            Mouvement mouvement = meilleurMouvement(combList);
+            if (mouvement instanceof Mouvement1) {
+                score1touche += ((Mouvement1) mouvement).getScore();
+            } else if (mouvement instanceof Mouvement2) {
+                Mouvement2 inter = (Mouvement2) mouvement;
+                int occ = inter.getOccurrences();
+                if (inter.isAlternance()) {
+                    alternance += occ;
+                }
+                if (inter.isCiseaux()) {
+                    ciseaux += occ;
+                }
+                if (inter.isLSB()) {
+                    lsb += occ;
+                }
+                if (inter.isSFB()) {
+                    sfb += occ;
+                }
+                roulement += inter.isRoulement();
+            } else {
+                Mouvement3 interMouvement3 = (Mouvement3) mouvement;
+                int occ = interMouvement3.getOccurrences();
+                if (interMouvement3.notRedirection() == false) {
+                    redirection += occ;
+                    if (interMouvement3.redirectionSansIndex()) {
+                        redirection += occ;
+                    }
+                }
+                if (interMouvement3.skipgramme()) {
+                    skipgramme += occ;
+                }
+            }
         }
-
-        Map<String, Integer> ages = new HashMap<>();
-        ages.put("Alice", 25);
-        ages.put("Bob", 30);
-        ages.forEach((nom, age) -> System.out.println(nom + " a " + age + " ans."));
-    }
-
-    // Méthode pour tester les lambdas et streams
-    public static void testerStreams() {
-        List<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5);
-        List<Integer> nombresPairs = nombres.stream()
-                                            .filter(n -> n % 2 == 0)
-                                            .map(n -> n * 2)
-                                            .collect(Collectors.toList());
-        System.out.println("Nombres pairs doublés : " + nombresPairs);
-    }
-
-    // Méthode pour gérer les exceptions
-    public static void gestionExceptions() {
-        try {
-            int result = diviser(10, 0);
-            System.out.println("Résultat : " + result);
-        } catch (ArithmeticException e) {
-            System.out.println("Erreur : " + e.getMessage());
+        double numerateur = redirection + skipgramme + lsb + sfb + ciseaux - roulement - alternance + score1touche; 
+        if (nombre3Grammes != 0) {
+            res = numerateur / nombre3Grammes;
+            res *=10;
         }
+        ObserverImplm o = new ObserverImplm(this);
+        notifyObservers("evaluation",o,this.observers);
+        return res;
     }
-
-    public static int diviser(int a, int b) {
-        if (b == 0) {
-            throw new ArithmeticException("Division par zéro !");
-        }
-        return a / b;
-    }
-
-    // Méthode pour générer des caractères spéciaux
-    public static void caracteresSpeciaux() {
-        String text = "Les caractères spéciaux incluent : \n\t- \"Guillemets\"\n\t- \\Antislash\\\n\t- %\n\t- $";
-        System.out.println(text);
-    }
-
-    // Méthode de stress-test avec Fibonacci
-    public static void stressTest() {
-        for (int i = 0; i < 20; i++) {
-            System.out.println("Fib(" + i + ") = " + calculFibonacci(i));
-        }
-    }
-
-    public static long calculFibonacci(int n) {
-        if (n <= 1) {
-            return n;
-        }
-        return calculFibonacci(n - 1) + calculFibonacci(n - 2);
-    }
-
-    public static void main(String[] args) {
-        System.out.println("=== Test Clavier : Début ===");
-
-        // Test des objets simples
-        Personne personne = new Personne("Alice", 25);
-        personne.saluer();
-
-        // Test des structures de contrôle
-        controleConditions();
-
-        // Test des collections
-        travaillerAvecCollections();
-
-        // Test des streams
-        testerStreams();
-
-        // Test des exceptions
-        gestionExceptions();
-
-        // Test des caractères spéciaux
-        caracteresSpeciaux();
-
-        // Stress-test
-        stressTest();
-
-        System.out.println("=== Test Clavier : Fin ===");
+    @Override
+    public List<Observer> getObservers() {
+        return this.observers;
     }
 }

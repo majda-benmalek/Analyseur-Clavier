@@ -13,6 +13,7 @@ import mouvement.Mouvement2;
 import mouvement.Mouvement3;
 import ui.Observable;
 import ui.Observer;
+import ui.ObserverImplm;
 
 public class Evaluateur implements InterfaceEvaluateur, Observable {
     private InterfaceClavier clavier;
@@ -38,9 +39,7 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
      * @param analyseur le résultat de l'analyse
      * @param clavier le clavier qu'on veut étudier
      */
-    public Evaluateur(InterfaceAnalyseur analyseur, InterfaceClavier clavier) throws TouchNotFound { // ? est ce qu'on donne le type du
-                                                                                   // clavier genre Azery
-        // qwerty etc..?
+    public Evaluateur(InterfaceAnalyseur analyseur, InterfaceClavier clavier) throws TouchNotFound { 
         this.analyseur = analyseur;
         this.clavier = clavier;
 
@@ -164,6 +163,8 @@ public class Evaluateur implements InterfaceEvaluateur, Observable {
             res = numerateur / nombre3Grammes;
             res *=10;
         }
+        ObserverImplm o = new ObserverImplm(this);
+        notifyObservers("evaluation",o,this.observers);
         return res;
     }
     @Override

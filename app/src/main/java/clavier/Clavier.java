@@ -30,9 +30,10 @@ public class Clavier implements InterfaceClavier, Observable {
     /**
      * Constructeur par défaut qui initialise le clavier avec les fichiers JSON par
      * défaut.
-          * @throws IOException 
-          */
-         public Clavier() throws IOException {
+     * 
+     * @throws IOException
+     */
+    public Clavier() throws IOException {
         this.touches = new ArrayList<>();
         this.combinaisons = new HashMap<>();
         this.path = "ressources/clavier/azerty.json"; // TODO pb d'accès
@@ -45,9 +46,9 @@ public class Clavier implements InterfaceClavier, Observable {
      * Constructeur qui initialise le clavier avec un fichier JSON spécifié.
      *
      * @param path Le chemin du fichier JSON pour le clavier.
-          * @throws IOException 
-          */
-         public Clavier(String path) throws IOException {
+     * @throws IOException
+     */
+    public Clavier(String path) throws IOException {
         this.touches = new ArrayList<>();
         this.path = path;
         this.combinaisons = new HashMap<>();
@@ -61,7 +62,7 @@ public class Clavier implements InterfaceClavier, Observable {
      * @param path      Le chemin du fichier JSON pour le clavier.
      * @param pathCombi Le chemin du fichier JSON pour les combinaisons.
      */
-    public Clavier(String path, String pathCombi) throws IOException{
+    public Clavier(String path, String pathCombi) throws IOException {
         this.touches = new ArrayList<>();
         this.path = path;
         this.pathCombi = pathCombi;
@@ -72,30 +73,35 @@ public class Clavier implements InterfaceClavier, Observable {
 
     /**
      * Crée le clavier en chargeant les données à partir du fichier JSON spécifié.
-          * @throws IOException 
-          */
-         @Override
-         public void creerClavier() throws IOException {
+     * 
+     * @throws IOException
+     */
+    @Override
+    public void creerClavier() throws IOException {
         try (FileReader reader = new FileReader((this.path))) {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
             JsonArray clavier = jsonObject.getAsJsonArray("clavier");
 
-            for (JsonElement element : clavier) {
-                JsonObject toucheJson = element.getAsJsonObject();
-                int x = toucheJson.get("x").getAsInt();
-                int y = toucheJson.get("y").getAsInt();
-                String touche = toucheJson.get("touche").getAsString();
-                Doigt doigt = null;
-                if (!toucheJson.get("doigt").isJsonNull()) {
-                    doigt = Doigt.valueOf(toucheJson.get("doigt").getAsString().toUpperCase());
-                    doigt.compteOccDoigts();
+            try {
+                for (JsonElement element : clavier) {
+                    JsonObject toucheJson = element.getAsJsonObject();
+                    int x = toucheJson.get("x").getAsInt();
+                    int y = toucheJson.get("y").getAsInt();
+                    String touche = toucheJson.get("touche").getAsString();
+                    Doigt doigt = null;
+                    if (!toucheJson.get("doigt").isJsonNull()) {
+                        doigt = Doigt.valueOf(toucheJson.get("doigt").getAsString().toUpperCase());
+                        doigt.compteOccDoigts();
+                    }
+                    this.touches.add(new Touche(touche, x, y, doigt));
                 }
-                this.touches.add(new Touche(touche, x, y, doigt));
+                Doigt.calculPoids();
+                ObserverImplm c = new ObserverImplm(this);
+                notifyObservers("Clavier", c, observers);
+            } catch (NullPointerException e) {
+                System.out.println("Format du fichier clavier non reconnu.");
             }
-            Doigt.calculPoids();
-            ObserverImplm c = new ObserverImplm(this);
-            notifyObservers("Clavier", c, observers);
         } catch (IOException e) {
             System.out.println("Mauvais chemin de fichier pour le clavier.");
             throw e;
@@ -104,27 +110,31 @@ public class Clavier implements InterfaceClavier, Observable {
 
     /**
      * Charge les combinaisons de touches à partir du fichier JSON spécifié.
-          * @throws IOException 
-          */
-         public void combinaison() throws IOException {
+     * 
+     * @throws IOException
+     */
+    public void combinaison() throws IOException {
         try (FileReader reader = new FileReader(this.pathCombi)) {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
             JsonArray combi = jsonObject.getAsJsonArray("combinaison");
 
-            for (JsonElement elem : combi) {
-                JsonObject object = elem.getAsJsonObject();
-                String etiq = object.get("char").getAsString();
-                List<String> comList = new ArrayList<>();
-                JsonArray com = object.getAsJsonArray("combi");
-                for (JsonElement comElem : com) {
-                    comList.add(comElem.getAsString());
+            try {
+                for (JsonElement elem : combi) {
+                    JsonObject object = elem.getAsJsonObject();
+                    String etiq = object.get("char").getAsString();
+                    List<String> comList = new ArrayList<>();
+                    JsonArray com = object.getAsJsonArray("combi");
+                    for (JsonElement comElem : com) {
+                        comList.add(comElem.getAsString());
+                    }
+                    this.combinaisons.put(etiq, comList);
                 }
-                this.combinaisons.put(etiq, comList);
+                ObserverImplm c = new ObserverImplm(this);
+                notifyObservers("Combinaisons", c, observers);
+            } catch (NullPointerException e) {
+                System.out.println("Format du fichier combinaisons non reconnu.");
             }
-            ObserverImplm c = new ObserverImplm(this);
-            notifyObservers("Combinaisons", c, observers);
-
         } catch (IOException e) {
             System.out.println("Mauvais chemin de fichiers pour les combinaisons.");
             throw e;
@@ -154,7 +164,6 @@ public class Clavier implements InterfaceClavier, Observable {
         for (List<Touche> toucheCombo : toucheCombos) {
             current.addAll(toucheCombo);
             generateCombinations(combo, current, result, index + 1);
-            current.removeAll(toucheCombo);
         }
     }
 
@@ -195,18 +204,11 @@ public class Clavier implements InterfaceClavier, Observable {
         }
 
         if (res.isEmpty()) {
-            System.out.println(etiquette);
+            System.out.println("Caractere non trouvé : " + etiquette);
             throw new TouchNotFound();
         }
 
         return res;
-    }
-
-    public void afficherCombinaisons() {
-        for (Map.Entry<String, List<String>> entry : combinaisons.entrySet()) {
-            System.out.println("tour de boucle");
-            System.out.println("Combinaison: " + entry.getKey() + " -> " + entry.getValue());
-        }
     }
 
     /**
