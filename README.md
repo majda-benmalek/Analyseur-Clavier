@@ -10,5 +10,5 @@
 ```./gradlew test```
 
 ### Membre : 
-Mushtaq Amenah
+Mushtaq Amenah et
 Benmalek Majda
