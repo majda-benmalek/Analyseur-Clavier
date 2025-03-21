@@ -1,14 +1,14 @@
 # Analyseur et évaluteur de clavier
 
-Membre : 
-Mushtaq Amenah
-Benmalek Majda
-
-Compilé avec : 
+### Compilé avec : 
 ```./gradlew build```
 
-Exécuté avec : 
+### Exécuté avec : 
 ```./gradlew run --console=plain --quiet```
 
-Exécuté les tests avec :
+### Exécuté les tests avec :
 ```./gradlew test```
+
+### Membre : 
+Mushtaq Amenah
+Benmalek Majda
